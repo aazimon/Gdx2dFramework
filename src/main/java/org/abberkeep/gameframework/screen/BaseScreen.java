@@ -8,7 +8,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Title: BaseScreen
@@ -23,9 +26,32 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public abstract class BaseScreen implements Screen {
    protected SpriteBatch batch;
    private Color bgColor;
+   private Map<String, Texture> textures = new HashMap<>();
 
    protected BaseScreen(int width, int height) {
       bgColor = new Color();
+   }
+
+   @Override
+   public void dispose() {
+      for (Texture texture : textures.values()) {
+         texture.dispose();
+      }
+      textures.clear();
+   }
+
+   public Texture getTexture(String fileName) {
+      return textures.computeIfAbsent(fileName, fn -> new Texture(fn));
+   }
+
+   @Override
+   public void hide() {
+      //
+   }
+
+   @Override
+   public void pause() {
+      //
    }
 
    @Override
@@ -42,6 +68,11 @@ public abstract class BaseScreen implements Screen {
     * @param deltaTime
     */
    protected abstract void renderChild(float deltaTime);
+
+   @Override
+   public void resume() {
+      //
+   }
 
    public void setBatch(SpriteBatch batch) {
       this.batch = batch;
