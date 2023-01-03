@@ -70,6 +70,11 @@ public abstract class BaseScreen implements Screen {
    protected abstract void renderChild(float deltaTime);
 
    @Override
+   public void resize(int width, int height) {
+      //
+   }
+
+   @Override
    public void resume() {
       //
    }
