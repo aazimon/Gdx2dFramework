@@ -12,11 +12,12 @@ import org.abberkeep.gameframework.animation.Animation;
  * Title: ScaleImage
  *
  * <p>
- * Description: </p>
+ * Description: Scales the Image.</p>
  *
  * Copyright (c) Jan 14, 2023
  * @author Gary Deken
- * @version
+ * @version 1
+ * @since 0.4
  */
 public class ScaleEffect implements ImageEffect {
    private float width;

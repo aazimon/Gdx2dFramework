@@ -4,26 +4,20 @@
  */
 package org.abberkeep.gameframework.animation;
 
-import org.abberkeep.gameframework.animation.imagefx.ImageEffect;
-
 /**
  * Title: BaseAnimation
  *
  * <p>
- * Description: </p>
+ * Description: An abstract Animation class that has height and width of the all Animations.</p>
  *
  * Copyright (c) Jan 12, 2023
  * @author Gary Deken
- * @version
+ * @version 1
+ * @since 0.4
  */
 public abstract class BaseAnimation implements Animation {
    protected float width;
    protected float height;
-   protected ImageEffect imageFX;
-
-   public void setImageFX(ImageEffect imageFX) {
-      this.imageFX = imageFX;
-   }
 
    @Override
    public float getHeight() {

@@ -15,11 +15,12 @@ import org.abberkeep.gameframework.screen.BaseScreen;
  * Title: BaseGame
  *
  * <p>
- * Description: </p>
+ * Description: Base Game setup for 2D games.</p>
  *
  * Copyright (c) Dec 9, 2022
  * @author Gary Deken
- * @version
+ * @version 1
+ * @since 0.1
  */
 public class BaseGame extends Game {
    protected SpriteBatch batch;

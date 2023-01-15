@@ -17,11 +17,12 @@ import java.util.Map;
  * Title: BaseScreen
  *
  * <p>
- * Description: </p>
+ * Description: The base screen used by all screens.</p>
  *
  * Copyright (c) Dec 9, 2022
  * @author Gary Deken
- * @version
+ * @version 1
+ * @since 0.1
  */
 public abstract class BaseScreen implements Screen {
    protected SpriteBatch batch;
@@ -40,6 +41,11 @@ public abstract class BaseScreen implements Screen {
       textures.clear();
    }
 
+   /**
+    * Method to get Textures and storing them at the Screen level for disposal when the screen disposes.
+    * @param fileName
+    * @return
+    */
    public Texture getTexture(String fileName) {
       return textures.computeIfAbsent(fileName, fn -> new Texture(fn));
    }
@@ -54,6 +60,11 @@ public abstract class BaseScreen implements Screen {
       //
    }
 
+   /**
+    * Renders the images to the screen and setting up basic setup for all Screens. This calls the renderChild method
+    * that child Screens will implement and render for the specific Screen.
+    * @param deltaTime
+    */
    @Override
    public void render(float deltaTime) {
       Gdx.gl.glClearColor(bgColor.r, bgColor.g, bgColor.b, bgColor.a);

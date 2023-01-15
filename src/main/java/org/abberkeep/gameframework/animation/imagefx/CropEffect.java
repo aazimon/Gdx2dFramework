@@ -12,7 +12,8 @@ import org.abberkeep.gameframework.animation.Animation;
  * Title: CropImage
  *
  * <p>
- * Description: </p>
+ * Description: Crops the image, thus making it smaller. If the crop value is outside the original image size, the edge
+ * pixels are repeated. A cropped</p>
  *
  * Copyright (c) Jan 14, 2023
  * @author Gary Deken

@@ -10,11 +10,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * Title: Animation
  *
  * <p>
- * Description: </p>
+ * Description: An Interface for abstracting out the still images and animated images.</p>
  *
  * Copyright (c) Jan 12, 2023
  * @author Gary Deken
- * @version
+ * @version 1
+ * @since 0.4
  */
 public interface Animation {
 

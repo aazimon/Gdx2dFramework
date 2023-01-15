@@ -12,11 +12,12 @@ import org.abberkeep.gameframework.animation.Animation;
  * Title: RenderAnimation
  *
  * <p>
- * Description: </p>
+ * Description: The base contract for an ImageEffect. This is for use with still images.</p>
  *
  * Copyright (c) Jan 12, 2023
  * @author Gary Deken
- * @version
+ * @version 1
+ * @since 0.4
  */
 public interface ImageEffect {
 
