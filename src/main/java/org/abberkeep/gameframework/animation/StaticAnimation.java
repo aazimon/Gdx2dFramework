@@ -56,6 +56,12 @@ public class StaticAnimation extends BaseAnimation {
       this.height = height;
    }
 
+   /**
+    * Renders the image to the screen based on the location provided and the parameters set by other methods.
+    * @param batch
+    * @param x
+    * @param y
+    */
    @Override
    public void draw(SpriteBatch batch, float x, float y) {
       batch.draw(texture, x, y, originX, originY, width, height, 1, 1, rotation, xStart, yStart, xSrcWidth, ySrcHeight,
@@ -71,6 +77,15 @@ public class StaticAnimation extends BaseAnimation {
       // no update.
    }
 
+   /**
+    * Crops the image, with the starting X and Y locations within the image, and Width and Height from the starting to
+    * the edge of the images. Any width or Height that goes beyond the original image size, will cause the last pixels
+    * to repeat. The image will resize based on the Height and Width set for the Animation.
+    * @param xStart
+    * @param yStart
+    * @param xSrcWidth
+    * @param ySrcHeight
+    */
    public void setCropping(int xStart, int yStart, int xSrcWidth, int ySrcHeight) {
       this.xStart = xStart;
       this.yStart = yStart;
@@ -84,14 +99,28 @@ public class StaticAnimation extends BaseAnimation {
       }
    }
 
+   /**
+    * Flips the image horizontally, side to side.
+    * @param flipHorizontal
+    */
    public void setFlipHorizontal(boolean flipHorizontal) {
       this.flipHorizontal = flipHorizontal;
    }
 
+   /**
+    * Flips the image vertically, top to bottom.
+    * @param flipVertical
+    */
    public void setFlipVertical(boolean flipVertical) {
       this.flipVertical = flipVertical;
    }
 
+   /**
+    * Rotates the image based on the center of the image, causing the image to remain within the bounds of the X and Y
+    * location and the Height and Width of the image. Rotation will cause the corners of the image to break that
+    * boundary.
+    * @param rotation
+    */
    public void setRotation(float rotation) {
       this.rotation = rotation;
       this.originX = width / 2;
