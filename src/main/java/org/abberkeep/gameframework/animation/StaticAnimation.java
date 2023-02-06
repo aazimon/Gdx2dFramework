@@ -6,8 +6,6 @@ package org.abberkeep.gameframework.animation;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import org.abberkeep.gameframework.animation.imagefx.ImageEffect;
-import org.abberkeep.gameframework.animation.imagefx.ScaleEffect;
 
 /**
  * Title: StaticAnimation
@@ -22,14 +20,26 @@ import org.abberkeep.gameframework.animation.imagefx.ScaleEffect;
  */
 public class StaticAnimation extends BaseAnimation {
    private Texture texture;
-   protected ImageEffect imageFX;
+   private float originX;
+   private float originY;
+   private float rotation;
+   private int xStart = 0;
+   private int xSrcWidth;
+   private int yStart = 0;
+   private int ySrcHeight;
+   private boolean flipHorizontal = false;
+   private boolean flipVertical = false;
 
    /**
     * Constructs a StaticAnimation based on the images size.
     * @param texture
     */
    public StaticAnimation(Texture texture) {
-      this(texture, texture.getWidth(), texture.getHeight());
+      this.texture = texture;
+      xSrcWidth = texture.getWidth();
+      ySrcHeight = texture.getHeight();
+      width = texture.getWidth();
+      height = texture.getHeight();
    }
 
    /**
@@ -40,24 +50,16 @@ public class StaticAnimation extends BaseAnimation {
     */
    public StaticAnimation(Texture texture, float width, float height) {
       this.texture = texture;
+      xSrcWidth = texture.getWidth();
+      ySrcHeight = texture.getHeight();
       this.width = width;
       this.height = height;
-      imageFX = new ScaleEffect(width, height);
-      imageFX.initialize(this);
    }
 
    @Override
    public void draw(SpriteBatch batch, float x, float y) {
-      imageFX.draw(batch, texture, x, y);
-   }
-
-   /**
-    * Sets the how the StaticAnimation renders. The default is a ScaleEffect based on the images size or the values
-    * passed into the Constructor.
-    * @param imageFX
-    */
-   public void setImageFX(ImageEffect imageFX) {
-      this.imageFX = imageFX;
+      batch.draw(texture, x, y, originX, originY, width, height, 1, 1, rotation, xStart, yStart, xSrcWidth, ySrcHeight,
+         flipHorizontal, flipVertical);
    }
 
    /**
@@ -67,6 +69,33 @@ public class StaticAnimation extends BaseAnimation {
    @Override
    public void update(float deltaTime) {
       // no update.
+   }
+
+   public void setCropping(int xStart, int yStart, int xSrcWidth, int ySrcHeight) {
+      this.xStart = xStart;
+      this.yStart = yStart;
+      this.xSrcWidth = xSrcWidth;
+      this.ySrcHeight = ySrcHeight;
+      width = xSrcWidth;
+      height = ySrcHeight;
+      if (rotation != 0) {
+         this.originX = width / 2;
+         this.originY = height / 2;
+      }
+   }
+
+   public void setFlipHorizontal(boolean flipHorizontal) {
+      this.flipHorizontal = flipHorizontal;
+   }
+
+   public void setFlipVertical(boolean flipVertical) {
+      this.flipVertical = flipVertical;
+   }
+
+   public void setRotation(float rotation) {
+      this.rotation = rotation;
+      this.originX = width / 2;
+      this.originY = height / 2;
    }
 
 }
