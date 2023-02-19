@@ -5,6 +5,7 @@
 package org.abberkeep.gameframework.animation;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.abberkeep.gameframework.Updatable;
 
 /**
  * Title: Animation
@@ -17,7 +18,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * @version 1
  * @since 0.4
  */
-public interface Animation {
+public interface Animation extends Updatable {
 
    /**
     * Draws the Animation to the screen.
@@ -35,5 +36,6 @@ public interface Animation {
     * Updates the animation.
     * @param deltaTime
     */
+   @Override
    void update(float deltaTime);
 }

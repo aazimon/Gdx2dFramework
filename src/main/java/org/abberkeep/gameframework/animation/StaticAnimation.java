@@ -20,9 +20,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class StaticAnimation extends BaseAnimation {
    private Texture texture;
-   private float originX;
-   private float originY;
-   private float rotation;
    private int xStart = 0;
    private int xSrcWidth;
    private int yStart = 0;
@@ -113,18 +110,6 @@ public class StaticAnimation extends BaseAnimation {
     */
    public void setFlipVertical(boolean flipVertical) {
       this.flipVertical = flipVertical;
-   }
-
-   /**
-    * Rotates the image based on the center of the image, causing the image to remain within the bounds of the X and Y
-    * location and the Height and Width of the image. Rotation will cause the corners of the image to break that
-    * boundary.
-    * @param rotation
-    */
-   public void setRotation(float rotation) {
-      this.rotation = rotation;
-      this.originX = width / 2;
-      this.originY = height / 2;
    }
 
 }
