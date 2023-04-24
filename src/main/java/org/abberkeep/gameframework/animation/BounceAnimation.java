@@ -9,51 +9,55 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import org.abberkeep.gameframework.Updatable;
 
 /**
- * Title: LoopAnimation
+ * Title: BounceAnimation
  *
  * <p>
- * Description: An Animation that loops through the images, either with no end are a set number of loops.</p>
+ * Description: An Animation that bounces back and forth through the images, either with no end are a set number of
+ * bounces.</p>
  *
  * Copyright (c) Apr 15, 2023
  * @author Gary Deken
  * @version
  */
-public class LoopAnimation extends BaseAnimation {
-   private Updatable loopUpdate;
-   private float stateTime;
-   private int currentIndex = 0;
+public class BounceAnimation extends BaseAnimation {
    private TextureRegion[] frames;
    private float animationDuration;
+   private float stateTime;
+   private int currentIndex = 0;
+   private Updatable bounceUpdate;
 
    /**
-    * Creates a LoopAnimation that loops continuously.
+    * Creates a BounceAnimation that bounces continuously.
     * @param frameDuration
     * @param region
     */
-   public LoopAnimation(float frameDuration, TextureRegion[] region) {
+   public BounceAnimation(float frameDuration, TextureRegion[] region) {
       frames = region;
       animationDuration = frameDuration * frames.length;
       width = region[0].getRegionWidth();
       height = region[0].getRegionHeight();
       originX = width / 2;
       originY = height / 2;
-      loopUpdate = (deltaTime) -> {
+      bounceUpdate = (deltaTime) -> {
          stateTime += deltaTime;
          currentIndex = (int) (stateTime / frameDuration);
-         currentIndex = currentIndex % frames.length;
+         currentIndex = currentIndex % ((frames.length * 2) - 2);
+         if (currentIndex >= frames.length) {
+            currentIndex = frames.length - 2 - (currentIndex - frames.length);
+         }
       };
    }
 
    /**
-    * Creates a LoopAnimation that loops for a set number of times. The number of loops must be positive
+    * Creates a BounceAnimation that bounces for a set number of times. The number of bounces must be positive
     * @param frameDuration
     * @param region
-    * @param numberOfLoops
-    * @throws IllegalArgumentException when the numberOfLoops is zero or negative.
+    * @param numberOfBounces
+    * @throws IllegalArgumentException when the numberOfBounces is zero or negative.
     */
-   public LoopAnimation(float frameDuration, TextureRegion[] region, int numberOfLoops) {
-      if (numberOfLoops < 1) {
-         throw new IllegalArgumentException("The numberOfLoops needs to be one or greater.");
+   public BounceAnimation(float frameDuration, TextureRegion[] region, int numberOfBounces) {
+      if (numberOfBounces < 1) {
+         throw new IllegalArgumentException("The numberOfBounces must be one or greater.");
       }
       frames = region;
       animationDuration = frameDuration * frames.length;
@@ -61,14 +65,15 @@ public class LoopAnimation extends BaseAnimation {
       height = region[0].getRegionHeight();
       originX = width / 2;
       originY = height / 2;
-      loopUpdate = (deltaTime) -> {
+      bounceUpdate = (deltaTime) -> {
          stateTime += deltaTime;
-         currentIndex = (int) (stateTime / frameDuration);
-         int loopNumber = (int) (stateTime / animationDuration);
-         if (loopNumber < numberOfLoops) {
-            currentIndex = currentIndex % frames.length;
-         } else {
-            currentIndex = Math.min(frames.length - 1, currentIndex);
+         int bounceNumber = (int) ((stateTime - frameDuration) / (animationDuration - frameDuration));
+         if (bounceNumber < numberOfBounces) {
+            currentIndex = (int) (stateTime / frameDuration);
+            currentIndex = currentIndex % ((frames.length * 2) - 2);
+            if (currentIndex >= frames.length) {
+               currentIndex = frames.length - 2 - (currentIndex - frames.length);
+            }
          }
       };
    }
@@ -90,7 +95,7 @@ public class LoopAnimation extends BaseAnimation {
     */
    @Override
    public void update(float deltaTime) {
-      loopUpdate.update(deltaTime);
+      bounceUpdate.update(deltaTime);
    }
 
 }

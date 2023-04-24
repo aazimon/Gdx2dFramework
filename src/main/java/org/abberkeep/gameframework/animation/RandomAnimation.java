@@ -6,54 +6,58 @@ package org.abberkeep.gameframework.animation;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import org.abberkeep.gameframework.Updatable;
 
 /**
- * Title: LoopAnimation
+ * Title: RandomAnimation
  *
  * <p>
- * Description: An Animation that loops through the images, either with no end are a set number of loops.</p>
+ * Description: An Animation that renders random frames, either with no end are a set number of cycles for the total
+ * duration.</p>
  *
  * Copyright (c) Apr 15, 2023
  * @author Gary Deken
  * @version
  */
-public class LoopAnimation extends BaseAnimation {
-   private Updatable loopUpdate;
-   private float stateTime;
-   private int currentIndex = 0;
+public class RandomAnimation extends BaseAnimation {
    private TextureRegion[] frames;
    private float animationDuration;
+   private float stateTime;
+   private int currentIndex = 0;
+   private Updatable randomUpdate;
+   private int lastFrameIndex;
+   private float lastStateTime;
 
    /**
-    * Creates a LoopAnimation that loops continuously.
+    * Creates a RandomAnimation that randomly renders frames continuously.
     * @param frameDuration
     * @param region
     */
-   public LoopAnimation(float frameDuration, TextureRegion[] region) {
+   public RandomAnimation(float frameDuration, TextureRegion[] region) {
       frames = region;
       animationDuration = frameDuration * frames.length;
       width = region[0].getRegionWidth();
       height = region[0].getRegionHeight();
       originX = width / 2;
       originY = height / 2;
-      loopUpdate = (deltaTime) -> {
+      randomUpdate = (deltaTime) -> {
          stateTime += deltaTime;
          currentIndex = (int) (stateTime / frameDuration);
-         currentIndex = currentIndex % frames.length;
+         int lastFrame = (int) ((lastStateTime) / frameDuration);
+         if (lastFrame != currentIndex) {
+            currentIndex = MathUtils.random(frames.length - 1);
+         } else {
+            currentIndex = lastFrameIndex;
+         }
+         lastFrameIndex = currentIndex;
+         lastStateTime = stateTime;
       };
    }
 
-   /**
-    * Creates a LoopAnimation that loops for a set number of times. The number of loops must be positive
-    * @param frameDuration
-    * @param region
-    * @param numberOfLoops
-    * @throws IllegalArgumentException when the numberOfLoops is zero or negative.
-    */
-   public LoopAnimation(float frameDuration, TextureRegion[] region, int numberOfLoops) {
-      if (numberOfLoops < 1) {
-         throw new IllegalArgumentException("The numberOfLoops needs to be one or greater.");
+   public RandomAnimation(float frameDuration, TextureRegion[] region, int numberOfCycles) {
+      if (numberOfCycles < 1) {
+         throw new IllegalArgumentException("The numberOfCycles must be one or greater.");
       }
       frames = region;
       animationDuration = frameDuration * frames.length;
@@ -61,16 +65,24 @@ public class LoopAnimation extends BaseAnimation {
       height = region[0].getRegionHeight();
       originX = width / 2;
       originY = height / 2;
-      loopUpdate = (deltaTime) -> {
+      randomUpdate = (deltaTime) -> {
          stateTime += deltaTime;
          currentIndex = (int) (stateTime / frameDuration);
-         int loopNumber = (int) (stateTime / animationDuration);
-         if (loopNumber < numberOfLoops) {
-            currentIndex = currentIndex % frames.length;
+         int cycleNumber = (int) (stateTime / animationDuration);
+         if (cycleNumber < numberOfCycles) {
+            int lastFrame = (int) ((lastStateTime) / frameDuration);
+            if (lastFrame != currentIndex) {
+               currentIndex = MathUtils.random(frames.length - 1);
+            } else {
+               currentIndex = lastFrameIndex;
+            }
+            lastFrameIndex = currentIndex;
+            lastStateTime = stateTime;
          } else {
-            currentIndex = Math.min(frames.length - 1, currentIndex);
+            currentIndex = lastFrameIndex;
          }
       };
+
    }
 
    /**
@@ -90,7 +102,7 @@ public class LoopAnimation extends BaseAnimation {
     */
    @Override
    public void update(float deltaTime) {
-      loopUpdate.update(deltaTime);
+      randomUpdate.update(deltaTime);
    }
 
 }
