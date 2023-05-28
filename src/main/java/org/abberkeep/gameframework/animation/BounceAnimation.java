@@ -17,7 +17,7 @@ import org.abberkeep.gameframework.Updatable;
  *
  * Copyright (c) Apr 15, 2023
  * @author Gary Deken
- * @version
+ * @version 0.5
  */
 public class BounceAnimation extends BaseAnimation {
    private TextureRegion[] frames;
