@@ -21,7 +21,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public interface Motion {
 
+   /**
+    * Draws the Motion on the Screen, based on the underlining Animation class.
+    * @param batch
+    * @param x
+    * @param y
+    */
    void draw(SpriteBatch batch, float x, float y);
 
+   /**
+    * Updates the Motion, where the implementing class will determine the Animation to update based on the Direction
+    * passed in.
+    * @param deltaTime
+    * @param direction
+    */
    void update(float deltaTime, float direction);
 }
