@@ -86,23 +86,23 @@ public class RandomAnimation extends BaseAnimation {
    }
 
    /**
-    * Renders the TextureRegion to the screen based on the location provided and the parameters set by other methods.
-    * @param batch
-    * @param x
-    * @param y
-    */
-   @Override
-   public void draw(SpriteBatch batch, float x, float y) {
-      batch.draw(frames[currentIndex], x, y, originX, originY, width, height, 1, 1, rotation);
-   }
-
-   /**
     * Updates the sequence of the images to be displayed to the screen.
     * @param deltaTime
     */
    @Override
    public void update(float deltaTime) {
       randomUpdate.update(deltaTime);
+   }
+
+   /**
+    * Renders the TextureRegion to the screen based on the location provided and the parameters set by other methods.
+    * @param batch
+    * @param x
+    * @param y
+    */
+   @Override
+   protected void drawChild(SpriteBatch batch, float x, float y) {
+      batch.draw(frames[currentIndex], x, y, originX, originY, width, height, 1, 1, rotation);
    }
 
 }

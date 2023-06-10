@@ -4,6 +4,9 @@
  */
 package org.abberkeep.gameframework.animation;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 /**
  * Title: BaseAnimation
  *
@@ -21,6 +24,20 @@ public abstract class BaseAnimation implements Animation {
    protected float originX;
    protected float originY;
    protected float rotation;
+   protected Color color;
+
+   @Override
+   public void draw(SpriteBatch batch, float x, float y) {
+      if (color != null) {
+         batch.setColor(color);
+         drawChild(batch, x, y);
+         batch.setColor(Color.WHITE);
+      } else {
+         drawChild(batch, x, y);
+      }
+   }
+
+   protected abstract void drawChild(SpriteBatch batch, float x, float y);
 
    @Override
    public float getHeight() {
@@ -32,21 +49,27 @@ public abstract class BaseAnimation implements Animation {
       return width;
    }
 
-   /**
-    * Rotates the Animation based on the center of the image. As the image rotates the corners will break the boundaries
-    * of the original Texture,
-    * @param rotation
-    */
+   @Override
+   public void setColor(Color color) {
+      this.color = color;
+   }
+
+   @Override
+   public void setColor(float red, float green, float blue) {
+      color.set(red, green, blue, 0);
+   }
+
+   @Override
+   public void setColor(int red, int green, int blue) {
+      color.set(red / 255.0f, green / 255.0f, blue / 255.0f, 0);
+   }
+
+   @Override
    public void setRotation(float rotation) {
       this.rotation = rotation;
    }
 
-   /**
-    * Sets the size of the Animation to the size that it will be draw as. This resizes the image. This will also set the
-    * rotation origin to the center of the image.
-    * @param width
-    * @param height
-    */
+   @Override
    public void setSize(float width, float height) {
       this.width = width;
       this.height = height;

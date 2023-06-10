@@ -54,18 +54,6 @@ public class StaticAnimation extends BaseAnimation {
    }
 
    /**
-    * Renders the image to the screen based on the location provided and the parameters set by other methods.
-    * @param batch
-    * @param x
-    * @param y
-    */
-   @Override
-   public void draw(SpriteBatch batch, float x, float y) {
-      batch.draw(texture, x, y, originX, originY, width, height, 1, 1, rotation, xStart, yStart, xSrcWidth, ySrcHeight,
-         flipHorizontal, flipVertical);
-   }
-
-   /**
     * StaticAnimations have no update.
     * @param deltaTime
     */
@@ -110,6 +98,18 @@ public class StaticAnimation extends BaseAnimation {
     */
    public void setFlipVertical(boolean flipVertical) {
       this.flipVertical = flipVertical;
+   }
+
+   /**
+    * Renders the image to the screen based on the location provided and the parameters set by other methods.
+    * @param batch
+    * @param x
+    * @param y
+    */
+   @Override
+   protected void drawChild(SpriteBatch batch, float x, float y) {
+      batch.draw(texture, x, y, originX, originY, width, height, 1, 1, rotation, xStart, yStart, xSrcWidth, ySrcHeight,
+         flipHorizontal, flipVertical);
    }
 
 }
