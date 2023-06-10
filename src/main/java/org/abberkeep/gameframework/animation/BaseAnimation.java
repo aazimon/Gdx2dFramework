@@ -64,7 +64,11 @@ public abstract class BaseAnimation implements Animation {
       color.set(red / 255.0f, green / 255.0f, blue / 255.0f, 0);
    }
 
-   @Override
+   /**
+    * Rotates the Animation based on the center of the image. As the image rotates the corners will break the boundaries
+    * of the original Texture,
+    * @param rotation
+    */
    public void setRotation(float rotation) {
       this.rotation = rotation;
    }

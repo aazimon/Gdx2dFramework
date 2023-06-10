@@ -56,13 +56,6 @@ public interface Animation extends Updatable {
    void setColor(int red, int green, int blue);
 
    /**
-    * Rotates the Animation based on the center of the image. As the image rotates the corners will break the boundaries
-    * of the original Texture,
-    * @param rotation
-    */
-   void setRotation(float rotation);
-
-   /**
     * Sets the size of the Animation to the size that it will be draw as. This resizes the image. This will also set the
     * rotation origin to the center of the image.
     * @param width
