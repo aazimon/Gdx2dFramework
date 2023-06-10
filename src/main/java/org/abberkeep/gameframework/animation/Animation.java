@@ -34,13 +34,13 @@ public interface Animation extends Updatable {
    float getWidth();
 
    /**
-    * Set the color for the Animation. The default is White.
+    * Set the color for the Animation, by the LibGdx Color object. The default is White.
     * @param color
     */
    void setColor(Color color);
 
    /**
-    * Set the color for the Animation. The default is 1, 1, 1, or white.
+    * Set the color for the Animation by percentage (0.0 to 1.0). The default is 1, 1, 1, or white.
     * @param red
     * @param green
     * @param blue
@@ -48,7 +48,7 @@ public interface Animation extends Updatable {
    void setColor(float red, float green, float blue);
 
    /**
-    * Set the color for the Animation from RGB 0-255 range. The range is converted to decimal 0.0 to 1.0.
+    * Set the color for the Animation from RGB 0-255 range. The range is converted to a decimal 0.0 to 1.0.
     * @param red
     * @param green
     * @param blue
@@ -56,7 +56,7 @@ public interface Animation extends Updatable {
    void setColor(int red, int green, int blue);
 
    /**
-    * Sets the size of the Animation to the size that it will be draw as. This resizes the image. This will also set the
+    * Sets the size of the Animation to the size that it will be drawn, resizing the image. This will also set the
     * rotation origin to the center of the image.
     * @param width
     * @param height

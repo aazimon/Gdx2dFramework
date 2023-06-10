@@ -29,6 +29,11 @@ public abstract class BaseScreen implements Screen {
    private Color bgColor;
    private Map<String, Texture> textures = new HashMap<>();
 
+   /**
+    * Constructor for the BaseScreen, taking in the width and height. It sets the background color to a default Black.
+    * @param width
+    * @param height
+    */
    protected BaseScreen(int width, int height) {
       bgColor = new Color();
    }

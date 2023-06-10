@@ -31,6 +31,9 @@ public class BaseGame extends Game {
    protected BaseGame() {
    }
 
+   /**
+    * Creates the SpriteBatch and OrthographicCamera based on the width and height.
+    */
    @Override
    public void create() {
       batch = new SpriteBatch();
@@ -40,12 +43,18 @@ public class BaseGame extends Game {
       camera.update();
    }
 
+   /**
+    * Disposes of the SpriteBatch.
+    */
    @Override
    public void dispose() {
       super.dispose();
       batch.dispose();
    }
 
+   /**
+    * Clears the screen and sets the Projection Matrix to the camera's combined.
+    */
    @Override
    public void render() {
       ScreenUtils.clear(1, 0, 0, 1);
@@ -53,12 +62,22 @@ public class BaseGame extends Game {
       super.render();
    }
 
+   /**
+    * Resizes the screen and updates the camera.
+    * @param width
+    * @param height
+    */
    @Override
    public void resize(int width, int height) {
       super.resize(width, height);
       camera.setToOrtho(false, width, height);
    }
 
+   /**
+    * Sets the Screen for this Game and puts the SpriteBatch in to the BaseScreen passed in. The Screen passed in must
+    * inherit from BaseScreen.
+    * @param screen
+    */
    @Override
    public void setScreen(Screen screen) {
       ((BaseScreen) screen).setBatch(batch);
