@@ -14,7 +14,7 @@ package org.abberkeep.gameframework.utils;
  * @author Markus Persson
  * @author Bruno Augier (DzzD)
  * @author Riven
- * @Since 1.0
+ * @Since 0.6
  */
 public final class FastMath {
    private static final double F2 = -0.5;
