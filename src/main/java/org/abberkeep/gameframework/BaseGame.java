@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import org.abberkeep.gameframework.screen.BaseScreen;
+import org.abberkeep.gameframework.screen.ScreenInput;
 
 /**
  * Title: BaseGame
@@ -41,6 +42,7 @@ public class BaseGame extends Game {
       camera.setToOrtho(false, width, height);
       camera.position.set(width / 2, height / 2, 0);
       camera.update();
+      ScreenInput.setScreenSize((int) width, (int) height);
    }
 
    /**
@@ -71,6 +73,7 @@ public class BaseGame extends Game {
    public void resize(int width, int height) {
       super.resize(width, height);
       camera.setToOrtho(false, width, height);
+      ScreenInput.setScreenSize(width, height);
    }
 
    /**
@@ -82,6 +85,7 @@ public class BaseGame extends Game {
    public void setScreen(Screen screen) {
       ((BaseScreen) screen).setBatch(batch);
       super.setScreen(screen);
+
    }
 
 }

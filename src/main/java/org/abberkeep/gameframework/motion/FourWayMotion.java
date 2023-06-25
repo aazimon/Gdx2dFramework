@@ -20,7 +20,7 @@ import org.abberkeep.gameframework.movement.Direction;
  *
  * Copyright (c) May 18, 2023
  * @author Gary Deken
- * @version
+ * @version 0.6
  */
 public class FourWayMotion implements Motion {
    private final static int NORTH = 0;

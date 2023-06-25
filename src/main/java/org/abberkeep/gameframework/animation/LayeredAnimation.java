@@ -12,11 +12,12 @@ import java.util.List;
  * Title: LayeredAnimation
  *
  * <p>
- * Description: </p>
+ * Description: A multi layered Animation, that contains one or more Animations. The first Animation added will be on
+ * the bottom and additional Animations will render on top of it.</p>
  *
  * Copyright (c) Jun 9, 2023
  * @author Gary Deken
- * @version
+ * @version 0.6
  */
 public class LayeredAnimation extends BaseAnimation {
    private List<Animation> animations = new ArrayList<>();

@@ -20,6 +20,10 @@ import org.abberkeep.gameframework.animation.Animation;
 public class SingleMotion implements Motion {
    private Animation animation;
 
+   /**
+    * Creates a SingleMotion with the given Animation.
+    * @param animation
+    */
    public SingleMotion(Animation animation) {
       this.animation = animation;
    }
