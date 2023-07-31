@@ -64,6 +64,13 @@ public interface Animation extends Updatable {
    void setSize(float width, float height);
 
    /**
+    * Sets the translucency of the Animation. This is the percentage that you can see through the image. 1 is normal, no
+    * translucency. 0 is fully transparent.
+    * @param percent
+    */
+   void setTranslucency(float percent);
+
+   /**
     * Updates the animation.
     * @param deltaTime
     */

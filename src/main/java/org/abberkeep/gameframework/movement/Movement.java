@@ -4,6 +4,8 @@
  */
 package org.abberkeep.gameframework.movement;
 
+import org.abberkeep.gameframework.sprite.SpriteUpdate;
+
 /**
  * Title: Movement
  *
@@ -36,11 +38,13 @@ public interface Movement {
    float getYUpdate();
 
    /**
-    * This method takes the delta time, since the last update, and determines the movement since. The amount of the
-    * movement is returned through the getXUpdate() and getYUpdate().
+    * This method takes the delta time since the last update and a SpriteUpdate. It determines the movement since the
+    * last update and allows setting the update amounts to the SpriteUpdate. The amount of the movement is also returned
+    * through the getXUpdate() and getYUpdate().
     * @param deltaTime float
+    * @param spriteUpdate
     */
-   void update(float deltaTime);
+   void update(float deltaTime, SpriteUpdate spriteUpdate);
 
    /**
     * Set the speed, as in pixels per second.

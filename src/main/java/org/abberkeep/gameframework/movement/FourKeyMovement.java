@@ -5,6 +5,7 @@
 package org.abberkeep.gameframework.movement;
 
 import com.badlogic.gdx.Gdx;
+import org.abberkeep.gameframework.sprite.SpriteUpdate;
 
 /**
  * Title: FourKeyMovement
@@ -22,41 +23,46 @@ public class FourKeyMovement extends BaseMovement {
    private boolean multi = false;
 
    /**
-    * Constructs a FourKeyMovement, with the key IDs.
+    * Constructs a FourKeyMovement, with the key IDs and the speed. The key IDs are used to move in that direction.
     * @param keyUpId
     * @param keyDownId
     * @param keyRightId
     * @param keyLeftId
+    * @param speed
     */
-   public FourKeyMovement(int keyUpId, int keyDownId, int keyRightId, int keyLeftId) {
-      this(keyUpId, keyDownId, keyRightId, keyLeftId, false);
+   public FourKeyMovement(int keyUpId, int keyDownId, int keyRightId, int keyLeftId, float speed) {
+      this(keyUpId, keyDownId, keyRightId, keyLeftId, speed, false);
    }
 
    /**
-    * Constructs a FourKeyMovement, with the key IDs. With the multi set to true, it allows for pressing two
-    * non-conflicting keys at the same time to get a direction. The Right and Left keys can be pressed with either Up or
-    * Down, but pressing Up and Down or Left and Right, will only go Up or Right.
+    * Constructs a FourKeyMovement, with the key IDs and the speed. With the multi set to true, it allows for pressing
+    * two non-conflicting keys at the same time to get a direction. The Right and Left keys can be pressed with either
+    * Up or Down, but pressing Up and Down or Left and Right, will only go Up or Right.
     * @param keyUpId
     * @param keyDownId
     * @param keyRightId
     * @param keyLeftId
+    * @param speed
     * @param multi
     */
-   public FourKeyMovement(int keyUpId, int keyDownId, int keyRightId, int keyLeftId, boolean multi) {
+   public FourKeyMovement(int keyUpId, int keyDownId, int keyRightId, int keyLeftId, float speed, boolean multi) {
       keyIds[0] = keyUpId;
       keyIds[1] = keyDownId;
       keyIds[2] = keyRightId;
       keyIds[3] = keyLeftId;
+      this.speed = speed;
       this.multi = multi;
    }
 
    @Override
-   public void update(float deltaTime) {
+   public void update(float deltaTime, SpriteUpdate spriteUpdate) {
       if (multi) {
          multipleUpdateDirection();
       } else {
          simpleUpdateDirection();
       }
+      spriteUpdate.setX(spriteUpdate.getX() + xUpdate);
+      spriteUpdate.setY(spriteUpdate.getY() + yUpdate);
    }
 
    private void simpleUpdateDirection() {

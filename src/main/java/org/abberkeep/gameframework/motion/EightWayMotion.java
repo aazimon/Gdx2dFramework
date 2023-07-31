@@ -4,6 +4,7 @@
  */
 package org.abberkeep.gameframework.motion;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -116,6 +117,51 @@ public class EightWayMotion implements Motion {
    @Override
    public void draw(SpriteBatch batch, float x, float y) {
       animations[index].draw(batch, x, y);
+   }
+
+   @Override
+   public float getHeight() {
+      return animations[index].getHeight();
+   }
+
+   @Override
+   public float getWidth() {
+      return animations[index].getWidth();
+   }
+
+   @Override
+   public void setColor(Color color) {
+      for (Animation animation1 : animations) {
+         animation1.setColor(color);
+      }
+   }
+
+   @Override
+   public void setColor(float red, float green, float blue) {
+      for (Animation animation1 : animations) {
+         animation1.setColor(red, green, blue);
+      }
+   }
+
+   @Override
+   public void setColor(int red, int green, int blue) {
+      for (Animation animation1 : animations) {
+         animation1.setColor(red, green, blue);
+      }
+   }
+
+   @Override
+   public void setSize(float width, float height) {
+      for (Animation animation1 : animations) {
+         animation1.setSize(width, height);
+      }
+   }
+
+   @Override
+   public void setTranslucency(float percent) {
+      for (Animation animation1 : animations) {
+         animation1.setTranslucency(percent);
+      }
    }
 
    @Override

@@ -25,6 +25,7 @@ public abstract class BaseAnimation implements Animation {
    protected float originY;
    protected float rotation;
    protected Color color;
+   protected float translucency = 1f;
 
    @Override
    public void draw(SpriteBatch batch, float x, float y) {
@@ -51,17 +52,17 @@ public abstract class BaseAnimation implements Animation {
 
    @Override
    public void setColor(Color color) {
-      this.color = color;
+      this.color = new Color(color.r, color.g, color.b, translucency);
    }
 
    @Override
    public void setColor(float red, float green, float blue) {
-      color.set(red, green, blue, 0);
+      color = new Color(red, green, blue, translucency);
    }
 
    @Override
    public void setColor(int red, int green, int blue) {
-      color.set(red / 255.0f, green / 255.0f, blue / 255.0f, 0);
+      color = new Color(red / 255.0f, green / 255.0f, blue / 255.0f, translucency);
    }
 
    /**
@@ -79,6 +80,23 @@ public abstract class BaseAnimation implements Animation {
       this.height = height;
       this.originX = width / 2;
       this.originY = height / 2;
+   }
+
+   @Override
+   public void setTranslucency(float percent) {
+      if (translucency != percent) {
+         if (percent > 1f) {
+            percent = 1f;
+         } else if (percent < 0f) {
+            percent = 0f;
+         }
+         translucency = percent;
+         if (color == null) {
+            setColor(Color.WHITE);
+         } else {
+            setColor(color);
+         }
+      }
    }
 
 }

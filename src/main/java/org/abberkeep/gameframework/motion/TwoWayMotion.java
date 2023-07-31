@@ -4,6 +4,7 @@
  */
 package org.abberkeep.gameframework.motion;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -23,7 +24,7 @@ import org.abberkeep.gameframework.movement.Direction;
  * @version 0.6
  */
 public class TwoWayMotion implements Motion {
-   private Animation[] animation = new Animation[2];
+   private Animation[] animations = new Animation[2];
    private int direction = 0;
    private boolean horizontal = true;
 
@@ -36,8 +37,8 @@ public class TwoWayMotion implements Motion {
     * @param directionTwo
     */
    public TwoWayMotion(Animation directionOne, Animation directionTwo) {
-      animation[0] = directionOne;
-      animation[1] = directionTwo;
+      animations[0] = directionOne;
+      animations[1] = directionTwo;
    }
 
    /**
@@ -51,8 +52,8 @@ public class TwoWayMotion implements Motion {
     */
    public TwoWayMotion(Texture texture, int tileWidth, int tileHeight, float duration) {
       TextureRegion[][] textureRegions = TextureRegion.split(texture, tileWidth, tileHeight);
-      animation[0] = new LoopAnimation(duration, textureRegions[0]);
-      animation[1] = new LoopAnimation(duration, textureRegions[1]);
+      animations[0] = new LoopAnimation(duration, textureRegions[0]);
+      animations[1] = new LoopAnimation(duration, textureRegions[1]);
    }
 
    /**
@@ -68,8 +69,8 @@ public class TwoWayMotion implements Motion {
     */
    public TwoWayMotion(Texture texture, int tileWidth, int tileHeight, float duration, int direction0, int direction1) {
       TextureRegion[][] textureRegions = TextureRegion.split(texture, tileWidth, tileHeight);
-      animation[0] = new LoopAnimation(duration, textureRegions[direction0]);
-      animation[1] = new LoopAnimation(duration, textureRegions[direction1]);
+      animations[0] = new LoopAnimation(duration, textureRegions[direction0]);
+      animations[1] = new LoopAnimation(duration, textureRegions[direction1]);
    }
 
    /**
@@ -80,7 +81,12 @@ public class TwoWayMotion implements Motion {
     */
    @Override
    public void draw(SpriteBatch batch, float x, float y) {
-      animation[direction].draw(batch, x, y);
+      animations[direction].draw(batch, x, y);
+   }
+
+   @Override
+   public float getHeight() {
+      return animations[direction].getHeight();
    }
 
    /**
@@ -89,6 +95,46 @@ public class TwoWayMotion implements Motion {
     */
    public void setHorizontal(boolean horizontal) {
       this.horizontal = horizontal;
+   }
+
+   @Override
+   public float getWidth() {
+      return animations[direction].getWidth();
+   }
+
+   @Override
+   public void setColor(Color color) {
+      for (Animation animation1 : animations) {
+         animation1.setColor(color);
+      }
+   }
+
+   @Override
+   public void setColor(float red, float green, float blue) {
+      for (Animation animation1 : animations) {
+         animation1.setColor(red, green, blue);
+      }
+   }
+
+   @Override
+   public void setColor(int red, int green, int blue) {
+      for (Animation animation1 : animations) {
+         animation1.setColor(red, green, blue);
+      }
+   }
+
+   @Override
+   public void setSize(float width, float height) {
+      for (Animation animation1 : animations) {
+         animation1.setSize(width, height);
+      }
+   }
+
+   @Override
+   public void setTranslucency(float percent) {
+      for (Animation animation1 : animations) {
+         animation1.setTranslucency(percent);
+      }
    }
 
    /**
@@ -109,7 +155,7 @@ public class TwoWayMotion implements Motion {
             this.direction = 0;
          }
       }
-      animation[this.direction].update(deltaTime);
+      animations[this.direction].update(deltaTime);
    }
 
 }

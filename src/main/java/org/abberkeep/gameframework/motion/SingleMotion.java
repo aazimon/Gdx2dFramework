@@ -4,6 +4,7 @@
  */
 package org.abberkeep.gameframework.motion;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.abberkeep.gameframework.animation.Animation;
 
@@ -37,6 +38,41 @@ public class SingleMotion implements Motion {
    @Override
    public void draw(SpriteBatch batch, float x, float y) {
       animation.draw(batch, x, y);
+   }
+
+   @Override
+   public float getHeight() {
+      return animation.getHeight();
+   }
+
+   @Override
+   public float getWidth() {
+      return animation.getWidth();
+   }
+
+   @Override
+   public void setColor(Color color) {
+      animation.setColor(color);
+   }
+
+   @Override
+   public void setColor(float red, float green, float blue) {
+      animation.setColor(red, green, blue);
+   }
+
+   @Override
+   public void setColor(int red, int green, int blue) {
+      animation.setColor(red, green, blue);
+   }
+
+   @Override
+   public void setSize(float width, float height) {
+      animation.setSize(width, height);
+   }
+
+   @Override
+   public void setTranslucency(float percent) {
+      animation.setTranslucency(percent);
    }
 
    /**

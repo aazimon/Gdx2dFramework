@@ -5,6 +5,7 @@
 package org.abberkeep.gameframework.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 
 /**
  * Title: ScreenInput
@@ -20,6 +21,7 @@ import com.badlogic.gdx.Gdx;
 public class ScreenInput {
    private static int width;
    private static int height;
+   private static Camera camera;
 
    public static final int getDeltaX() {
       return Gdx.input.getDeltaX();
@@ -29,17 +31,26 @@ public class ScreenInput {
       return -Gdx.input.getDeltaY();
    }
 
+   /**
+    * Returns the input X coordinate depending on the Camera's position.
+    * @return
+    */
    public static final int getX() {
-      return Gdx.input.getX();
+      return (int) camera.position.x - (width / 2) + Gdx.input.getX();
    }
 
+   /**
+    * Returns the input Y coordinate depending on the Camera's position.
+    * @return
+    */
    public static final int getY() {
-      return ScreenInput.height - Gdx.input.getY();
+      return (int) camera.position.y - (height / 2) + ScreenInput.height - Gdx.input.getY();
    }
 
-   public static final void setScreenSize(int screenWidth, int screenHeight) {
+   public static final void setScreenSize(int screenWidth, int screenHeight, Camera camera) {
       ScreenInput.width = screenWidth;
       ScreenInput.height = screenHeight;
+      ScreenInput.camera = camera;
    }
 
 }

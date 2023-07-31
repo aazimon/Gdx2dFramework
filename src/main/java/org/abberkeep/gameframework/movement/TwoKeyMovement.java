@@ -5,6 +5,7 @@
 package org.abberkeep.gameframework.movement;
 
 import com.badlogic.gdx.Gdx;
+import org.abberkeep.gameframework.sprite.SpriteUpdate;
 
 /**
  * Title: TwoKeyMovement
@@ -22,20 +23,23 @@ public class TwoKeyMovement extends BaseMovement {
    private boolean horizontal = true;
 
    /**
-    * Constructs a TwoKeyMovement, with the key IDs. If the direction is vertical (keyId1 is up, keyId2 is down) or
-    * horizontal (keyId1 is right, keyId2 is left).
+    * Constructs a TwoKeyMovement, with the key IDs and speed. If the direction is vertical (keyId1 is up, keyId2 is
+    * down) or horizontal (keyId1 is right, keyId2 is left). The horizontal flag is for determining if the movement is
+    * horizontal or vertical.
     * @param keyId1
     * @param keyId2
+    * @param speed
     * @param horizontal
     */
-   public TwoKeyMovement(int keyId1, int keyId2, boolean horizontal) {
+   public TwoKeyMovement(int keyId1, int keyId2, float speed, boolean horizontal) {
       keyIds[0] = keyId1;
       keyIds[1] = keyId2;
+      this.speed = speed;
       this.horizontal = horizontal;
    }
 
    @Override
-   public void update(float deltaTime) {
+   public void update(float deltaTime, SpriteUpdate spriteUpdate) {
       if (Gdx.input.isKeyPressed(keyIds[0])) {
          // up or right
          if (horizontal) {
@@ -58,6 +62,8 @@ public class TwoKeyMovement extends BaseMovement {
          xUpdate = 0;
          yUpdate = 0;
       }
+      spriteUpdate.setX(spriteUpdate.getX() + xUpdate);
+      spriteUpdate.setY(spriteUpdate.getY() + yUpdate);
    }
 
 }

@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +27,7 @@ import java.util.Map;
  */
 public abstract class BaseScreen implements Screen {
    protected SpriteBatch batch;
+   protected Viewport viewport;
    private Color bgColor;
    private Map<String, Texture> textures = new HashMap<>();
 
@@ -72,6 +74,8 @@ public abstract class BaseScreen implements Screen {
    public void render(float deltaTime) {
       Gdx.gl.glClearColor(bgColor.r, bgColor.g, bgColor.b, bgColor.a);
       Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+      viewport.getCamera().update();
+      batch.setProjectionMatrix(viewport.getCamera().combined);
       batch.begin();
       renderChild(deltaTime);
       batch.end();
@@ -93,8 +97,15 @@ public abstract class BaseScreen implements Screen {
       //
    }
 
-   public void setBatch(SpriteBatch batch) {
+   /**
+    * Used within the BaseGame when calling setScreen. The setScreen will call this method to inject the SpriteBatch and
+    * Viewport objects.
+    * @param batch
+    * @param viewport
+    */
+   public void setupScreen(SpriteBatch batch, Viewport viewport) {
       this.batch = batch;
+      this.viewport = viewport;
    }
 
    /**
@@ -112,7 +123,7 @@ public abstract class BaseScreen implements Screen {
     * @param blue
     */
    public void setBackgroundColor(float red, float green, float blue) {
-      bgColor.set(red, green, blue, 0);
+      bgColor = new Color(red, green, blue, 0f);
    }
 
    /**
@@ -122,7 +133,7 @@ public abstract class BaseScreen implements Screen {
     * @param blue
     */
    public void setBackgroundColor(int red, int green, int blue) {
-      bgColor.set(red / 255.0f, green / 255.0f, blue / 255.0f, 0);
+      bgColor = new Color(red / 255.0f, green / 255.0f, blue / 255.0f, 0f);
    }
 
 }

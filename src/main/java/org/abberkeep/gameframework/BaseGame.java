@@ -9,6 +9,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import org.abberkeep.gameframework.screen.BaseScreen;
 import org.abberkeep.gameframework.screen.ScreenInput;
 
@@ -27,9 +29,15 @@ public class BaseGame extends Game {
    protected SpriteBatch batch;
    protected float height = 600;
    protected float width = 800;
-   protected OrthographicCamera camera;
+   protected Viewport viewport;
 
    protected BaseGame() {
+      this(800, 600);
+   }
+
+   protected BaseGame(int width, int height) {
+      this.width = width;
+      this.height = height;
    }
 
    /**
@@ -38,11 +46,12 @@ public class BaseGame extends Game {
    @Override
    public void create() {
       batch = new SpriteBatch();
-      camera = new OrthographicCamera();
+      OrthographicCamera camera = new OrthographicCamera();
       camera.setToOrtho(false, width, height);
       camera.position.set(width / 2, height / 2, 0);
       camera.update();
-      ScreenInput.setScreenSize((int) width, (int) height);
+      viewport = new ScreenViewport(camera);
+      ScreenInput.setScreenSize((int) width, (int) height, camera);
    }
 
    /**
@@ -60,7 +69,7 @@ public class BaseGame extends Game {
    @Override
    public void render() {
       ScreenUtils.clear(1, 0, 0, 1);
-      batch.setProjectionMatrix(camera.combined);
+      batch.setProjectionMatrix(viewport.getCamera().combined);
       super.render();
    }
 
@@ -72,18 +81,20 @@ public class BaseGame extends Game {
    @Override
    public void resize(int width, int height) {
       super.resize(width, height);
-      camera.setToOrtho(false, width, height);
-      ScreenInput.setScreenSize(width, height);
+      if (viewport.getCamera() instanceof OrthographicCamera) {
+         ((OrthographicCamera) viewport.getCamera()).setToOrtho(false, width, height);
+      }
+      ScreenInput.setScreenSize(width, height, viewport.getCamera());
    }
 
    /**
-    * Sets the Screen for this Game and puts the SpriteBatch in to the BaseScreen passed in. The Screen passed in must
-    * inherit from BaseScreen.
+    * Sets the Screen for this Game and calls the BaseScreen's setupScreen, where it injects the SpriteBatch and
+    * Viewport in to the BaseScreen passed in. The Screen passed in must inherit from BaseScreen.
     * @param screen
     */
    @Override
    public void setScreen(Screen screen) {
-      ((BaseScreen) screen).setBatch(batch);
+      ((BaseScreen) screen).setupScreen(batch, viewport);
       super.setScreen(screen);
 
    }

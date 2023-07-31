@@ -32,6 +32,26 @@ public class DirectionTest {
 
    @Test
    public void testGetDirection() {
+      int x = 100;
+      int y = 100;
+
+      float actual = Direction.getDirection(x, y, x + 100, y);
+      assertEquals(Direction.EAST, actual, 0.0);
+      actual = Direction.getDirection(x, y, x - 100, y);
+      assertEquals(Direction.WEST, actual, 0.0);
+      actual = Direction.getDirection(x, y, x, y + 100);
+      assertEquals(Direction.NORTH, actual, 0.0);
+      actual = Direction.getDirection(x, y, x, y - 100);
+      assertEquals(Direction.SOUTH, actual, 0.0);
+      actual = Direction.getDirection(x, y, x + 100, y + 100);
+      assertEquals(Direction.NORTH_EAST, actual, 0.0);
+      actual = Direction.getDirection(x, y, x + 100, y - 100);
+      assertEquals(Direction.SOUTH_EAST, actual, 0.0);
+      actual = Direction.getDirection(x, y, x - 100, y + 100);
+      assertEquals(Direction.NORTH_WEST, actual, 0.0);
+      actual = Direction.getDirection(x, y, x - 100, y - 100);
+      assertEquals(Direction.SOUTH_WEST, actual, 0.0);
+
    }
 
    @Test
