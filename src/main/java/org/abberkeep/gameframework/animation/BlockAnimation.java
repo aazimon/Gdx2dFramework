@@ -22,7 +22,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class BlockAnimation extends BaseAnimation {
    private static Texture texture;
 
-   public BlockAnimation(float width, float height) {
+   /**
+    * Creates a BlockAnimation with the given width and height.
+    * @param width
+    * @param height
+    */
+   public BlockAnimation(int width, int height) {
       if (texture == null) {
          texture = new Texture("blank.png");
       }
@@ -38,7 +43,7 @@ public class BlockAnimation extends BaseAnimation {
 
    @Override
    protected void drawChild(SpriteBatch batch, float x, float y) {
-      batch.draw(texture, x, y, width, height);
+      batch.draw(texture, x + xOffset, y + yOffset, width, height);
    }
 
 }

@@ -85,7 +85,7 @@ public class TwoWayMotion implements Motion {
    }
 
    @Override
-   public float getHeight() {
+   public int getHeight() {
       return animations[direction].getHeight();
    }
 
@@ -98,7 +98,7 @@ public class TwoWayMotion implements Motion {
    }
 
    @Override
-   public float getWidth() {
+   public int getWidth() {
       return animations[direction].getWidth();
    }
 
@@ -124,7 +124,7 @@ public class TwoWayMotion implements Motion {
    }
 
    @Override
-   public void setSize(float width, float height) {
+   public void setSize(int width, int height) {
       for (Animation animation1 : animations) {
          animation1.setSize(width, height);
       }

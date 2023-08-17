@@ -29,9 +29,9 @@ public interface Animation extends Updatable {
     */
    void draw(SpriteBatch batch, float x, float y);
 
-   float getHeight();
+   int getHeight();
 
-   float getWidth();
+   int getWidth();
 
    /**
     * Set the color for the Animation, by the LibGdx Color object. The default is White.
@@ -61,7 +61,7 @@ public interface Animation extends Updatable {
     * @param width
     * @param height
     */
-   void setSize(float width, float height);
+   void setSize(int width, int height);
 
    /**
     * Sets the translucency of the Animation. This is the percentage that you can see through the image. 1 is normal, no
@@ -69,6 +69,18 @@ public interface Animation extends Updatable {
     * @param percent
     */
    void setTranslucency(float percent);
+
+   /**
+    * Sets an X offset in pixel to render this Animation image.
+    * @param xOffset
+    */
+   void setXOffSet(int xOffset);
+
+   /**
+    * Sets an Y offset in pixel to render this Animation image.
+    * @param yOffset
+    */
+   public void setYOffset(int yOffset);
 
    /**
     * Updates the animation.

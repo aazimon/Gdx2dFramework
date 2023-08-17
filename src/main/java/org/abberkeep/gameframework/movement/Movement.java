@@ -26,6 +26,12 @@ public interface Movement {
    float getDirection();
 
    /**
+    * Returns the current speed of the Movement.
+    * @return speed
+    */
+   float getCurrentSpeed();
+
+   /**
     * This returns the amount of the X movement for a given update.
     * @return double
     */

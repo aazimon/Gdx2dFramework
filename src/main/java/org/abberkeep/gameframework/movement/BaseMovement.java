@@ -28,6 +28,14 @@ public abstract class BaseMovement implements Movement {
    }
 
    @Override
+   public float getCurrentSpeed() {
+      if (xUpdate == 0.0f && yUpdate == 0.0f) {
+         return 0.0f;
+      }
+      return speed;
+   }
+
+   @Override
    public float getXUpdate() {
       return xUpdate;
    }

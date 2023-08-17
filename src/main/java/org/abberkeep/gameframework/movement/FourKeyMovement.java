@@ -61,8 +61,7 @@ public class FourKeyMovement extends BaseMovement {
       } else {
          simpleUpdateDirection();
       }
-      spriteUpdate.setX(spriteUpdate.getX() + xUpdate);
-      spriteUpdate.setY(spriteUpdate.getY() + yUpdate);
+      spriteUpdate.setLocation(spriteUpdate.getX() + xUpdate, spriteUpdate.getY() + yUpdate);
    }
 
    private void simpleUpdateDirection() {

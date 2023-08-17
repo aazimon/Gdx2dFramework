@@ -19,13 +19,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * @since 0.4
  */
 public abstract class BaseAnimation implements Animation {
-   protected float width;
-   protected float height;
+   protected int width;
+   protected int height;
    protected float originX;
    protected float originY;
    protected float rotation;
    protected Color color;
    protected float translucency = 1f;
+   protected int xOffset;
+   protected int yOffset;
 
    @Override
    public void draw(SpriteBatch batch, float x, float y) {
@@ -41,12 +43,12 @@ public abstract class BaseAnimation implements Animation {
    protected abstract void drawChild(SpriteBatch batch, float x, float y);
 
    @Override
-   public float getHeight() {
+   public int getHeight() {
       return height;
    }
 
    @Override
-   public float getWidth() {
+   public int getWidth() {
       return width;
    }
 
@@ -75,7 +77,7 @@ public abstract class BaseAnimation implements Animation {
    }
 
    @Override
-   public void setSize(float width, float height) {
+   public void setSize(int width, int height) {
       this.width = width;
       this.height = height;
       this.originX = width / 2;
@@ -97,6 +99,16 @@ public abstract class BaseAnimation implements Animation {
             setColor(color);
          }
       }
+   }
+
+   @Override
+   public void setXOffSet(int xOffset) {
+      this.xOffset = xOffset;
+   }
+
+   @Override
+   public void setYOffset(int yOffset) {
+      this.yOffset = yOffset;
    }
 
 }

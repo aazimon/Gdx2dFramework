@@ -92,12 +92,12 @@ public class FourWayMotion implements Motion {
    }
 
    @Override
-   public float getHeight() {
+   public int getHeight() {
       return animations[index].getHeight();
    }
 
    @Override
-   public float getWidth() {
+   public int getWidth() {
       return animations[index].getWidth();
    }
 
@@ -123,7 +123,7 @@ public class FourWayMotion implements Motion {
    }
 
    @Override
-   public void setSize(float width, float height) {
+   public void setSize(int width, int height) {
       for (Animation animation1 : animations) {
          animation1.setSize(width, height);
       }

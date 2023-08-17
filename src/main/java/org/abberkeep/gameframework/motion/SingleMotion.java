@@ -41,12 +41,12 @@ public class SingleMotion implements Motion {
    }
 
    @Override
-   public float getHeight() {
+   public int getHeight() {
       return animation.getHeight();
    }
 
    @Override
-   public float getWidth() {
+   public int getWidth() {
       return animation.getWidth();
    }
 
@@ -66,7 +66,7 @@ public class SingleMotion implements Motion {
    }
 
    @Override
-   public void setSize(float width, float height) {
+   public void setSize(int width, int height) {
       animation.setSize(width, height);
    }
 

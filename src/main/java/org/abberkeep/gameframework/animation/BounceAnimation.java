@@ -95,7 +95,7 @@ public class BounceAnimation extends BaseAnimation {
     */
    @Override
    protected void drawChild(SpriteBatch batch, float x, float y) {
-      batch.draw(frames[currentIndex], x, y, originX, originY, width, height, 1, 1, rotation);
+      batch.draw(frames[currentIndex], x + xOffset, y + yOffset, originX, originY, width, height, 1, 1, rotation);
    }
 
 }

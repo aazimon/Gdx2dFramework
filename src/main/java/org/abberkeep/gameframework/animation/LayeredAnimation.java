@@ -41,7 +41,7 @@ public class LayeredAnimation extends BaseAnimation {
 
    @Override
    protected void drawChild(SpriteBatch batch, float x, float y) {
-      animations.forEach(animation -> animation.draw(batch, x, y));
+      animations.forEach(animation -> animation.draw(batch, x + xOffset, y + yOffset));
    }
 
 }

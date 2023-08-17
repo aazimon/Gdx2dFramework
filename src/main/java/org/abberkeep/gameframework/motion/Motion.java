@@ -34,13 +34,13 @@ public interface Motion {
     * Returns the Height of this Motion, based on the current Animation.
     * @return
     */
-   float getHeight();
+   int getHeight();
 
    /**
     * Returns the Width of this Motion, based on the current Animation.
     * @return
     */
-   float getWidth();
+   int getWidth();
 
    /**
     * Set the color for all the Animations in this Motion, by the LibGdx Color object. The default is White.
@@ -71,7 +71,7 @@ public interface Motion {
     * @param width
     * @param height
     */
-   void setSize(float width, float height);
+   void setSize(int width, int height);
 
    /**
     * Sets the translucency of all the Animations in this Motion. This is the percentage that you can see through the

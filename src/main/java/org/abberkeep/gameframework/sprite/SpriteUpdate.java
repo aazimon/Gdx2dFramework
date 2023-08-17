@@ -30,6 +30,13 @@ public interface SpriteUpdate {
    float getY();
 
    /**
+    * Sets the Sprite's X and Y location.
+    * @param x
+    * @param y
+    */
+   void setLocation(float x, float y);
+
+   /**
     * Sets the Sprite's X location.
     * @param x
     */

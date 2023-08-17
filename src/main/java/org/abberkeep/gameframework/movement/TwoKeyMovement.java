@@ -62,8 +62,7 @@ public class TwoKeyMovement extends BaseMovement {
          xUpdate = 0;
          yUpdate = 0;
       }
-      spriteUpdate.setX(spriteUpdate.getX() + xUpdate);
-      spriteUpdate.setY(spriteUpdate.getY() + yUpdate);
+      spriteUpdate.setLocation(spriteUpdate.getX() + xUpdate, spriteUpdate.getY() + yUpdate);
    }
 
 }

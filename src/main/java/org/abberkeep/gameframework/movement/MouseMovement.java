@@ -78,6 +78,9 @@ public class MouseMovement extends BaseMovement {
             }
          }
          spriteUpdate.setY(ny);
+      } else {
+         xUpdate = 0f;
+         yUpdate = 0f;
       }
    }
 

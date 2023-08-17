@@ -28,7 +28,7 @@ public class StaticAnimation extends BaseAnimation {
    private boolean flipVertical = false;
 
    /**
-    * Constructs a StaticAnimation based on the images size.
+    * Constructs a StaticAnimation based on the Texture's size.
     * @param texture
     */
    public StaticAnimation(Texture texture) {
@@ -37,20 +37,24 @@ public class StaticAnimation extends BaseAnimation {
       ySrcHeight = texture.getHeight();
       width = texture.getWidth();
       height = texture.getHeight();
+      this.originX = width / 2;
+      this.originY = height / 2;
    }
 
    /**
-    * Constructs a StaticAnimation and resizing it.
+    * Constructs a StaticAnimation with a Texture and resizes it.
     * @param texture
     * @param width
     * @param height
     */
-   public StaticAnimation(Texture texture, float width, float height) {
+   public StaticAnimation(Texture texture, int width, int height) {
       this.texture = texture;
       xSrcWidth = texture.getWidth();
       ySrcHeight = texture.getHeight();
       this.width = width;
       this.height = height;
+      this.originX = width / 2;
+      this.originY = height / 2;
    }
 
    /**
@@ -108,8 +112,8 @@ public class StaticAnimation extends BaseAnimation {
     */
    @Override
    protected void drawChild(SpriteBatch batch, float x, float y) {
-      batch.draw(texture, x, y, originX, originY, width, height, 1, 1, rotation, xStart, yStart, xSrcWidth, ySrcHeight,
-         flipHorizontal, flipVertical);
+      batch.draw(texture, x + xOffset, y + yOffset, originX, originY, width, height, 1, 1, rotation, xStart, yStart,
+         xSrcWidth, ySrcHeight, flipHorizontal, flipVertical);
    }
 
 }
