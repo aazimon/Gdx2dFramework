@@ -63,7 +63,10 @@ public class StaticAnimation extends BaseAnimation {
     */
    @Override
    public void update(float deltaTime) {
-      // no update.
+      if (stateTime == 0.0f && sound != null) {
+         sound.play();
+         stateTime = 1f;
+      }
    }
 
    /**

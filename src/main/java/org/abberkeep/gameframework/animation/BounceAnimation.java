@@ -22,9 +22,9 @@ import org.abberkeep.gameframework.Updatable;
 public class BounceAnimation extends BaseAnimation {
    private TextureRegion[] frames;
    private float animationDuration;
-   private float stateTime;
    private int currentIndex = 0;
    private Updatable bounceUpdate;
+   private boolean playSound = true;
 
    /**
     * Creates a BounceAnimation that bounces continuously.
@@ -44,6 +44,9 @@ public class BounceAnimation extends BaseAnimation {
          currentIndex = currentIndex % ((frames.length * 2) - 2);
          if (currentIndex >= frames.length) {
             currentIndex = frames.length - 2 - (currentIndex - frames.length);
+         }
+         if (sound != null) {
+            updateSound();
          }
       };
    }
@@ -74,6 +77,9 @@ public class BounceAnimation extends BaseAnimation {
             if (currentIndex >= frames.length) {
                currentIndex = frames.length - 2 - (currentIndex - frames.length);
             }
+            if (sound != null) {
+               updateSound();
+            }
          }
       };
    }
@@ -96,6 +102,17 @@ public class BounceAnimation extends BaseAnimation {
    @Override
    protected void drawChild(SpriteBatch batch, float x, float y) {
       batch.draw(frames[currentIndex], x + xOffset, y + yOffset, originX, originY, width, height, 1, 1, rotation);
+   }
+
+   private void updateSound() {
+      if (playSound) {
+         if (currentIndex == 0 || currentIndex == frames.length - 1) {
+            sound.play();
+            playSound = false;
+         }
+      } else if (currentIndex != 0 && currentIndex < frames.length - 1) {
+         playSound = true;
+      }
    }
 
 }

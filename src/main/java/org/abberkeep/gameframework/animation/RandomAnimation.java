@@ -23,11 +23,12 @@ import org.abberkeep.gameframework.Updatable;
 public class RandomAnimation extends BaseAnimation {
    private TextureRegion[] frames;
    private float animationDuration;
-   private float stateTime;
    private int currentIndex = 0;
    private Updatable randomUpdate;
    private int lastFrameIndex;
    private float lastStateTime;
+   private boolean playSound = true;
+   private int countIndex = 0;
 
    /**
     * Creates a RandomAnimation that randomly renders frames continuously.
@@ -47,11 +48,15 @@ public class RandomAnimation extends BaseAnimation {
          int lastFrame = (int) ((lastStateTime) / frameDuration);
          if (lastFrame != currentIndex) {
             currentIndex = MathUtils.random(frames.length - 1);
+            countIndex++;
          } else {
             currentIndex = lastFrameIndex;
          }
          lastFrameIndex = currentIndex;
          lastStateTime = stateTime;
+         if (sound != null) {
+            updateSound();
+         }
       };
    }
 
@@ -73,6 +78,7 @@ public class RandomAnimation extends BaseAnimation {
             int lastFrame = (int) ((lastStateTime) / frameDuration);
             if (lastFrame != currentIndex) {
                currentIndex = MathUtils.random(frames.length - 1);
+               countIndex++;
             } else {
                currentIndex = lastFrameIndex;
             }
@@ -80,6 +86,9 @@ public class RandomAnimation extends BaseAnimation {
             lastStateTime = stateTime;
          } else {
             currentIndex = lastFrameIndex;
+         }
+         if (sound != null) {
+            updateSound();
          }
       };
 
@@ -103,6 +112,18 @@ public class RandomAnimation extends BaseAnimation {
    @Override
    protected void drawChild(SpriteBatch batch, float x, float y) {
       batch.draw(frames[currentIndex], x + xOffset, y + yOffset, originX, originY, width, height, 1, 1, rotation);
+   }
+
+   private void updateSound() {
+      if (countIndex >= frames.length) {
+         countIndex = 0;
+      }
+      if (playSound && countIndex == 0) {
+         sound.play();
+         playSound = false;
+      } else if (countIndex > 0) {
+         playSound = true;
+      }
    }
 
 }

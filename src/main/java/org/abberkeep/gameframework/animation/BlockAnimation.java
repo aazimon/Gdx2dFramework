@@ -7,6 +7,7 @@ package org.abberkeep.gameframework.animation;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.abberkeep.gameframework.BaseGame;
 
 /**
  * Title: BlockAnimation
@@ -29,7 +30,7 @@ public class BlockAnimation extends BaseAnimation {
     */
    public BlockAnimation(int width, int height) {
       if (texture == null) {
-         texture = new Texture("blank.png");
+         texture = BaseGame.getGlobalTexture("blank.png");
       }
       color = Color.WHITE;
       this.width = width;
@@ -38,7 +39,10 @@ public class BlockAnimation extends BaseAnimation {
 
    @Override
    public void update(float deltaTime) {
-      // do nothing
+      if (stateTime == 0.0f && sound != null) {
+         sound.play();
+         stateTime = 1f;
+      }
    }
 
    @Override

@@ -20,10 +20,10 @@ import org.abberkeep.gameframework.Updatable;
  */
 public class LoopAnimation extends BaseAnimation {
    private Updatable loopUpdate;
-   private float stateTime;
    private int currentIndex = 0;
    private TextureRegion[] frames;
    private float animationDuration;
+   private boolean playSound = true;
 
    /**
     * Creates a LoopAnimation that loops continuously.
@@ -41,6 +41,9 @@ public class LoopAnimation extends BaseAnimation {
          stateTime += deltaTime;
          currentIndex = (int) (stateTime / frameDuration);
          currentIndex = currentIndex % frames.length;
+         if (sound != null) {
+            updateSound();
+         }
       };
    }
 
@@ -70,6 +73,9 @@ public class LoopAnimation extends BaseAnimation {
          } else {
             currentIndex = Math.min(frames.length - 1, currentIndex);
          }
+         if (sound != null) {
+            updateSound();
+         }
       };
    }
 
@@ -91,6 +97,15 @@ public class LoopAnimation extends BaseAnimation {
    @Override
    protected void drawChild(SpriteBatch batch, float x, float y) {
       batch.draw(frames[currentIndex], x + xOffset, y + yOffset, originX, originY, width, height, 1, 1, rotation);
+   }
+
+   private void updateSound() {
+      if (playSound && currentIndex == 0) {
+         sound.play();
+         playSound = false;
+      } else if (currentIndex > 0) {
+         playSound = true;
+      }
    }
 
 }

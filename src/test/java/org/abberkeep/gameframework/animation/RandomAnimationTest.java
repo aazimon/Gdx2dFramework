@@ -14,18 +14,18 @@ import org.junit.Test;
 
 /**
  * <p>
- * Title: LoopAnimationTest</p>
+ * Title: RandomAnimationTest</p>
  *
  * <p>
- * Description: This tests the methods of the LoopAnimationTest class.</p>
+ * Description: This tests the methods of the RandomAnimationTest class.</p>
  *
- * Copyright: Copyright (c) Feb 17, 2023
+ * Copyright: Copyright (c) Sep 4, 2023
  *
  * @author Gary Deken
  * @version 1.0
  */
-public class LoopAnimationTest extends EasyMockSupport {
-   private LoopAnimation underTest;
+public class RandomAnimationTest extends EasyMockSupport {
+   private RandomAnimation underTest;
    private TextureRegion[] region;
    private Sound sound;
 
@@ -40,11 +40,11 @@ public class LoopAnimationTest extends EasyMockSupport {
    }
 
    @Test
-   public void testUpdateLoop2() {
+   public void testUpdate() {
       expect(sound.play()).andReturn(1l).times(2);
       replayAll();
 
-      underTest = new LoopAnimation(.2f, region, 2);
+      underTest = new RandomAnimation(.2f, region, 2);
       underTest.setSound(sound);
       float delta = 0.1f;
 

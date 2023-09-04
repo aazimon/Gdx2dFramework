@@ -6,6 +6,7 @@ package org.abberkeep.gameframework.animation;
 
 import static org.easymock.EasyMock.expect;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.easymock.EasyMockSupport;
@@ -28,6 +29,7 @@ import org.junit.Test;
 public class BounceAnimationTest extends EasyMockSupport {
    private BounceAnimation underTest;
    private TextureRegion[] region;
+   private Sound sound;
 
    @Before
    public void setUp() {
@@ -36,13 +38,16 @@ public class BounceAnimationTest extends EasyMockSupport {
       region[0] = tr;
       expect(region[0].getRegionWidth()).andReturn(32);
       expect(region[0].getRegionHeight()).andReturn(32);
+      sound = mock(Sound.class);
    }
 
    @Test
    public void testUpdate() {
+      expect(sound.play()).andReturn(1l).times(5);
       replayAll();
 
       underTest = new BounceAnimation(.2f, region);
+      underTest.setSound(sound);
       float delta = 0.1f;
 
       test(delta, 0);
@@ -78,6 +83,7 @@ public class BounceAnimationTest extends EasyMockSupport {
 
    @Test
    public void testUpdateNumberOfLoops1() {
+      expect(sound.play()).andReturn(1l);
       replayAll();
 
       underTest = new BounceAnimation(.2f, region, 1);
@@ -101,9 +107,11 @@ public class BounceAnimationTest extends EasyMockSupport {
 
    @Test
    public void testUpdateNumberOfLoops2() {
+      expect(sound.play()).andReturn(1l).times(3);
       replayAll();
 
       underTest = new BounceAnimation(.2f, region, 2);
+      underTest.setSound(sound);
       float delta = 0.1f;
 
       test(delta, 0);

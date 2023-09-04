@@ -4,6 +4,7 @@
  */
 package org.abberkeep.gameframework.animation;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -28,6 +29,8 @@ public abstract class BaseAnimation implements Animation {
    protected float translucency = 1f;
    protected int xOffset;
    protected int yOffset;
+   protected float stateTime;
+   protected Sound sound;
 
    @Override
    public void draw(SpriteBatch batch, float x, float y) {
@@ -82,6 +85,11 @@ public abstract class BaseAnimation implements Animation {
       this.height = height;
       this.originX = width / 2;
       this.originY = height / 2;
+   }
+
+   @Override
+   public void setSound(Sound sound) {
+      this.sound = sound;
    }
 
    @Override

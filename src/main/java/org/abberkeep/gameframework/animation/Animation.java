@@ -4,6 +4,7 @@
  */
 package org.abberkeep.gameframework.animation;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.abberkeep.gameframework.Updatable;
@@ -62,6 +63,12 @@ public interface Animation extends Updatable {
     * @param height
     */
    void setSize(int width, int height);
+
+   /**
+    * Set the sound for this Animation.
+    * @param sound
+    */
+   void setSound(Sound sound);
 
    /**
     * Sets the translucency of the Animation. This is the percentage that you can see through the image. 1 is normal, no

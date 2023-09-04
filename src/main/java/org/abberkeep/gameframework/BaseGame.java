@@ -7,10 +7,13 @@ package org.abberkeep.gameframework;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import java.util.HashMap;
+import java.util.Map;
 import org.abberkeep.gameframework.screen.BaseScreen;
 import org.abberkeep.gameframework.screen.ScreenInput;
 
@@ -30,6 +33,7 @@ public class BaseGame extends Game {
    protected float height = 600;
    protected float width = 800;
    protected Viewport viewport;
+   private static Map<String, Texture> textures = new HashMap<>();
 
    protected BaseGame() {
       this(800, 600);
@@ -38,6 +42,15 @@ public class BaseGame extends Game {
    protected BaseGame(int width, int height) {
       this.width = width;
       this.height = height;
+   }
+
+   /**
+    * Returns a Global Textures and will dispose of it when the Game is Disposed.
+    * @param fileName
+    * @return
+    */
+   public static Texture getGlobalTexture(String fileName) {
+      return textures.computeIfAbsent(fileName, fn -> new Texture(fn));
    }
 
    /**
@@ -60,6 +73,10 @@ public class BaseGame extends Game {
    @Override
    public void dispose() {
       super.dispose();
+      for (Texture texture : textures.values()) {
+         texture.dispose();
+      }
+      textures.clear();
       batch.dispose();
    }
 

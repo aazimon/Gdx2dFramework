@@ -6,6 +6,8 @@ package org.abberkeep.gameframework.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
@@ -30,6 +32,8 @@ public abstract class BaseScreen implements Screen {
    protected Viewport viewport;
    private Color bgColor;
    private Map<String, Texture> textures = new HashMap<>();
+   private Map<String, Sound> sounds = new HashMap<>();
+   private Map<String, Music> musics = new HashMap<>();
 
    /**
     * Constructor for the BaseScreen. It sets the background color to a default Black.
@@ -43,7 +47,33 @@ public abstract class BaseScreen implements Screen {
       for (Texture texture : textures.values()) {
          texture.dispose();
       }
+      for (Sound sound : sounds.values()) {
+         sound.dispose();
+      }
+      for (Music music : musics.values()) {
+         music.dispose();
+      }
       textures.clear();
+      sounds.clear();
+      musics.clear();
+   }
+
+   /**
+    * Method to get Musics and storing them at the Screen level for disposal when the screen disposes.
+    * @param fileName
+    * @return
+    */
+   public Music getMusic(String fileName) {
+      return musics.computeIfAbsent(fileName, fn -> Gdx.audio.newMusic(Gdx.files.internal(fn)));
+   }
+
+   /**
+    * Method to get Sounds and storing them at the Screen level for disposal when the screen disposes.
+    * @param fileName
+    * @return
+    */
+   public Sound getSound(String fileName) {
+      return sounds.computeIfAbsent(fileName, fn -> Gdx.audio.newSound(Gdx.files.internal(fn)));
    }
 
    /**
