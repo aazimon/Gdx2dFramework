@@ -15,6 +15,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.HashMap;
 import java.util.Map;
+import org.abberkeep.gameframework.sprite.Actor;
+import org.abberkeep.gameframework.sprite.Decor;
 
 /**
  * Title: BaseScreen
@@ -29,6 +31,8 @@ import java.util.Map;
  */
 public abstract class BaseScreen implements Screen {
    protected SpriteBatch batch;
+   protected int largestSpriteWidth = 0;
+   protected int largestSpriteHeight = 0;
    protected Viewport viewport;
    private Color bgColor;
    private Map<String, Texture> textures = new HashMap<>();
@@ -41,6 +45,23 @@ public abstract class BaseScreen implements Screen {
    protected BaseScreen() {
       bgColor = new Color();
    }
+
+   /**
+    * Adds an Actor to this Screen at the location.
+    * @param actor
+    * @param x
+    * @param y
+    */
+   public abstract void addActor(Actor actor);
+
+   /**
+    * Adds a Decor to this Screen at the location.
+    * @param decor
+    * @param x
+    * @param y
+    */
+   public abstract void addDecor(Decor decor);
+
 
    @Override
    public void dispose() {

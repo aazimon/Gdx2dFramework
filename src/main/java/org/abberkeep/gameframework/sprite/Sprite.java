@@ -23,11 +23,19 @@ public abstract class Sprite implements Updatable, SpriteUpdate {
    protected float y;
    protected int height = 1;
    protected int width = 1;
+   protected BoundingBox bounds;
 
    public Sprite(int width, int height) {
       this.width = width;
       this.height = height;
+      bounds = new BoundingBox(0, 0, width, height);
    }
+
+   /**
+    * Returns if this Sprite moves and can impact other Sprites
+    * @return
+    */
+   public abstract boolean doesImpact();
 
    /**
     * Draws the Sprite on the Screen. Location of the Sprite is held internal to the Sprite class, and those values are
@@ -38,6 +46,18 @@ public abstract class Sprite implements Updatable, SpriteUpdate {
 
    @Override
    public abstract void update(float deltaTime);
+
+   /**
+    * Determines if this sprite contains any points from the other sprite.
+    * @param other
+    * @return
+    */
+   public boolean contains(Sprite other) {
+      if (!other.equals(this)) {
+         return bounds.contains(other.bounds);
+      }
+      return false;
+   }
 
    /**
     * Returns the height of this Sprite in pixels.
@@ -74,6 +94,14 @@ public abstract class Sprite implements Updatable, SpriteUpdate {
    }
 
    /**
+    * Handle the collision with the other sprite.
+    * @param other
+    */
+   public void handleCollision(Sprite other) {
+      // do nothing by default
+   }
+
+   /**
     * Sets the height of this Sprite in pixels.
     * @param height
     */
@@ -85,6 +113,7 @@ public abstract class Sprite implements Updatable, SpriteUpdate {
    public void setLocation(float x, float y) {
       this.x = x;
       this.y = y;
+      bounds.setLocation((int) x, (int) y);
    }
 
    /**
@@ -112,6 +141,7 @@ public abstract class Sprite implements Updatable, SpriteUpdate {
    @Override
    public void setX(float x) {
       this.x = x;
+      bounds.setLocation((int) x, (int) y);
    }
 
    /**
@@ -121,6 +151,7 @@ public abstract class Sprite implements Updatable, SpriteUpdate {
    @Override
    public void setY(float y) {
       this.y = y;
+      bounds.setLocation((int) x, (int) y);
    }
 
 }

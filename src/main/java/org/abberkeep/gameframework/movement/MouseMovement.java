@@ -6,16 +6,18 @@ package org.abberkeep.gameframework.movement;
 
 import com.badlogic.gdx.Gdx;
 import org.abberkeep.gameframework.screen.ScreenInput;
+import org.abberkeep.gameframework.sprite.BoundingBox;
 import org.abberkeep.gameframework.sprite.SpriteUpdate;
 
 /**
  * Title: MouseMovement
  *
  * <p>
- * Description: Encapsulates the Movement controlled by clicking (touching) the screen, and updating the movement to go
- * towards that locations.</p>
+ * Description: Encapsulates the Movement controlled by clicking (touching) the
+ * screen, and updating the movement to go towards that locations.</p>
  *
  * Copyright (c) Jul 1, 2023
+ *
  * @author Gary Deken
  * @version 0.8
  */
@@ -29,12 +31,18 @@ public class MouseMovement extends BaseMovement {
 
    /**
     * Constructs a MouseMovement based on the buttonID and the speed.
+    *
     * @param buttonID
     * @param speed
     */
    public MouseMovement(int buttonID, float speed) {
       this.buttonID = buttonID;
       this.speed = speed;
+   }
+
+   @Override
+   public void handleCollision(SpriteUpdate spriteUpdate, BoundingBox other) {
+
    }
 
    @Override

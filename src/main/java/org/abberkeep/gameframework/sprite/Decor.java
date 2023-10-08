@@ -27,6 +27,12 @@ public class Decor extends Sprite {
    }
 
    @Override
+   public boolean doesImpact() {
+      return false;
+   }
+
+
+   @Override
    public void draw(SpriteBatch batch) {
       animation.draw(batch, x, y);
    }
