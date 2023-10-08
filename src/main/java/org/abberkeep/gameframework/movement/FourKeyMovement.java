@@ -5,16 +5,19 @@
 package org.abberkeep.gameframework.movement;
 
 import com.badlogic.gdx.Gdx;
+import org.abberkeep.gameframework.sprite.BoundingBox;
 import org.abberkeep.gameframework.sprite.SpriteUpdate;
 
 /**
  * Title: FourKeyMovement
  *
  * <p>
- * Description: Encapsulates getting the input from four keys and determines the direction and the amount of movement
- * for the update. This uses the four cardinal directions (North, South, East and West).</p>
+ * Description: Encapsulates getting the input from four keys and determines the
+ * direction and the amount of movement for the update. This uses the four
+ * cardinal directions (North, South, East and West).</p>
  *
  * Copyright (c) Jun 22, 2023
+ *
  * @author Gary Deken
  * @version 0.7
  */
@@ -23,7 +26,9 @@ public class FourKeyMovement extends BaseMovement {
    private boolean multi = false;
 
    /**
-    * Constructs a FourKeyMovement, with the key IDs and the speed. The key IDs are used to move in that direction.
+    * Constructs a FourKeyMovement, with the key IDs and the speed. The key IDs
+    * are used to move in that direction.
+    *
     * @param keyUpId
     * @param keyDownId
     * @param keyRightId
@@ -35,9 +40,12 @@ public class FourKeyMovement extends BaseMovement {
    }
 
    /**
-    * Constructs a FourKeyMovement, with the key IDs and the speed. With the multi set to true, it allows for pressing
-    * two non-conflicting keys at the same time to get a direction. The Right and Left keys can be pressed with either
-    * Up or Down, but pressing Up and Down or Left and Right, will only go Up or Right.
+    * Constructs a FourKeyMovement, with the key IDs and the speed. With the
+    * multi set to true, it allows for pressing two non-conflicting keys at the
+    * same time to get a direction. The Right and Left keys can be pressed with
+    * either Up or Down, but pressing Up and Down or Left and Right, will only
+    * go Up or Right.
+    *
     * @param keyUpId
     * @param keyDownId
     * @param keyRightId
@@ -52,6 +60,11 @@ public class FourKeyMovement extends BaseMovement {
       keyIds[3] = keyLeftId;
       this.speed = speed;
       this.multi = multi;
+   }
+
+   @Override
+   public void handleCollision(SpriteUpdate spriteUpdate, BoundingBox other) {
+
    }
 
    @Override

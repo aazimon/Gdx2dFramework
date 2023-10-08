@@ -15,6 +15,7 @@ import org.abberkeep.gameframework.movement.Movement;
  * Description: Defines a Sprite that moves on the screen.</p>
  *
  * Copyright (c) Aug 6, 2023
+ *
  * @author Gary Deken
  * @version 0.9
  */
@@ -26,8 +27,9 @@ public class Actor extends Sprite {
    protected int currentStillMotion = 0;
 
    /**
-    * Creates an Actor with the Movement, move Motion and still Motion passed in. The width and height are based on the
-    * first still Motion.
+    * Creates an Actor with the Movement, move Motion and still Motion passed
+    * in. The width and height are based on the first still Motion.
+    *
     * @param movement
     * @param moveMotion
     * @param stillMotion
@@ -40,8 +42,9 @@ public class Actor extends Sprite {
    }
 
    /**
-    * Creates an Actor with the Movement, move Motion and still Motion passed in. The width and height are based on the
-    * first still Motion.
+    * Creates an Actor with the Movement, move Motion and still Motion passed
+    * in. The width and height are based on the first still Motion.
+    *
     * @param movement
     * @param moveMotion
     * @param stillMotion
@@ -51,6 +54,11 @@ public class Actor extends Sprite {
       this.movement = movement;
       this.moveMotion = moveMotion;
       this.stillMotion = stillMotion;
+   }
+
+   @Override
+   public boolean doesImpact() {
+      return true;
    }
 
    @Override
@@ -64,6 +72,14 @@ public class Actor extends Sprite {
 
    public float getSpeed() {
       return movement.getCurrentSpeed();
+   }
+
+   @Override
+   public void handleCollision(Sprite other) {
+      // move back by default
+      if (contains(other)) {
+         setLocation(x - movement.getXUpdate(), y - movement.getYUpdate());
+      }
    }
 
    @Override
