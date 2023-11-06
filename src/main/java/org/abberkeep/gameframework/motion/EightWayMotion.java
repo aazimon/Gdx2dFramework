@@ -1,9 +1,22 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Copyright (c) 2023 Gary Deken
+ * All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.abberkeep.gameframework.motion;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -120,6 +133,14 @@ public class EightWayMotion implements Motion {
    }
 
    @Override
+   public Animation getAnimation(int index) {
+      if (index > 7 || index < 0) {
+         return null;
+      }
+      return animations[index];
+   }
+
+   @Override
    public int getHeight() {
       return animations[index].getHeight();
    }
@@ -151,9 +172,21 @@ public class EightWayMotion implements Motion {
    }
 
    @Override
+   public void setDirection(float direction) {
+      setDirectionIndex(direction);
+   }
+
+   @Override
    public void setSize(int width, int height) {
       for (Animation animation1 : animations) {
          animation1.setSize(width, height);
+      }
+   }
+
+   @Override
+   public void setSound(Sound sound) {
+      for (Animation animation1 : animations) {
+         animation1.setSound(sound);
       }
    }
 
@@ -166,7 +199,11 @@ public class EightWayMotion implements Motion {
 
    @Override
    public void update(float deltaTime, float direction) {
-      direction = Direction.nearest8thDirection(direction);
+      setDirectionIndex(Direction.nearest8thDirection(direction));
+      animations[index].update(deltaTime);
+   }
+
+   private void setDirectionIndex(float direction) {
       if (direction == Direction.NORTH) {
          index = NORTH;
       } else if (direction == Direction.NORTH_EAST) {
@@ -184,7 +221,6 @@ public class EightWayMotion implements Motion {
       } else {
          index = NORTH_WEST;
       }
-      animations[index].update(deltaTime);
    }
 
 }

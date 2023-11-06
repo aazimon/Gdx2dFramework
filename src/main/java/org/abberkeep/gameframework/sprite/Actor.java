@@ -1,6 +1,18 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Copyright (c) 2023 Gary Deken
+ * All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.abberkeep.gameframework.sprite;
 
@@ -27,8 +39,8 @@ public class Actor extends Sprite {
    protected int currentStillMotion = 0;
 
    /**
-    * Creates an Actor with the Movement, move Motion and still Motion passed
-    * in. The width and height are based on the first still Motion.
+    * Creates an Actor with the Movement, move Motion and still Motion passed in. The width and height are based on the
+    * first still Motion.
     *
     * @param movement
     * @param moveMotion
@@ -42,8 +54,8 @@ public class Actor extends Sprite {
    }
 
    /**
-    * Creates an Actor with the Movement, move Motion and still Motion passed
-    * in. The width and height are based on the first still Motion.
+    * Creates an Actor with the Movement, move Motion and still Motion passed in. The width and height are based on the
+    * first still Motion.
     *
     * @param movement
     * @param moveMotion
@@ -70,6 +82,14 @@ public class Actor extends Sprite {
       }
    }
 
+   public Motion[] getMoveMotions() {
+      return moveMotion;
+   }
+
+   public Motion[] getStillMotions() {
+      return stillMotion;
+   }
+
    public float getSpeed() {
       return movement.getCurrentSpeed();
    }
@@ -78,7 +98,7 @@ public class Actor extends Sprite {
    public void handleCollision(Sprite other) {
       // move back by default
       if (contains(other)) {
-         setLocation(x - movement.getXUpdate(), y - movement.getYUpdate());
+         movement.handleCollision(this, other.bounds);
       }
    }
 
@@ -89,6 +109,7 @@ public class Actor extends Sprite {
          stillMotion[currentStillMotion].update(deltaTime, movement.getDirection());
       } else {
          moveMotion[currentMoveMotion].update(deltaTime, movement.getDirection());
+         stillMotion[currentStillMotion].setDirection(movement.getDirection());
       }
    }
 

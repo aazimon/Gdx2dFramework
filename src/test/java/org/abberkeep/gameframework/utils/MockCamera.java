@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Gary Deken
+ * Copyright (c) 2022-2023 Gary Deken
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,18 +16,34 @@
  */
 package org.abberkeep.gameframework.utils;
 
-import org.abberkeep.gameframework.BaseGame;
+import com.badlogic.gdx.graphics.Camera;
 
 /**
- * Title: TestGame
+ * Title: MockCamera
  *
  * <p>
  * Description: </p>
  *
- * Copyright (c) Jul 29, 2023
+ * Copyright (c) Nov 5, 2023
  * @author Gary Deken
  * @version
  */
-public class TestGame extends BaseGame {
+public class MockCamera extends Camera {
+   public MockCamera(int xOffset, int yOffset) {
+      position.x = xOffset;
+      position.y = yOffset;
+   }
+
+   @Override
+   public void update() {
+      // TODO Implement method
+      throw new UnsupportedOperationException("Not supported yet.");
+   }
+
+   @Override
+   public void update(boolean bln) {
+      // TODO Implement method
+      throw new UnsupportedOperationException("Not supported yet.");
+   }
 
 }

@@ -1,6 +1,18 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ * Copyright (c) 2023 Gary Deken
+ * All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.abberkeep.gameframework.sprite;
 
@@ -16,6 +28,13 @@ package org.abberkeep.gameframework.sprite;
  * @version 0.8
  */
 public interface SpriteUpdate {
+
+   /**
+    * Determines if this updated Sprite contains any points from the other Sprite.
+    * @param other
+    * @return
+    */
+   boolean contains(BoundingBox other);
 
    /**
     * Returns the Sprite's X location.

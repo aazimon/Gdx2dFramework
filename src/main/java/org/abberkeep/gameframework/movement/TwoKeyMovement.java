@@ -1,6 +1,18 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Copyright (c) 2023 Gary Deken
+ * All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.abberkeep.gameframework.movement;
 
@@ -12,9 +24,8 @@ import org.abberkeep.gameframework.sprite.SpriteUpdate;
  * Title: TwoKeyMovement
  *
  * <p>
- * Description: Encapsulates getting the input from two keys and determines the
- * direction and the amount of movement for the update. This works either in a
- * horizontal or horizontal direction.</p>
+ * Description: Encapsulates getting the input from two keys and determines the direction and the amount of movement for
+ * the update. This works either in a horizontal or horizontal direction.</p>
  *
  * Copyright (c) Jun 22, 2023
  *
@@ -26,9 +37,8 @@ public class TwoKeyMovement extends BaseMovement {
    private boolean horizontal = true;
 
    /**
-    * Constructs a TwoKeyMovement, with the key IDs and speed. If the direction
-    * is vertical (keyId1 is up, keyId2 is down) or horizontal (keyId1 is right,
-    * keyId2 is left). The horizontal flag is for determining if the movement is
+    * Constructs a TwoKeyMovement, with the key IDs and speed. If the direction is vertical (keyId1 is up, keyId2 is
+    * down) or horizontal (keyId1 is right, keyId2 is left). The horizontal flag is for determining if the movement is
     * horizontal or vertical.
     *
     * @param keyId1
@@ -45,7 +55,7 @@ public class TwoKeyMovement extends BaseMovement {
 
    @Override
    public void handleCollision(SpriteUpdate spriteUpdate, BoundingBox other) {
-      // Do nothing.
+      spriteUpdate.setLocation(spriteUpdate.getX() - xUpdate, spriteUpdate.getY() - yUpdate);
    }
 
    @Override

@@ -1,9 +1,22 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Copyright (c) 2023 Gary Deken
+ * All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.abberkeep.gameframework.motion;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -85,6 +98,14 @@ public class TwoWayMotion implements Motion {
    }
 
    @Override
+   public Animation getAnimation(int index) {
+      if (index > 1 || index < 0) {
+         return null;
+      }
+      return animations[index];
+   }
+
+   @Override
    public int getHeight() {
       return animations[direction].getHeight();
    }
@@ -124,9 +145,21 @@ public class TwoWayMotion implements Motion {
    }
 
    @Override
+   public void setDirection(float direction) {
+      setDirectionIndex(direction);
+   }
+
+   @Override
    public void setSize(int width, int height) {
       for (Animation animation1 : animations) {
          animation1.setSize(width, height);
+      }
+   }
+
+   @Override
+   public void setSound(Sound sound) {
+      for (Animation animation1 : animations) {
+         animation1.setSound(sound);
       }
    }
 
@@ -144,7 +177,11 @@ public class TwoWayMotion implements Motion {
     */
    @Override
    public void update(float deltaTime, float direction) {
-      direction = Direction.convertTo360Degrees(direction);
+      setDirectionIndex(Direction.convertTo360Degrees(direction));
+      animations[this.direction].update(deltaTime);
+   }
+
+   private void setDirectionIndex(float direction) {
       this.direction = 1;
       if (horizontal) {
          if (direction <= Direction.NORTH || direction > Direction.SOUTH) {
@@ -155,7 +192,6 @@ public class TwoWayMotion implements Motion {
             this.direction = 0;
          }
       }
-      animations[this.direction].update(deltaTime);
    }
 
 }

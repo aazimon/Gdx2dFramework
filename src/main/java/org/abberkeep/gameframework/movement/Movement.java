@@ -1,6 +1,18 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ * Copyright (c) 2023 Gary Deken
+ * All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.abberkeep.gameframework.movement;
 
@@ -11,8 +23,8 @@ import org.abberkeep.gameframework.sprite.SpriteUpdate;
  * Title: Movement
  *
  * <p>
- * Description: This interface is for implementing a movement control system,
- * either through the Keyboard, mouse or other device.</p>
+ * Description: This interface is for implementing a movement control system, either through the Keyboard, mouse or
+ * other device.</p>
  *
  * Copyright (c) Jun 22, 2023
  *
@@ -58,10 +70,9 @@ public interface Movement {
    void handleCollision(SpriteUpdate spriteUpdate, BoundingBox other);
 
    /**
-    * This method takes the delta time since the last update and a SpriteUpdate.
-    * It determines the movement since the last update and allows setting the
-    * update amounts to the SpriteUpdate. The amount of the movement is also
-    * returned through the getXUpdate() and getYUpdate().
+    * This method takes the delta time since the last update and a SpriteUpdate. It determines the movement since the
+    * last update and allows setting the update amounts to the SpriteUpdate. The amount of the movement is also returned
+    * through the getXUpdate() and getYUpdate().
     *
     * @param deltaTime float
     * @param spriteUpdate

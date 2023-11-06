@@ -1,6 +1,18 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Copyright (c) 2023 Gary Deken
+ * All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.abberkeep.gameframework.sprite;
 
@@ -13,11 +25,13 @@ package org.abberkeep.gameframework.sprite;
  * Copyright (c) Sept 17, 2023
  *
  * @author Gary Deken
- * @version 0.10
+ * @version 0.11
  */
-public class BoundingBox {
+public class BoundingBox implements Bounds {
    private int x;
+   private int xInset = 0;
    private int y;
+   private int yInset = 0;
    private int width;
    private int height;
 
@@ -32,23 +46,64 @@ public class BoundingBox {
       return (checkX(other) && checkY(other));
    }
 
+   @Override
+   public void setHeight(int height) {
+      this.height = height;
+   }
+
    public void setLocation(int x, int y) {
       this.x = x;
       this.y = y;
    }
 
+   public void setSize(int width, int height) {
+      this.width = width;
+      this.height = height;
+   }
+
+   @Override
+   public void setWidth(int width) {
+      this.width = width;
+   }
+
+   @Override
+   public void setXInset(int xInset) {
+      this.xInset = xInset;
+   }
+
+   @Override
+   public void setYInset(int yInset) {
+      this.yInset = yInset;
+   }
+
+   /**
+    * Returns the x location (left) plus the xInset to return the x edge.
+    * @return int
+    */
+   int getXEdge() {
+      return x + xInset;
+   }
+
+   /**
+    * Returns the y location (bottom) minus the yInset to return the y edge.
+    * @return int
+    */
+   int getYEdge() {
+      return y + yInset;
+   }
+
    private boolean checkX(BoundingBox other) {
       // x <= oX <= x+w
       // ox <= x <= ox+ow
-      return (x <= other.x && other.x <= x + width)
-            || (other.x <= x && x <= other.x + other.width);
+      return (getXEdge() <= other.getXEdge() && other.getXEdge() <= getXEdge() + width)
+         || (other.getXEdge() <= getXEdge() && getXEdge() <= other.getXEdge() + other.width);
    }
 
    private boolean checkY(BoundingBox other) {
       // y <= oy <= y+h
       // oy <= y <= oy+oh
-      return (y <= other.y && other.y <= y + height)
-            || (other.y <= y && y <= other.y + other.height);
+      return (getYEdge() <= other.getYEdge() && other.getYEdge() <= getYEdge() + height)
+         || (other.getYEdge() <= getYEdge() && getYEdge() <= other.getYEdge() + other.height);
    }
 
 }

@@ -1,6 +1,18 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Copyright (c) 2023 Gary Deken
+ * All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.abberkeep.gameframework.movement;
 
@@ -13,8 +25,8 @@ import org.abberkeep.gameframework.sprite.SpriteUpdate;
  * Title: MouseMovement
  *
  * <p>
- * Description: Encapsulates the Movement controlled by clicking (touching) the
- * screen, and updating the movement to go towards that locations.</p>
+ * Description: Encapsulates the Movement controlled by clicking (touching) the screen, and updating the movement to go
+ * towards that locations.</p>
  *
  * Copyright (c) Jul 1, 2023
  *
@@ -42,7 +54,15 @@ public class MouseMovement extends BaseMovement {
 
    @Override
    public void handleCollision(SpriteUpdate spriteUpdate, BoundingBox other) {
-
+      // determine which direction was the collision
+      // check if reverting X update there is no collision
+      spriteUpdate.setX(spriteUpdate.getX() - xUpdate);
+      if (spriteUpdate.contains(other)) {
+         // Still collision, so collided on Y axis. Set X back and revert Y update.
+         spriteUpdate.setX(spriteUpdate.getX() + xUpdate);
+         spriteUpdate.setY(spriteUpdate.getY() - yUpdate);
+      }
+      // otherwise collision is on the X axis, leave reverted.
    }
 
    @Override
@@ -63,7 +83,7 @@ public class MouseMovement extends BaseMovement {
          xPositive = goalX > x;
          yPositive = goalY > y;
       }
-      if (x != goalX && goalY != y) {
+      if (x != goalX || goalY != y) {
          float nx = spriteUpdate.getX() + xUpdate;
          if (xPositive) {
             if (nx > goalX) {
