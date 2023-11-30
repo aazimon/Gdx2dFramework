@@ -17,6 +17,7 @@
 package org.abberkeep.gameframework.screen;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.abberkeep.gameframework.sprite.Actor;
 import org.abberkeep.gameframework.sprite.Decor;
@@ -35,6 +36,8 @@ import org.abberkeep.gameframework.sprite.Sprite;
  */
 public abstract class SimpleScreen extends BaseScreen {
    private List<Sprite> sprites = new ArrayList<>();
+   private boolean renderCycle = false;
+   private List<Sprite> toBeAdded = new ArrayList<>();
 
    @Override
    public void addActor(Actor actor) {
@@ -48,18 +51,35 @@ public abstract class SimpleScreen extends BaseScreen {
 
    @Override
    protected void renderChild(float deltaTime) {
-      for (Sprite sprite : sprites) {
+      Iterator<Sprite> iter = sprites.iterator();
+      renderCycle = true;
+
+      while (iter.hasNext()) {
+         Sprite sprite = iter.next();
          sprite.update(deltaTime);
          // detect collision
          if (sprite.doesImpact()) {
             detectCollision(sprite);
          }
-         sprite.draw(batch);
+         if (sprite.isRemove()) {
+            iter.remove();
+         } else {
+            sprite.draw(batch);
+         }
+      }
+      renderCycle = false;
+      if (!toBeAdded.isEmpty()) {
+         sprites.addAll(toBeAdded);
+         toBeAdded.clear();
       }
    }
 
    private void addSprite(Sprite sprite) {
-      sprites.add(sprite);
+      if (renderCycle) {
+         toBeAdded.add(sprite);
+      } else {
+         sprites.add(sprite);
+      }
    }
 
    private void detectCollision(Sprite sprite) {

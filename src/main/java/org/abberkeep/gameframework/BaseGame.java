@@ -17,6 +17,7 @@
 package org.abberkeep.gameframework;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -47,15 +48,6 @@ public class BaseGame extends Game {
    protected Viewport viewport;
    private static Map<String, Texture> textures = new HashMap<>();
 
-   protected BaseGame() {
-      this(800, 600);
-   }
-
-   protected BaseGame(int width, int height) {
-      this.width = width;
-      this.height = height;
-   }
-
    /**
     * Returns a Global Textures and will dispose of it when the Game is Disposed.
     * @param fileName
@@ -70,6 +62,8 @@ public class BaseGame extends Game {
     */
    @Override
    public void create() {
+      height = Gdx.graphics.getHeight();
+      width = Gdx.graphics.getWidth();
       batch = new SpriteBatch();
       OrthographicCamera camera = new OrthographicCamera();
       camera.setToOrtho(false, width, height);

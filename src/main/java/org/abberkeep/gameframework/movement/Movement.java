@@ -48,20 +48,6 @@ public interface Movement {
    float getCurrentSpeed();
 
    /**
-    * This returns the amount of the X movement for a given update.
-    *
-    * @return double
-    */
-   float getXUpdate();
-
-   /**
-    * This returns the amount of the Y movement for a given update.
-    *
-    * @return double
-    */
-   float getYUpdate();
-
-   /**
     * Handle the collision between the Sprite and a BoundBox.
     *
     * @param spriteUpdate

@@ -36,6 +36,7 @@ public abstract class Sprite implements Updatable, SpriteUpdate {
    protected int height = 1;
    protected int width = 1;
    protected BoundingBox bounds;
+   protected boolean remove;
 
    public Sprite(int width, int height) {
       this.width = width;
@@ -127,6 +128,14 @@ public abstract class Sprite implements Updatable, SpriteUpdate {
    }
 
    /**
+    * This tells the Screen if this Sprite should be removed from the Screen.
+    * @return boolean
+    */
+   public boolean isRemove() {
+      return remove;
+   }
+
+   /**
     * Sets the height of this Sprite in pixels.
     * @param height
     */
@@ -140,6 +149,11 @@ public abstract class Sprite implements Updatable, SpriteUpdate {
       this.x = x;
       this.y = y;
       bounds.setLocation((int) x, (int) y);
+   }
+
+   @Override
+   public void setRemove(boolean remove) {
+      this.remove = remove;
    }
 
    /**

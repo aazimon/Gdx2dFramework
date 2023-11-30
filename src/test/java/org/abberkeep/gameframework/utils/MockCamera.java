@@ -36,13 +36,11 @@ public class MockCamera extends Camera {
 
    @Override
    public void update() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public void update(boolean bln) {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 

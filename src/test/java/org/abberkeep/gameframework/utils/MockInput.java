@@ -45,146 +45,122 @@ public class MockInput extends AbstractInput {
 
    @Override
    public void cancelVibrate() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public float getAccelerometerX() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public float getAccelerometerY() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public float getAccelerometerZ() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public float getAzimuth() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public long getCurrentEventTime() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public float getGyroscopeX() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public float getGyroscopeY() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public float getGyroscopeZ() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public int getDeltaX() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public int getDeltaX(int i) {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public int getDeltaY() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public int getDeltaY(int i) {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public InputProcessor getInputProcessor() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public int getMaxPointers() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public Orientation getNativeOrientation() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public float getPitch() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public float getPressure() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public float getPressure(int i) {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public float getRoll() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public int getRotation() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public void getRotationMatrix(float[] floats) {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public void getTextInput(TextInputListener tl, String string, String string1, String string2) {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public void getTextInput(TextInputListener tl, String string, String string1, String string2,
       OnscreenKeyboardType okt) {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
@@ -220,7 +196,6 @@ public class MockInput extends AbstractInput {
 
    @Override
    public boolean isCursorCatched() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
@@ -231,25 +206,21 @@ public class MockInput extends AbstractInput {
 
    @Override
    public boolean isPeripheralAvailable(Peripheral prphrl) {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public boolean isTouched() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public boolean isTouched(int i) {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public boolean justTouched() {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
@@ -259,19 +230,16 @@ public class MockInput extends AbstractInput {
 
    @Override
    public void setCursorCatched(boolean bln) {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public void setCursorPosition(int i, int i1) {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public void setInputProcessor(InputProcessor ip) {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
@@ -285,13 +253,11 @@ public class MockInput extends AbstractInput {
 
    @Override
    public void setOnscreenKeyboardVisible(boolean bln) {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public void setOnscreenKeyboardVisible(boolean bln, OnscreenKeyboardType okt) {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
@@ -305,13 +271,11 @@ public class MockInput extends AbstractInput {
 
    @Override
    public void vibrate(int i) {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public void vibrate(long[] longs, int i) {
-      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
