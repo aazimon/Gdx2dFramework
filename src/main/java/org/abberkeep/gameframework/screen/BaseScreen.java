@@ -46,6 +46,8 @@ public abstract class BaseScreen implements Screen {
    protected int largestSpriteWidth = 0;
    protected int largestSpriteHeight = 0;
    protected Viewport viewport;
+   protected int height;
+   protected int width;
    private Color bgColor;
    private Map<String, Texture> textures = new HashMap<>();
    private Map<String, Sound> sounds = new HashMap<>();
@@ -151,7 +153,8 @@ public abstract class BaseScreen implements Screen {
 
    @Override
    public void resize(int width, int height) {
-      //
+      this.width = width;
+      this.height = height;
    }
 
    @Override
@@ -168,6 +171,8 @@ public abstract class BaseScreen implements Screen {
    public void setupScreen(SpriteBatch batch, Viewport viewport) {
       this.batch = batch;
       this.viewport = viewport;
+      height = Gdx.graphics.getHeight();
+      width = Gdx.graphics.getWidth();
    }
 
    /**

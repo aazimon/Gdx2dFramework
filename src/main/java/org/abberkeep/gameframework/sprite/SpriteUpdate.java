@@ -55,6 +55,8 @@ public interface SpriteUpdate {
     */
    void setLocation(float x, float y);
 
+   void setRemove(boolean remove);
+
    /**
     * Sets the Sprite's X location.
     * @param x

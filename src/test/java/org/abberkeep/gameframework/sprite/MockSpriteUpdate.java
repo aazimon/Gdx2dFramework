@@ -30,6 +30,7 @@ public class MockSpriteUpdate implements SpriteUpdate {
    private float x;
    private float y;
    private BoundingBox bounds;
+   private boolean remove;
 
    public MockSpriteUpdate(int width, int height) {
       bounds = new BoundingBox(0, 0, width, height);
@@ -55,18 +56,26 @@ public class MockSpriteUpdate implements SpriteUpdate {
       this.x = x;
       this.y = y;
       bounds.setLocation((int) x, (int) y);
+      System.out.println("SpriteUpdate X: " + x + " Y: " + y);
+   }
+
+   @Override
+   public void setRemove(boolean remove) {
+      throw new UnsupportedOperationException("Not supported yet.");
    }
 
    @Override
    public void setX(float x) {
       this.x = x;
       bounds.setLocation((int) x, (int) y);
+      System.out.println("SpriteUpdate X: " + x);
    }
 
    @Override
    public void setY(float y) {
       this.y = y;
       bounds.setLocation((int) x, (int) y);
+      System.out.println("SpriteUpdate Y: " + y);
    }
 
 }

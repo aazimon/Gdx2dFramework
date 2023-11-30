@@ -48,16 +48,6 @@ public abstract class BaseMovement implements Movement {
    }
 
    @Override
-   public float getXUpdate() {
-      return xUpdate;
-   }
-
-   @Override
-   public float getYUpdate() {
-      return yUpdate;
-   }
-
-   @Override
    public void setSpeed(float speed) {
       this.speed = speed;
    }
@@ -74,8 +64,8 @@ public abstract class BaseMovement implements Movement {
       if (updateSpeed > 0) {
          // calculate the x & y distance based on the direction and speed.
          double radians = Math.toRadians(direction);
-         yUpdate = (float) (FastMath.fastSin(radians) * speed);
-         xUpdate = (float) (FastMath.fastCos(radians) * speed);
+         yUpdate = (float) (FastMath.fastSin(radians) * updateSpeed);
+         xUpdate = (float) (FastMath.fastCos(radians) * updateSpeed);
       } else {
          xUpdate = 0;
          yUpdate = 0;
