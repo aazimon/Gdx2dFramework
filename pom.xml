@@ -4,7 +4,7 @@
    <modelVersion>4.0.0</modelVersion>
    <groupId>org.abberkeep.gameframework</groupId>
    <artifactId>Gdx2dFramework</artifactId>
-   <version>0.12</version>
+   <version>0.13</version>
    <packaging>jar</packaging>
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -35,7 +35,7 @@
       <dependency>
          <groupId>com.badlogicgames.gdx</groupId>
          <artifactId>gdx</artifactId>
-         <version>1.10.0</version>
+         <version>1.11.0</version>
       </dependency>
       <dependency>
          <groupId>org.apache.commons</groupId>
