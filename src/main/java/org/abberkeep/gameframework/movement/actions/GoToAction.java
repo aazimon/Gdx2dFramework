@@ -44,8 +44,8 @@ public class GoToAction extends ScriptAction {
     */
    public GoToAction(ScriptMovement parent, int actionIndex) {
       this.parent = parent;
-      if (actionIndex < 1) {
-         throw new IllegalArgumentException("ScriptAction needs to be one or greater.");
+      if (actionIndex < 0) {
+         throw new IllegalArgumentException("ScriptAction needs to be zero or greater.");
       }
       this.actionIndex = actionIndex;
    }
@@ -59,8 +59,8 @@ public class GoToAction extends ScriptAction {
     */
    public GoToAction(ScriptMovement parent, int actionIndex, int repeat) {
       this.parent = parent;
-      if (actionIndex < 1) {
-         throw new IllegalArgumentException("ScriptAction needs to be one or greater.");
+      if (actionIndex < 0) {
+         throw new IllegalArgumentException("ScriptAction needs to be zero or greater.");
       }
       this.actionIndex = actionIndex;
       this.repeat = repeat;

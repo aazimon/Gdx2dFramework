@@ -38,7 +38,7 @@ import org.abberkeep.gameframework.sprite.SpriteUpdate;
  */
 public class ScriptMovement implements Movement {
    private List<ScriptAction> actions = new ArrayList<>();
-   private int currentIndex = 0;
+   private int currentIndex = -1;
    private ScriptAction currentAction;
    private boolean done = false;
    private WaitAction waitAction = new WaitAction(0f);
@@ -49,7 +49,6 @@ public class ScriptMovement implements Movement {
     * @param action
     */
    public ScriptMovement(ScriptAction action) {
-      actions.add(waitAction);
       currentAction = waitAction;
       // add the intended first ScriptAction
       actions.add(action);
@@ -89,9 +88,9 @@ public class ScriptMovement implements Movement {
     * @param newIndex
     */
    public void goToAction(int newIndex) {
-      if (newIndex >= actions.size() || newIndex < 1) {
+      if (newIndex >= actions.size() || newIndex < 0) {
          throw new IllegalArgumentException(
-            "New ScriptAction is not a valid index. Expected: " + (actions.size() - 1) + ", Actual: " + newIndex);
+            "New ScriptAction is not a valid index. Expected: 0 to " + (actions.size() - 1) + ", Actual: " + newIndex);
       }
       currentIndex = newIndex;
       float direction = currentAction.getDirection();
@@ -118,6 +117,16 @@ public class ScriptMovement implements Movement {
 
    public void nextAction() {
       gotoNextAction();
+   }
+
+   /**
+    * resets the ScriptMovement to its initial state, so that it could start over.
+    */
+   @Override
+   public void reset() {
+      currentAction = waitAction;
+      done = false;
+      currentIndex = -1;
    }
 
    /**

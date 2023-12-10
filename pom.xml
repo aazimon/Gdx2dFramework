@@ -35,7 +35,7 @@
       <dependency>
          <groupId>com.badlogicgames.gdx</groupId>
          <artifactId>gdx</artifactId>
-         <version>1.11.0</version>
+         <version>1.12.1</version><!-- 1.10.0 -->
       </dependency>
       <dependency>
          <groupId>org.apache.commons</groupId>

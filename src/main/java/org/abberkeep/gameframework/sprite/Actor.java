@@ -102,6 +102,15 @@ public class Actor extends Sprite {
       }
    }
 
+   /**
+    * Resets the actor to its original state. The remove flag is set to false. This method also calls the movement's
+    * reset() method.
+    */
+   public void reset() {
+      remove = false;
+      movement.reset();
+   }
+
    @Override
    public void update(float deltaTime) {
       movement.update(deltaTime, this);

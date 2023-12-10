@@ -66,6 +66,11 @@ public interface Movement {
    void update(float deltaTime, SpriteUpdate spriteUpdate);
 
    /**
+    * Reset the Movement to its original state.
+    */
+   void reset();
+
+   /**
     * Set the speed, as in pixels per second.
     *
     * @param speed

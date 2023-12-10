@@ -84,7 +84,9 @@ public abstract class SimpleScreen extends BaseScreen {
 
    private void detectCollision(Sprite sprite) {
       for (Sprite collideSprite : sprites) {
-         sprite.handleCollision(collideSprite);
+         if (sprite != collideSprite && sprite.contains(collideSprite)) {
+            sprite.handleCollision(collideSprite);
+         }
       }
    }
 

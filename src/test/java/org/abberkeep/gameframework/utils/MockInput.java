@@ -44,11 +44,6 @@ public class MockInput extends AbstractInput {
    }
 
    @Override
-   public void cancelVibrate() {
-      throw new UnsupportedOperationException("Not supported yet.");
-   }
-
-   @Override
    public float getAccelerometerX() {
       throw new UnsupportedOperationException("Not supported yet.");
    }
@@ -275,7 +270,20 @@ public class MockInput extends AbstractInput {
    }
 
    @Override
-   public void vibrate(long[] longs, int i) {
+   public void vibrate(int i, boolean bln) {
+      // TODO Implement method
+      throw new UnsupportedOperationException("Not supported yet.");
+   }
+
+   @Override
+   public void vibrate(int i, int i1, boolean bln) {
+      // TODO Implement method
+      throw new UnsupportedOperationException("Not supported yet.");
+   }
+
+   @Override
+   public void vibrate(VibrationType vt) {
+      // TODO Implement method
       throw new UnsupportedOperationException("Not supported yet.");
    }
 

@@ -25,8 +25,11 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import org.abberkeep.gameframework.Updatable;
 import org.abberkeep.gameframework.sprite.Actor;
 import org.abberkeep.gameframework.sprite.Decor;
 
@@ -52,6 +55,7 @@ public abstract class BaseScreen implements Screen {
    private Map<String, Texture> textures = new HashMap<>();
    private Map<String, Sound> sounds = new HashMap<>();
    private Map<String, Music> musics = new HashMap<>();
+   private List<Updatable> updatables = new ArrayList<>();
 
    /**
     * Constructor for the BaseScreen. It sets the background color to a default Black.
@@ -75,6 +79,15 @@ public abstract class BaseScreen implements Screen {
     * @param y
     */
    public abstract void addDecor(Decor decor);
+
+   /**
+    * Adds an Updatable object to this Screen. Updatable objects are not drawn on the screen but are only updated each
+    * cycle. Updatables are used for functionalities that require events to happen at any given iteration of the Game.
+    * @param updatable
+    */
+   public void addUpdatable(Updatable updatable) {
+      updatables.add(updatable);
+   }
 
    @Override
    public void dispose() {
@@ -142,6 +155,7 @@ public abstract class BaseScreen implements Screen {
       batch.setProjectionMatrix(viewport.getCamera().combined);
       batch.begin();
       renderChild(deltaTime);
+      updatables.forEach(up -> up.update(deltaTime));
       batch.end();
    }
 

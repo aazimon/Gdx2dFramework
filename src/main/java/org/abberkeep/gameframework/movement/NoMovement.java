@@ -61,6 +61,11 @@ public class NoMovement implements Movement {
    }
 
    @Override
+   public void reset() {
+      // do nothing by default.
+   }
+
+   @Override
    public void setSpeed(float speed) {
       // Do nothing.
    }

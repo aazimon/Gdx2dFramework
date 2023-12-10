@@ -243,7 +243,7 @@ public class ScriptMovementTest {
    public void testGoToAction() {
       TimeMoveAction action = new TimeMoveAction(Direction.EAST, .8f, 1f);
       underTest = new ScriptMovement(action);
-      GoToAction action1 = new GoToAction(underTest, 1);
+      GoToAction action1 = new GoToAction(underTest, 0);
       underTest.addAction(action1);
 
       underTest.update(.2f, spriteUpdate);
@@ -267,7 +267,7 @@ public class ScriptMovementTest {
    public void testGoToActionRepeat() {
       TimeMoveAction action = new TimeMoveAction(Direction.EAST, .8f, 1f);
       underTest = new ScriptMovement(action);
-      GoToAction action1 = new GoToAction(underTest, 1, 1);
+      GoToAction action1 = new GoToAction(underTest, 0, 1);
       underTest.addAction(action1);
 
       underTest.update(.2f, spriteUpdate);
