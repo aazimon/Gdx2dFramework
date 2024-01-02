@@ -16,6 +16,7 @@
  */
 package org.abberkeep.gameframework.animation;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,13 +48,30 @@ public class LayeredAnimation extends BaseAnimation {
    }
 
    @Override
-   public void update(float deltaTime) {
-      animations.forEach(animation -> animation.update(deltaTime));
+   public void setColor(Color color) {
+      animations.forEach(animation -> animation.setColor(color));
+   }
+
+   @Override
+   public void setColor(float red, float green, float blue) {
+      super.setColor(red, green, blue);
+      animations.forEach(animation -> animation.setColor(color));
+   }
+
+   @Override
+   public void setColor(int red, int green, int blue) {
+      super.setColor(red, green, blue);
+      animations.forEach(animation -> animation.setColor(color));
    }
 
    @Override
    protected void drawChild(SpriteBatch batch, float x, float y) {
       animations.forEach(animation -> animation.draw(batch, x + xOffset, y + yOffset));
+   }
+
+   @Override
+   protected void updateChild(float deltaTime) {
+      animations.forEach(animation -> animation.update(deltaTime));
    }
 
 }

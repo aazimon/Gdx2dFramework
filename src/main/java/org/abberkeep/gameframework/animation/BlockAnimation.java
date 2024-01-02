@@ -50,16 +50,16 @@ public class BlockAnimation extends BaseAnimation {
    }
 
    @Override
-   public void update(float deltaTime) {
+   protected void drawChild(SpriteBatch batch, float x, float y) {
+      batch.draw(texture, x + xOffset, y + yOffset, width, height);
+   }
+
+   @Override
+   protected void updateChild(float deltaTime) {
       if (stateTime == 0.0f && sound != null) {
          sound.play();
          stateTime = 1f;
       }
-   }
-
-   @Override
-   protected void drawChild(SpriteBatch batch, float x, float y) {
-      batch.draw(texture, x + xOffset, y + yOffset, width, height);
    }
 
 }

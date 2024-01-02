@@ -19,6 +19,7 @@ package org.abberkeep.gameframework.animation;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.abberkeep.gameframework.effects.ColorEffect;
 
 /**
  * Title: BaseAnimation
@@ -43,6 +44,7 @@ public abstract class BaseAnimation implements Animation {
    protected int yOffset;
    protected float stateTime;
    protected Sound sound;
+   protected ColorEffect colorEffect;
 
    @Override
    public void draw(SpriteBatch batch, float x, float y) {
@@ -54,8 +56,6 @@ public abstract class BaseAnimation implements Animation {
          drawChild(batch, x, y);
       }
    }
-
-   protected abstract void drawChild(SpriteBatch batch, float x, float y);
 
    @Override
    public int getHeight() {
@@ -80,6 +80,11 @@ public abstract class BaseAnimation implements Animation {
    @Override
    public void setColor(int red, int green, int blue) {
       color = new Color(red / 255.0f, green / 255.0f, blue / 255.0f, translucency);
+   }
+
+   @Override
+   public void setColorEffect(ColorEffect colorEffect) {
+      this.colorEffect = colorEffect;
    }
 
    /**
@@ -130,5 +135,28 @@ public abstract class BaseAnimation implements Animation {
    public void setYOffset(int yOffset) {
       this.yOffset = yOffset;
    }
+
+   @Override
+   public void update(float deltaTime) {
+      if (colorEffect != null) {
+         colorEffect.update(deltaTime);
+         setColor(colorEffect.getColor());
+      }
+      updateChild(deltaTime);
+   }
+
+   /**
+    * Child class implementation of the draw method.
+    * @param batch
+    * @param x
+    * @param y
+    */
+   protected abstract void drawChild(SpriteBatch batch, float x, float y);
+
+   /**
+    * Child class implementation of the update method.
+    * @param deltaTime
+    */
+   protected abstract void updateChild(float deltaTime);
 
 }

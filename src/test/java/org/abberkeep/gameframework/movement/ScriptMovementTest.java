@@ -134,29 +134,54 @@ public class ScriptMovementTest {
 
       assertTrue(action.isDone());
       assertTrue(underTest.isDone());
-
    }
 
    @Test
    public void testDestinationAction2() {
-      DestinationAction action = new DestinationAction(15, 12, 1f, true);
+      DestinationAction action = new DestinationAction(25, 20, 1f);
       underTest = new ScriptMovement(action);
+      action.addGoal(25, 25);
+      action.addGoal(20, 25);
+      action.addGoal(20, 20);
 
       underTest.update(.2f, spriteUpdate);
-      assertEquals(19.549, spriteUpdate.getX(), 0.001f);
-      assertEquals(19.108, spriteUpdate.getY(), 0.001f);
       underTest.update(.2f, spriteUpdate);
-      assertEquals(19.087, spriteUpdate.getX(), 0.001f);
-      assertEquals(18.22, spriteUpdate.getY(), 0.001f);
       underTest.update(.2f, spriteUpdate);
-      assertEquals(18.616, spriteUpdate.getX(), 0.001f);
-      assertEquals(17.339, spriteUpdate.getY(), 0.001f);
       underTest.update(.2f, spriteUpdate);
-      assertEquals(18.13, spriteUpdate.getX(), 0.001f);
-      assertEquals(16.464, spriteUpdate.getY(), 0.001f);
+      assertEquals(Direction.EAST, underTest.getDirection(), 0f);
       underTest.update(.2f, spriteUpdate);
-      assertEquals(17.63, spriteUpdate.getX(), 0.001f);
-      assertEquals(15.598, spriteUpdate.getY(), 0.001f);
+      assertEquals(25, spriteUpdate.getX(), 0f);
+      assertEquals(20, spriteUpdate.getY(), 0f);
+      // ------ 1
+      underTest.update(.2f, spriteUpdate);
+      underTest.update(.2f, spriteUpdate);
+      underTest.update(.2f, spriteUpdate);
+      underTest.update(.2f, spriteUpdate);
+      assertEquals(Direction.NORTH, underTest.getDirection(), 0f);
+      underTest.update(.2f, spriteUpdate);
+      assertEquals(25, spriteUpdate.getX(), 0f);
+      assertEquals(25, spriteUpdate.getY(), 0f);
+      // ------ 2
+      underTest.update(.2f, spriteUpdate);
+      underTest.update(.2f, spriteUpdate);
+      underTest.update(.2f, spriteUpdate);
+      underTest.update(.2f, spriteUpdate);
+      assertEquals(Direction.WEST, underTest.getDirection(), 0f);
+      underTest.update(.2f, spriteUpdate);
+      assertEquals(20, spriteUpdate.getX(), 0f);
+      assertEquals(25, spriteUpdate.getY(), 0f);
+      // ------ 3
+      underTest.update(.2f, spriteUpdate);
+      underTest.update(.2f, spriteUpdate);
+      underTest.update(.2f, spriteUpdate);
+      underTest.update(.2f, spriteUpdate);
+      assertEquals(Direction.SOUTH, underTest.getDirection(), 0f);
+      underTest.update(.2f, spriteUpdate);
+      assertEquals(20, spriteUpdate.getX(), 0f);
+      assertEquals(20, spriteUpdate.getY(), 0f);
+
+      assertTrue(action.isDone());
+      assertTrue(underTest.isDone());
    }
 
    @Test
@@ -327,6 +352,47 @@ public class ScriptMovementTest {
       underTest.update(.2f, spriteUpdate);
       underTest.update(.2f, spriteUpdate);
       underTest.update(.2f, spriteUpdate);
+      // 2 seconds
+
+      assertTrue(action.isDone());
+      assertTrue(underTest.isDone());
+      assertEquals(1f, action.getSpeed(), 0.0f);
+   }
+
+   @Test
+   public void testTimeMoveAction2() {
+      TimeMoveAction action = new TimeMoveAction(Direction.EAST, 1f, 1f);
+      underTest = new ScriptMovement(action);
+      underTest.addAction(new TimeMoveAction(Direction.NORTH, 1f, 1f, true));
+
+      underTest.update(.2f, spriteUpdate);
+      assertEquals(21.0, spriteUpdate.getX(), 0.001f);
+      assertEquals(20.0, spriteUpdate.getY(), 0.001f);
+      underTest.update(.2f, spriteUpdate);
+      underTest.update(.2f, spriteUpdate);
+      underTest.update(.2f, spriteUpdate);
+      assertEquals(24.0, spriteUpdate.getX(), 0.001f);
+      assertEquals(20.0, spriteUpdate.getY(), 0.001f);
+      underTest.update(.2f, spriteUpdate);
+      assertEquals(25.0, spriteUpdate.getX(), 0.001f);
+      assertEquals(20.0, spriteUpdate.getY(), 0.001f);
+      // 1 second
+      underTest.update(.2f, spriteUpdate);
+      assertEquals(25.951, spriteUpdate.getX(), 0.001f);
+      assertEquals(20.309, spriteUpdate.getY(), 0.001f);
+      underTest.update(.2f, spriteUpdate);
+      assertEquals(26.76, spriteUpdate.getX(), 0.001f);
+      assertEquals(20.896, spriteUpdate.getY(), 0.001f);
+      underTest.update(.2f, spriteUpdate);
+      assertEquals(27.347, spriteUpdate.getX(), 0.001f);
+      assertEquals(21.705, spriteUpdate.getY(), 0.001f);
+      underTest.update(.2f, spriteUpdate);
+      assertEquals(27.656, spriteUpdate.getX(), 0.001f);
+      assertEquals(22.656, spriteUpdate.getY(), 0.001f);
+      underTest.update(.2f, spriteUpdate);
+      assertEquals(27.656, spriteUpdate.getX(), 0.001f);
+      assertEquals(23.656, spriteUpdate.getY(), 0.001f);
+      assertEquals(90.0, underTest.getDirection(), 0.001f);
       // 2 seconds
 
       assertTrue(action.isDone());

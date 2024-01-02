@@ -92,15 +92,6 @@ public class LoopAnimation extends BaseAnimation {
    }
 
    /**
-    * Updates the sequence of the images to be displayed to the screen.
-    * @param deltaTime
-    */
-   @Override
-   public void update(float deltaTime) {
-      loopUpdate.update(deltaTime);
-   }
-
-   /**
     * Renders the TextureRegion to the screen based on the location provided and the parameters set by other methods.
     * @param batch
     * @param x
@@ -109,6 +100,15 @@ public class LoopAnimation extends BaseAnimation {
    @Override
    protected void drawChild(SpriteBatch batch, float x, float y) {
       batch.draw(frames[currentIndex], x + xOffset, y + yOffset, originX, originY, width, height, 1, 1, rotation);
+   }
+
+   /**
+    * Updates the sequence of the images to be displayed to the screen.
+    * @param deltaTime
+    */
+   @Override
+   protected void updateChild(float deltaTime) {
+      loopUpdate.update(deltaTime);
    }
 
    private void updateSound() {

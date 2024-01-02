@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Gary Deken
+ * Copyright (c) 2022-2023 Gary Deken
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,105 +14,92 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.abberkeep.gameframework.animation;
+package org.abberkeep.gameframework.motion;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.abberkeep.gameframework.animation.Animation;
 import org.abberkeep.gameframework.effects.ColorEffect;
 
 /**
- * Title: MockAnimation
+ * Title: BaseMotion
  *
  * <p>
- * Description:
+ * Description: BaseMotion holds all attributes that are common to all Motions.</p>
  *
- * Copyright (c) Sep 21, 2023
- *
+ * Copyright (c) Dec 31, 2023
  * @author Gary Deken
- * @version
+ * @version 0.14
  */
-public class MockAnimation implements Animation {
-   private int height;
-   private int width;
-   private Color color;
-   private ColorEffect colorEffect;
-
-   public MockAnimation() {
-      height = 10;
-      width = 12;
-   }
+public abstract class BaseMotion implements Motion {
+   protected Animation[] animations;
+   protected int currentIndex = 0;
 
    @Override
-   public void draw(SpriteBatch batch, float x, float y) {
-      // do nothing
-   }
-
-   public Color getColor() {
-      return color;
+   public Animation getAnimation(int index) {
+      if (index < 0 || index > animations.length) {
+         return null;
+      }
+      return animations[index];
    }
 
    @Override
    public int getHeight() {
-      return height;
+      return animations[currentIndex].getHeight();
    }
 
    @Override
    public int getWidth() {
-      return width;
+      return animations[currentIndex].getWidth();
    }
 
    @Override
    public void setColor(Color color) {
-      this.color = color;
+      for (Animation animation : animations) {
+         animation.setColor(color);
+      }
    }
 
    @Override
    public void setColor(float red, float green, float blue) {
-      this.color.r = red;
-      this.color.g = green;
-      this.color.b = blue;
+      for (Animation animation : animations) {
+         animation.setColor(red, green, blue);
+      }
    }
 
    @Override
    public void setColor(int red, int green, int blue) {
-      color = new Color(red / 255.0f, green / 255.0f, blue / 255.0f, 1f);
+      for (Animation animation : animations) {
+         animation.setColor(red, green, blue);
+      }
    }
 
    @Override
    public void setColorEffect(ColorEffect colorEffect) {
-      this.colorEffect = colorEffect;
+      for (Animation animation : animations) {
+         animation.setColorEffect(colorEffect);
+      }
    }
 
    @Override
    public void setSize(int width, int height) {
-      this.height = height;
-      this.width = width;
+      for (Animation animation : animations) {
+         animation.setSize(width, height);
+      }
    }
 
    @Override
    public void setSound(Sound sound) {
-      // do nothing.
+      for (Animation animation : animations) {
+         animation.setSound(sound);
+      }
    }
 
    @Override
    public void setTranslucency(float percent) {
-      // do nothing.
-   }
-
-   @Override
-   public void setXOffSet(int xOffset) {
-      // do nothing.
-   }
-
-   @Override
-   public void setYOffset(int yOffset) {
-      // do nothing.
-   }
-
-   @Override
-   public void update(float deltaTime) {
-      // do nothing.
+      for (Animation animation : animations) {
+         animation.setTranslucency(percent);
+      }
    }
 
 }

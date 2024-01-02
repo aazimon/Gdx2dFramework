@@ -16,8 +16,6 @@
  */
 package org.abberkeep.gameframework.motion;
 
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -36,9 +34,7 @@ import org.abberkeep.gameframework.movement.Direction;
  * @author Gary Deken
  * @version 0.6
  */
-public class TwoWayMotion implements Motion {
-   private Animation[] animations = new Animation[2];
-   private int direction = 0;
+public class TwoWayMotion extends BaseMotion {
    private boolean horizontal = true;
 
    /**
@@ -50,6 +46,7 @@ public class TwoWayMotion implements Motion {
     * @param directionTwo
     */
    public TwoWayMotion(Animation directionOne, Animation directionTwo) {
+      animations = new Animation[2];
       animations[0] = directionOne;
       animations[1] = directionTwo;
    }
@@ -64,6 +61,7 @@ public class TwoWayMotion implements Motion {
     * @param duration
     */
    public TwoWayMotion(Texture texture, int tileWidth, int tileHeight, float duration) {
+      animations = new Animation[2];
       TextureRegion[][] textureRegions = TextureRegion.split(texture, tileWidth, tileHeight);
       animations[0] = new LoopAnimation(duration, textureRegions[0]);
       animations[1] = new LoopAnimation(duration, textureRegions[1]);
@@ -81,6 +79,7 @@ public class TwoWayMotion implements Motion {
     * @param direction1
     */
    public TwoWayMotion(Texture texture, int tileWidth, int tileHeight, float duration, int direction0, int direction1) {
+      animations = new Animation[2];
       TextureRegion[][] textureRegions = TextureRegion.split(texture, tileWidth, tileHeight);
       animations[0] = new LoopAnimation(duration, textureRegions[direction0]);
       animations[1] = new LoopAnimation(duration, textureRegions[direction1]);
@@ -94,20 +93,7 @@ public class TwoWayMotion implements Motion {
     */
    @Override
    public void draw(SpriteBatch batch, float x, float y) {
-      animations[direction].draw(batch, x, y);
-   }
-
-   @Override
-   public Animation getAnimation(int index) {
-      if (index > 1 || index < 0) {
-         return null;
-      }
-      return animations[index];
-   }
-
-   @Override
-   public int getHeight() {
-      return animations[direction].getHeight();
+      animations[currentIndex].draw(batch, x, y);
    }
 
    /**
@@ -119,55 +105,8 @@ public class TwoWayMotion implements Motion {
    }
 
    @Override
-   public int getWidth() {
-      return animations[direction].getWidth();
-   }
-
-   @Override
-   public void setColor(Color color) {
-      for (Animation animation1 : animations) {
-         animation1.setColor(color);
-      }
-   }
-
-   @Override
-   public void setColor(float red, float green, float blue) {
-      for (Animation animation1 : animations) {
-         animation1.setColor(red, green, blue);
-      }
-   }
-
-   @Override
-   public void setColor(int red, int green, int blue) {
-      for (Animation animation1 : animations) {
-         animation1.setColor(red, green, blue);
-      }
-   }
-
-   @Override
    public void setDirection(float direction) {
       setDirectionIndex(direction);
-   }
-
-   @Override
-   public void setSize(int width, int height) {
-      for (Animation animation1 : animations) {
-         animation1.setSize(width, height);
-      }
-   }
-
-   @Override
-   public void setSound(Sound sound) {
-      for (Animation animation1 : animations) {
-         animation1.setSound(sound);
-      }
-   }
-
-   @Override
-   public void setTranslucency(float percent) {
-      for (Animation animation1 : animations) {
-         animation1.setTranslucency(percent);
-      }
    }
 
    /**
@@ -178,18 +117,18 @@ public class TwoWayMotion implements Motion {
    @Override
    public void update(float deltaTime, float direction) {
       setDirectionIndex(Direction.convertTo360Degrees(direction));
-      animations[this.direction].update(deltaTime);
+      animations[currentIndex].update(deltaTime);
    }
 
    private void setDirectionIndex(float direction) {
-      this.direction = 1;
+      currentIndex = 1;
       if (horizontal) {
          if (direction <= Direction.NORTH || direction > Direction.SOUTH) {
-            this.direction = 0;
+            currentIndex = 0;
          }
       } else {
          if (direction >= Direction.EAST && direction < Direction.WEST) {
-            this.direction = 0;
+            currentIndex = 0;
          }
       }
    }

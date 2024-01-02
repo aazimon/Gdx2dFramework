@@ -20,6 +20,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.abberkeep.gameframework.Updatable;
+import org.abberkeep.gameframework.effects.ColorEffect;
 
 /**
  * Title: Animation
@@ -67,6 +68,12 @@ public interface Animation extends Updatable {
     * @param blue
     */
    void setColor(int red, int green, int blue);
+
+   /**
+    * Set the ColorEffect for the Animation
+    * @param colorEffect
+    */
+   void setColorEffect(ColorEffect colorEffect);
 
    /**
     * Sets the size of the Animation to the size that it will be drawn, resizing the image. This will also set the

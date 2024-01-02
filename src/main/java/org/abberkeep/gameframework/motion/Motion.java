@@ -20,6 +20,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.abberkeep.gameframework.animation.Animation;
+import org.abberkeep.gameframework.effects.ColorEffect;
 
 /**
  * Title: Motion
@@ -86,6 +87,12 @@ public interface Motion {
     * @param blue
     */
    void setColor(int red, int green, int blue);
+
+   /**
+    * Set the colorEffect for all the Animations in this Motion.
+    * @param colorEffect
+    */
+   void setColorEffect(ColorEffect colorEffect);
 
    /**
     * Sets the direction of the Motion. This is useful if another motion sets a direction, and the Actor then flips to

@@ -16,8 +16,6 @@
  */
 package org.abberkeep.gameframework.motion;
 
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -36,13 +34,11 @@ import org.abberkeep.gameframework.movement.Direction;
  * @author Gary Deken
  * @version 0.6
  */
-public class FourWayMotion implements Motion {
+public class FourWayMotion extends BaseMotion {
    private final static int NORTH = 0;
    private final static int EAST = 1;
    private final static int SOUTH = 2;
    private final static int WEST = 3;
-   private Animation[] animations = new Animation[4];
-   private int index;
 
    /**
     * Creates a TwoWayMotion to control the animation. The animation changes as the direction changes.
@@ -52,6 +48,7 @@ public class FourWayMotion implements Motion {
     * @param west
     */
    public FourWayMotion(Animation north, Animation east, Animation south, Animation west) {
+      animations = new Animation[4];
       animations[NORTH] = north;
       animations[EAST] = east;
       animations[SOUTH] = south;
@@ -69,6 +66,7 @@ public class FourWayMotion implements Motion {
     * @param duration
     */
    public FourWayMotion(Texture texture, int tileWidth, int tileHeight, float duration) {
+      animations = new Animation[4];
       TextureRegion[][] textureRegions = TextureRegion.split(texture, tileWidth, tileHeight);
       animations[NORTH] = new LoopAnimation(duration, textureRegions[0]);
       animations[EAST] = new LoopAnimation(duration, textureRegions[1]);
@@ -92,6 +90,7 @@ public class FourWayMotion implements Motion {
     */
    public FourWayMotion(Texture texture, int tileWidth, int tileHeight, float duration, int north, int east, int south,
       int west) {
+      animations = new Animation[4];
       TextureRegion[][] textureRegions = TextureRegion.split(texture, tileWidth, tileHeight);
       animations[NORTH] = new LoopAnimation(duration, textureRegions[north]);
       animations[EAST] = new LoopAnimation(duration, textureRegions[east]);
@@ -101,46 +100,7 @@ public class FourWayMotion implements Motion {
 
    @Override
    public void draw(SpriteBatch batch, float x, float y) {
-      animations[index].draw(batch, x, y);
-   }
-
-   @Override
-   public Animation getAnimation(int index) {
-      if (index > 3 || index < 0) {
-         return null;
-      }
-      return animations[index];
-   }
-
-   @Override
-   public int getHeight() {
-      return animations[index].getHeight();
-   }
-
-   @Override
-   public int getWidth() {
-      return animations[index].getWidth();
-   }
-
-   @Override
-   public void setColor(Color color) {
-      for (Animation animation1 : animations) {
-         animation1.setColor(color);
-      }
-   }
-
-   @Override
-   public void setColor(float red, float green, float blue) {
-      for (Animation animation1 : animations) {
-         animation1.setColor(red, green, blue);
-      }
-   }
-
-   @Override
-   public void setColor(int red, int green, int blue) {
-      for (Animation animation1 : animations) {
-         animation1.setColor(red, green, blue);
-      }
+      animations[currentIndex].draw(batch, x, y);
    }
 
    @Override
@@ -149,42 +109,21 @@ public class FourWayMotion implements Motion {
    }
 
    @Override
-   public void setSize(int width, int height) {
-      for (Animation animation1 : animations) {
-         animation1.setSize(width, height);
-      }
-   }
-
-   @Override
-   public void setSound(Sound sound) {
-      for (Animation animation1 : animations) {
-         animation1.setSound(sound);
-      }
-   }
-
-   @Override
-   public void setTranslucency(float percent) {
-      for (Animation animation1 : animations) {
-         animation1.setTranslucency(percent);
-      }
-   }
-
-   @Override
    public void update(float deltaTime, float direction) {
       direction = Direction.nearest4thDirection(direction);
       setIndex(direction);
-      animations[index].update(deltaTime);
+      animations[currentIndex].update(deltaTime);
    }
 
    private void setIndex(float direction) {
       if (direction == Direction.NORTH) {
-         index = NORTH;
+         currentIndex = NORTH;
       } else if (direction == Direction.EAST) {
-         index = EAST;
+         currentIndex = EAST;
       } else if (direction == Direction.SOUTH) {
-         index = SOUTH;
+         currentIndex = SOUTH;
       } else {
-         index = WEST;
+         currentIndex = WEST;
       }
    }
 

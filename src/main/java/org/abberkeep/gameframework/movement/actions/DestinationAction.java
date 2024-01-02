@@ -16,9 +16,6 @@
  */
 package org.abberkeep.gameframework.movement.actions;
 
-import org.abberkeep.gameframework.movement.Direction;
-import org.abberkeep.gameframework.sprite.SpriteUpdate;
-
 /**
  * Title: DestinationAction
  *
@@ -29,12 +26,7 @@ import org.abberkeep.gameframework.sprite.SpriteUpdate;
  * @author Gary Deken
  * @version 0.12
  */
-public class DestinationAction extends ScriptAction {
-   private int initialX;
-   private int initialY;
-   private int goalX;
-   private int goalY;
-   private boolean directionSet = false;
+public class DestinationAction extends AbstractDestinationAction<Integer> {
 
    /**
     * This ScriptAction will move the Actor from its current location to the specified goal location.
@@ -43,83 +35,28 @@ public class DestinationAction extends ScriptAction {
     * @param speed
     */
    public DestinationAction(int goalX, int goalY, float speed) {
-      this.goalX = goalX;
-      this.goalY = goalY;
+      goalXs.add(goalX);
+      goalYs.add(goalY);
       this.speed = speed;
    }
 
-   /**
-    * This ScriptAction will move the Actor from its current location to the specified goal location. This action will
-    * change direction gradually, in an arc.
-    * @param goalX
-    * @param goalY
-    * @param speed
-    * @param changeGradually
-    */
-   public DestinationAction(int goalX, int goalY, float speed, boolean changeGradually) {
-      this.goalX = goalX;
-      this.goalY = goalY;
-      this.speed = speed;
-      // TODO this is currently not working.
-      this.changeDirectionGradually = changeGradually;
+   @Override
+   public void addGoal(Integer x, Integer y) {
+      if (x == null || y == null) {
+         throw new NullPointerException("Both X and Y are required.");
+      }
+      goalXs.add(x);
+      goalYs.add(y);
    }
 
    @Override
-   public void setup(float direction, float speed) {
-      super.setup(direction, speed);
-      directionSet = false;
+   protected int getNextX() {
+      return goalXs.get(currentIndex);
    }
 
    @Override
-   public void updateChild(float deltaTime, SpriteUpdate spriteUpdate) {
-      float x = spriteUpdate.getX();
-      float y = spriteUpdate.getY();
-
-      if (!directionSet) {
-         initialX = (int) x;
-         initialY = (int) y;
-         directionSet = true;
-         float x1 = initialX - goalX;
-         float y1 = initialY - goalY;
-         float f = (x1 * x1) + (y1 * y1);
-         float distance = (float) Math.sqrt(f);
-         duration = distance / speed;
-         changeInDirection = (Direction.getDirection(initialX, initialY, goalX, goalY) - initialDirection) / duration;
-      }
-      direction = Direction.getDirection(x, y, goalX, goalY);
-      calculateMagnitudesByDirection(getUpdatedDirection(deltaTime), speed);
-
-      boolean xPositive = goalX > x;
-      boolean yPositive = goalY > y;
-      if (x != goalX || goalY != y) {
-         float nx = spriteUpdate.getX() + xUpdate;
-         if (xPositive) {
-            if (nx > goalX) {
-               nx = goalX;
-            }
-         } else {
-            if (nx < goalX) {
-               nx = goalX;
-            }
-         }
-         spriteUpdate.setX(nx);
-         float ny = spriteUpdate.getY() + yUpdate;
-         if (yPositive) {
-            if (ny > goalY) {
-               ny = goalY;
-            }
-         } else {
-            if (ny < goalY) {
-               ny = goalY;
-            }
-         }
-         spriteUpdate.setY(ny);
-      } else {
-         calculateMagnitudesByDirection(getUpdatedDirection(deltaTime), 0f);
-      }
-      if (spriteUpdate.getX() == goalX && spriteUpdate.getY() == goalY) {
-         done = true;
-      }
+   protected int getNextY() {
+      return goalYs.get(currentIndex);
    }
 
 }

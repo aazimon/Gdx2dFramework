@@ -45,18 +45,6 @@ public class StaticRegionAnimation extends BaseAnimation {
    }
 
    /**
-    * StaticRegionAnimations have no update.
-    * @param deltaTime
-    */
-   @Override
-   public void update(float deltaTime) {
-      if (stateTime == 0.0f && sound != null) {
-         sound.play();
-         stateTime = 1f;
-      }
-   }
-
-   /**
     * Renders the TextureRegion to the screen based on the location provided and the parameters set by other methods.
     * @param batch
     * @param x
@@ -65,6 +53,18 @@ public class StaticRegionAnimation extends BaseAnimation {
    @Override
    protected void drawChild(SpriteBatch batch, float x, float y) {
       batch.draw(region, x + xOffset, y + yOffset, originX, originY, width, height, 1, 1, rotation);
+   }
+
+   /**
+    * StaticRegionAnimations have no update.
+    * @param deltaTime
+    */
+   @Override
+   protected void updateChild(float deltaTime) {
+      if (stateTime == 0.0f && sound != null) {
+         sound.play();
+         stateTime = 1f;
+      }
    }
 
 }

@@ -70,18 +70,6 @@ public class StaticAnimation extends BaseAnimation {
    }
 
    /**
-    * StaticAnimations have no update.
-    * @param deltaTime
-    */
-   @Override
-   public void update(float deltaTime) {
-      if (stateTime == 0.0f && sound != null) {
-         sound.play();
-         stateTime = 1f;
-      }
-   }
-
-   /**
     * Crops the image, with the starting X and Y locations within the image, and Width and Height from the starting to
     * the edge of the images. Any width or Height that goes beyond the original image size, will cause the last pixels
     * to repeat. The image will resize based on the Height and Width set for the Animation.
@@ -129,6 +117,18 @@ public class StaticAnimation extends BaseAnimation {
    protected void drawChild(SpriteBatch batch, float x, float y) {
       batch.draw(texture, x + xOffset, y + yOffset, originX, originY, width, height, 1, 1, rotation, xStart, yStart,
          xSrcWidth, ySrcHeight, flipHorizontal, flipVertical);
+   }
+
+   /**
+    * StaticAnimations have no update.
+    * @param deltaTime
+    */
+   @Override
+   protected void updateChild(float deltaTime) {
+      if (stateTime == 0.0f && sound != null) {
+         sound.play();
+         stateTime = 1f;
+      }
    }
 
 }
