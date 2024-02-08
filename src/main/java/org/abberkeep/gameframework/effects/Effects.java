@@ -16,29 +16,24 @@
  */
 package org.abberkeep.gameframework.effects;
 
-import com.badlogic.gdx.graphics.Color;
 import org.abberkeep.gameframework.Updatable;
+import org.abberkeep.gameframework.animation.Animation;
+import org.abberkeep.gameframework.motion.Motion;
 
 /**
  * Title: Effect
  *
  * <p>
- * Description: An ColorEffect to be applied to a Motion and Animation.</p>
+ * Description: An Effects to be applied to a Motion and Animation.</p>
  *
  * Copyright (c) Dec 31, 2023
  * @author Gary Deken
- * @version 0.14
+ * @version 0.15
  */
-public interface ColorEffect extends Updatable {
+public interface Effects extends Updatable {
 
    /**
-    * Gets the current Color of this Effect.
-    * @return
-    */
-   Color getColor();
-
-   /**
-    * Returns true when this ColorEffect has completed.
+    * Returns true when this Effects has completed.
     * @return
     */
    boolean isDone();
@@ -48,4 +43,15 @@ public interface ColorEffect extends Updatable {
     */
    void reset();
 
+   /**
+    * This is called from the BaseAnimation to update it with the given effects.
+    * @param animation
+    */
+   void updateAnimation(Animation animation);
+
+   /**
+    * This is called from the BaseMotion to update it with the given effects.
+    * @param motion
+    */
+   void updateMotion(Motion motion);
 }

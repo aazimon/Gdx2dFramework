@@ -19,7 +19,7 @@ package org.abberkeep.gameframework.motion;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import org.abberkeep.gameframework.animation.Animation;
-import org.abberkeep.gameframework.effects.ColorEffect;
+import org.abberkeep.gameframework.effects.Effects;
 
 /**
  * Title: BaseMotion
@@ -34,6 +34,13 @@ import org.abberkeep.gameframework.effects.ColorEffect;
 public abstract class BaseMotion implements Motion {
    protected Animation[] animations;
    protected int currentIndex = 0;
+
+   @Override
+   public void addEffects(Effects effect) {
+      for (Animation animation : animations) {
+         animation.addEffects(effect);
+      }
+   }
 
    @Override
    public Animation getAnimation(int index) {
@@ -54,6 +61,13 @@ public abstract class BaseMotion implements Motion {
    }
 
    @Override
+   public void reset() {
+      for (Animation animation : animations) {
+         animation.reset();
+      }
+   }
+
+   @Override
    public void setColor(Color color) {
       for (Animation animation : animations) {
          animation.setColor(color);
@@ -71,13 +85,6 @@ public abstract class BaseMotion implements Motion {
    public void setColor(int red, int green, int blue) {
       for (Animation animation : animations) {
          animation.setColor(red, green, blue);
-      }
-   }
-
-   @Override
-   public void setColorEffect(ColorEffect colorEffect) {
-      for (Animation animation : animations) {
-         animation.setColorEffect(colorEffect);
       }
    }
 

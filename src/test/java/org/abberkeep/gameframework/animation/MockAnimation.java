@@ -19,7 +19,9 @@ package org.abberkeep.gameframework.animation;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import org.abberkeep.gameframework.effects.ColorEffect;
+import java.util.ArrayList;
+import java.util.List;
+import org.abberkeep.gameframework.effects.Effects;
 
 /**
  * Title: MockAnimation
@@ -36,11 +38,21 @@ public class MockAnimation implements Animation {
    private int height;
    private int width;
    private Color color;
-   private ColorEffect colorEffect;
+   private float translucency = 1f;
+   private List<Effects> effects;
 
    public MockAnimation() {
       height = 10;
       width = 12;
+      color = new Color(1, 1, 1, 1);
+   }
+
+   @Override
+   public void addEffects(Effects effect) {
+      if (effects == null) {
+         effects = new ArrayList<>();
+      }
+      effects.add(effect);
    }
 
    @Override
@@ -57,9 +69,20 @@ public class MockAnimation implements Animation {
       return height;
    }
 
+   public float getTranslucency() {
+      return translucency;
+   }
+
    @Override
    public int getWidth() {
       return width;
+   }
+
+   @Override
+   public void reset() {
+      if (effects != null) {
+         effects.forEach(Effects::reset);
+      }
    }
 
    @Override
@@ -80,11 +103,6 @@ public class MockAnimation implements Animation {
    }
 
    @Override
-   public void setColorEffect(ColorEffect colorEffect) {
-      this.colorEffect = colorEffect;
-   }
-
-   @Override
    public void setSize(int width, int height) {
       this.height = height;
       this.width = width;
@@ -97,7 +115,7 @@ public class MockAnimation implements Animation {
 
    @Override
    public void setTranslucency(float percent) {
-      // do nothing.
+      this.translucency = percent;
    }
 
    @Override
@@ -112,7 +130,12 @@ public class MockAnimation implements Animation {
 
    @Override
    public void update(float deltaTime) {
-      // do nothing.
+      if (effects != null) {
+         effects.forEach(effect -> {
+            effect.update(deltaTime);
+            effect.updateAnimation(this);
+         });
+      }
    }
 
 }

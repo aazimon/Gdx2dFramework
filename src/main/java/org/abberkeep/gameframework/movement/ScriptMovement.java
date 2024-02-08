@@ -120,7 +120,7 @@ public class ScriptMovement implements Movement {
    }
 
    /**
-    * resets the ScriptMovement to its initial state, so that it could start over.
+    * resets the ScriptMovement to its initial state so that it could start over.
     */
    @Override
    public void reset() {

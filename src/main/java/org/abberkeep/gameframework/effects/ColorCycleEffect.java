@@ -19,26 +19,25 @@ package org.abberkeep.gameframework.effects;
 import com.badlogic.gdx.graphics.Color;
 import java.util.ArrayList;
 import java.util.List;
+import org.abberkeep.gameframework.animation.Animation;
+import org.abberkeep.gameframework.motion.Motion;
 
 /**
  * Title: ColorEffect
  *
  * <p>
- * Description: An effect that cycles through, from one Color to another Color.</p>
+ * Description: An effect that will cycles through colors, from one Color to another Color.</p>
  *
  * Copyright (c) Dec 31, 2023
  * @author Gary Deken
- * @version 0.14
+ * @version 0.15
  */
-public class ColorCycleEffect implements ColorEffect {
+public class ColorCycleEffect extends BaseEffect {
    private Color baseColor = Color.WHITE;
    private Color renderColor = new Color(1, 1, 1, 1);
+   private Color startColor;
    private List<Color> colors = new ArrayList<>();
-   private List<Float> durations = new ArrayList<>();
-   private int currentColor = 0;
-   private float currentTime;
    private float[] currentChange = new float[4];
-   private float currentDuration;
 
    /**
     * Creates a ColorCycleEffect which will change from White to the Color passed in, over the duration.
@@ -59,6 +58,7 @@ public class ColorCycleEffect implements ColorEffect {
     */
    public ColorCycleEffect(Color color1, Color color2, float duration) {
       baseColor = color1;
+      startColor = color1;
       addColorCycle(color2, duration);
       currentDuration = duration;
       setUpCurrentChange(color2);
@@ -75,19 +75,14 @@ public class ColorCycleEffect implements ColorEffect {
    }
 
    @Override
-   public Color getColor() {
-      return renderColor;
-   }
-
-   @Override
-   public boolean isDone() {
-      return currentColor >= colors.size();
-   }
-
-   @Override
    public void reset() {
+      baseReset();
       renderColor = new Color(1, 1, 1, 1);
-      currentColor = 0;
+      baseColor = Color.WHITE;
+      if (startColor != null) {
+         baseColor = startColor;
+      }
+      setUpCurrentChange(colors.get(0));
    }
 
    @Override
@@ -96,15 +91,31 @@ public class ColorCycleEffect implements ColorEffect {
       if (currentTime <= currentDuration) {
          updateRenderColor();
       } else {
-         currentColor++;
-         if (currentColor < colors.size()) {
-            currentDuration = durations.get(currentColor);
-            baseColor = colors.get(currentColor - 1);
-            setUpCurrentChange(colors.get(currentColor));
+         currentIndex++;
+         if (currentIndex < colors.size()) {
+            currentDuration = durations.get(currentIndex);
+            baseColor = colors.get(currentIndex - 1);
+            setUpCurrentChange(colors.get(currentIndex));
             currentTime = deltaTime;
             updateRenderColor();
+         } else {
+            Color c = colors.get(colors.size() - 1);
+            renderColor.r = c.r;
+            renderColor.g = c.g;
+            renderColor.b = c.b;
+            renderColor.a = c.a;
          }
       }
+   }
+
+   @Override
+   public void updateAnimation(Animation animation) {
+      animation.setColor(renderColor);
+   }
+
+   @Override
+   public void updateMotion(Motion motion) {
+      motion.setColor(renderColor);
    }
 
    private void setUpCurrentChange(Color color) {

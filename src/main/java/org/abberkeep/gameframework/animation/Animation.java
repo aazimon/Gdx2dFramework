@@ -20,7 +20,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.abberkeep.gameframework.Updatable;
-import org.abberkeep.gameframework.effects.ColorEffect;
+import org.abberkeep.gameframework.effects.Effects;
 
 /**
  * Title: Animation
@@ -36,6 +36,12 @@ import org.abberkeep.gameframework.effects.ColorEffect;
 public interface Animation extends Updatable {
 
    /**
+    * Adds an Effects to the Animation.
+    * @param effect
+    */
+   void addEffects(Effects effect);
+
+   /**
     * Draws the Animation to the screen.
     * @param batch
     * @param x
@@ -46,6 +52,12 @@ public interface Animation extends Updatable {
    int getHeight();
 
    int getWidth();
+
+   /**
+    * The method resets the Animation, including any Effects. This method is implemented in the BaseAnimation. Any class
+    * that overrides the reset() should call the BaseAnimation reset() method, or implement Effects resets if needed.
+    */
+   void reset();
 
    /**
     * Set the color for the Animation, by the LibGdx Color object. The default is White.
@@ -68,12 +80,6 @@ public interface Animation extends Updatable {
     * @param blue
     */
    void setColor(int red, int green, int blue);
-
-   /**
-    * Set the ColorEffect for the Animation
-    * @param colorEffect
-    */
-   void setColorEffect(ColorEffect colorEffect);
 
    /**
     * Sets the size of the Animation to the size that it will be drawn, resizing the image. This will also set the

@@ -20,7 +20,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import org.abberkeep.gameframework.animation.Animation;
-import org.abberkeep.gameframework.effects.ColorEffect;
+import org.abberkeep.gameframework.effects.Effects;
 
 /**
  * Title: Motion
@@ -36,6 +36,12 @@ import org.abberkeep.gameframework.effects.ColorEffect;
  * @version 0.6
  */
 public interface Motion {
+
+   /**
+    * Adds an Effects to the Motion, and thus its Animations.
+    * @param effect
+    */
+   void addEffects(Effects effect);
 
    /**
     * Draws the Motion on the Screen, based on the underlining Animation class.
@@ -66,6 +72,12 @@ public interface Motion {
    int getWidth();
 
    /**
+    * Resets the Motion, including any Effects. This method is implemented in the BaseMotion. Any class that overrides
+    * the reset() should call the BaseMotion reset() method, or implement Effects resets if needed.
+    */
+   void reset();
+
+   /**
     * Set the color for all the Animations in this Motion, by the LibGdx Color object. The default is White.
     * @param color
     */
@@ -87,12 +99,6 @@ public interface Motion {
     * @param blue
     */
    void setColor(int red, int green, int blue);
-
-   /**
-    * Set the colorEffect for all the Animations in this Motion.
-    * @param colorEffect
-    */
-   void setColorEffect(ColorEffect colorEffect);
 
    /**
     * Sets the direction of the Motion. This is useful if another motion sets a direction, and the Actor then flips to

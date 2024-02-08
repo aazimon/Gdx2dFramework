@@ -48,7 +48,7 @@ public interface Movement {
    float getCurrentSpeed();
 
    /**
-    * Handle the collision between the Sprite and a BoundBox.
+    * Handle the collision between the Sprite and a BoundingBox.
     *
     * @param spriteUpdate
     * @param other

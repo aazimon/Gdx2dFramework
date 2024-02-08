@@ -35,10 +35,10 @@ import org.abberkeep.gameframework.screen.BaseScreen;
  * @author Gary Deken
  * @version 0.13
  */
-public abstract class ActorFactory<T extends Actor> {
+public abstract class ActorFactory<T extends ForgedActor> {
    protected BaseScreen baseScreen;
    protected Queue<T> queue = new LinkedList<>();
-   private int queueSize = 5;
+   protected int queueSize = 5;
 
    /**
     * Creates a SpriteFactory taking in the BaseScreen where the Actors will be added. The queue will only be populated
@@ -72,6 +72,7 @@ public abstract class ActorFactory<T extends Actor> {
       T t;
       if (queue.isEmpty()) {
          t = construct(buildMovement(), buildMoveMotions(), buildStillMotions());
+         t.setActorFactory(this);
       } else {
          t = queue.poll();
          t.reset();
@@ -87,17 +88,19 @@ public abstract class ActorFactory<T extends Actor> {
     */
    public void setupQueue() {
       for (int i = 0; i < queueSize; i++) {
-         queue.add(construct(buildMovement(), buildMoveMotions(), buildStillMotions()));
+         T t = construct(buildMovement(), buildMoveMotions(), buildStillMotions());
+         t.setActorFactory(this);
+         queue.add(t);
       }
    }
 
    /**
     * This gets called when an Actor is removed, and this adds that Actor back into the Queue. The remove flag is not
     * set to false at this point, so that the Screen can still see it needs to be removed.
-    * @param sprite
+    * @param actor
     */
-   public void spriteRemoved(Sprite sprite) {
-      T t = (T) sprite;
+   public void actorRemoved(ForgedActor actor) {
+      T t = (T) actor;
       queue.add(t);
    }
 

@@ -123,7 +123,7 @@ public class Direction {
    }
 
    /**
-    * Take a degree and ensures that it is between zero and 360.
+    * Take a degree and ensure that it is between zero and 360.
     * @param degree
     * @return
     */

@@ -19,7 +19,9 @@ package org.abberkeep.gameframework.animation;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import org.abberkeep.gameframework.effects.ColorEffect;
+import java.util.ArrayList;
+import java.util.List;
+import org.abberkeep.gameframework.effects.Effects;
 
 /**
  * Title: BaseAnimation
@@ -44,7 +46,15 @@ public abstract class BaseAnimation implements Animation {
    protected int yOffset;
    protected float stateTime;
    protected Sound sound;
-   protected ColorEffect colorEffect;
+   protected List<Effects> effects;
+
+   @Override
+   public void addEffects(Effects effect) {
+      if (effects == null) {
+         effects = new ArrayList<>();
+      }
+      effects.add(effect);
+   }
 
    @Override
    public void draw(SpriteBatch batch, float x, float y) {
@@ -68,6 +78,13 @@ public abstract class BaseAnimation implements Animation {
    }
 
    @Override
+   public void reset() {
+      if (effects != null) {
+         effects.forEach(Effects::reset);
+      }
+   }
+
+   @Override
    public void setColor(Color color) {
       this.color = new Color(color.r, color.g, color.b, translucency);
    }
@@ -80,11 +97,6 @@ public abstract class BaseAnimation implements Animation {
    @Override
    public void setColor(int red, int green, int blue) {
       color = new Color(red / 255.0f, green / 255.0f, blue / 255.0f, translucency);
-   }
-
-   @Override
-   public void setColorEffect(ColorEffect colorEffect) {
-      this.colorEffect = colorEffect;
    }
 
    /**
@@ -138,9 +150,11 @@ public abstract class BaseAnimation implements Animation {
 
    @Override
    public void update(float deltaTime) {
-      if (colorEffect != null) {
-         colorEffect.update(deltaTime);
-         setColor(colorEffect.getColor());
+      if (effects != null) {
+         effects.forEach(effect -> {
+            effect.update(deltaTime);
+            effect.updateAnimation(this);
+         });
       }
       updateChild(deltaTime);
    }

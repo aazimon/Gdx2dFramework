@@ -109,6 +109,12 @@ public class Actor extends Sprite {
    public void reset() {
       remove = false;
       movement.reset();
+      for (Motion motion : moveMotion) {
+         motion.reset();
+      }
+      for (Motion motion : stillMotion) {
+         motion.reset();
+      }
    }
 
    @Override

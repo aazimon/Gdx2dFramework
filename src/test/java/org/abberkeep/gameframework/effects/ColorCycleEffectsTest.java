@@ -21,6 +21,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import com.badlogic.gdx.graphics.Color;
+import org.abberkeep.gameframework.animation.MockAnimation;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -37,118 +39,260 @@ import org.junit.Test;
  */
 public class ColorCycleEffectsTest {
    private ColorCycleEffect underTest;
+   private MockAnimation animation;
+
+   @Before
+   public void setUp() {
+      animation = new MockAnimation();
+   }
+
+   @Test
+   public void testColor0() {
+      underTest = new ColorCycleEffect(new Color(1, 1, 1, 1), 1f);
+      animation.addEffects(underTest);
+
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(1f, animation.getColor().g, 0.01f);
+      assertEquals(1f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(1f, animation.getColor().g, 0.01f);
+      assertEquals(1f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
+      animation.update(.2f);
+      assertTrue(underTest.isDone());
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(1f, animation.getColor().g, 0.01f);
+      assertEquals(1f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
+      animation.update(.2f);
+      assertTrue(underTest.isDone());
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(1f, animation.getColor().g, 0.01f);
+      assertEquals(1f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
+   }
 
    @Test
    public void testColor1() {
       underTest = new ColorCycleEffect(new Color(1, 0, 0, 1), 1f);
+      animation.addEffects(underTest);
 
-      underTest.update(.2f);
+      animation.update(.2f);
       assertFalse(underTest.isDone());
-      underTest.update(.2f);
+      animation.update(.2f);
       assertFalse(underTest.isDone());
-      underTest.update(.2f);
+      animation.update(.2f);
       assertFalse(underTest.isDone());
-      underTest.update(.2f);
+      animation.update(.2f);
       assertFalse(underTest.isDone());
-      underTest.update(.2f);
+      animation.update(.2f);
       assertFalse(underTest.isDone());
-      assertEquals(1f, underTest.getColor().r, 0.1f);
-      assertEquals(0f, underTest.getColor().g, 0.1f);
-      assertEquals(0f, underTest.getColor().b, 0.1f);
-      assertEquals(1f, underTest.getColor().a, 0.1f);
-      underTest.update(.2f);
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(0f, animation.getColor().g, 0.01f);
+      assertEquals(0f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
+      animation.update(.2f);
       assertTrue(underTest.isDone());
-      assertEquals(1f, underTest.getColor().r, 0.1f);
-      assertEquals(0f, underTest.getColor().g, 0.1f);
-      assertEquals(0f, underTest.getColor().b, 0.1f);
-      assertEquals(1f, underTest.getColor().a, 0.1f);
-      underTest.update(.2f);
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(0f, animation.getColor().g, 0.01f);
+      assertEquals(0f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
+      animation.update(.2f);
       assertTrue(underTest.isDone());
-      assertEquals(1f, underTest.getColor().r, 0.1f);
-      assertEquals(0f, underTest.getColor().g, 0.1f);
-      assertEquals(0f, underTest.getColor().b, 0.1f);
-      assertEquals(1f, underTest.getColor().a, 0.1f);
-      underTest.update(.2f);
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(0f, animation.getColor().g, 0.01f);
+      assertEquals(0f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
+      animation.update(.2f);
       assertTrue(underTest.isDone());
-      assertEquals(1f, underTest.getColor().r, 0.1f);
-      assertEquals(0f, underTest.getColor().g, 0.1f);
-      assertEquals(0f, underTest.getColor().b, 0.1f);
-      assertEquals(1f, underTest.getColor().a, 0.1f);
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(0f, animation.getColor().g, 0.01f);
+      assertEquals(0f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
    }
 
    @Test
    public void testColor2() {
       underTest = new ColorCycleEffect(new Color(1, .6f, 1, 1), 1f);
+      animation.addEffects(underTest);
 
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      assertEquals(1f, underTest.getColor().r, 0.1f);
-      assertEquals(.6f, underTest.getColor().g, 0.1f);
-      assertEquals(1f, underTest.getColor().b, 0.1f);
-      assertEquals(1f, underTest.getColor().a, 0.1f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(.6f, animation.getColor().g, 0.01f);
+      assertEquals(1f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
    }
 
    @Test
    public void testColor3() {
       underTest = new ColorCycleEffect(new Color(1, .258f, 1, 1), 1f);
+      animation.addEffects(underTest);
 
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      assertEquals(1f, underTest.getColor().r, 0.1f);
-      assertEquals(.258f, underTest.getColor().g, 0.1f);
-      assertEquals(1f, underTest.getColor().b, 0.1f);
-      assertEquals(1f, underTest.getColor().a, 0.1f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(.258f, animation.getColor().g, 0.01f);
+      assertEquals(1f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
    }
 
    @Test
    public void testColor4() {
       underTest = new ColorCycleEffect(new Color(1, .258f, 1, 1), Color.WHITE, 1f);
+      animation.addEffects(underTest);
 
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      assertEquals(1f, underTest.getColor().r, 0.1f);
-      assertEquals(1f, underTest.getColor().g, 0.1f);
-      assertEquals(1f, underTest.getColor().b, 0.1f);
-      assertEquals(1f, underTest.getColor().a, 0.1f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(1f, animation.getColor().g, 0.01f);
+      assertEquals(1f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
    }
 
    @Test
    public void testColor5() {
       underTest = new ColorCycleEffect(new Color(1, .258f, 1, 1), new Color(1, .8f, .5f, .6f), 1f);
+      animation.addEffects(underTest);
 
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      assertEquals(1f, underTest.getColor().r, 0.1f);
-      assertEquals(.8f, underTest.getColor().g, 0.1f);
-      assertEquals(.5f, underTest.getColor().b, 0.1f);
-      assertEquals(.6f, underTest.getColor().a, 0.1f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(.8f, animation.getColor().g, 0.01f);
+      assertEquals(.5f, animation.getColor().b, 0.01f);
+      assertEquals(.6f, animation.getColor().a, 0.01f);
    }
 
    @Test
    public void testColor6() {
       underTest = new ColorCycleEffect(new Color(1, .8f, .5f, .6f), new Color(.8f, .5f, .3f, 1f), 1f);
+      animation.addEffects(underTest);
 
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      assertEquals(.8f, underTest.getColor().r, 0.1f);
-      assertEquals(.5f, underTest.getColor().g, 0.1f);
-      assertEquals(.3f, underTest.getColor().b, 0.1f);
-      assertEquals(1f, underTest.getColor().a, 0.1f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      assertEquals(.8f, animation.getColor().r, 0.01f);
+      assertEquals(.5f, animation.getColor().g, 0.01f);
+      assertEquals(.3f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
+   }
+
+   @Test
+   public void testColorOver() {
+      underTest = new ColorCycleEffect(new Color(1, .6f, 1, 1), 0.5f);
+      animation.addEffects(underTest);
+
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      underTest.isDone();
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(.6f, animation.getColor().g, 0.01f);
+      assertEquals(1f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
+   }
+
+   @Test
+   public void testColorReset() {
+      underTest = new ColorCycleEffect(new Color(1, 0, 0, 1), 1f);
+      underTest.addColorCycle(new Color(1, .5f, .5f, 1), .6f);
+      animation.addEffects(underTest);
+
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(.8f, animation.getColor().g, 0.01f);
+      assertEquals(.8f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(0f, animation.getColor().g, 0.01f);
+      assertEquals(0f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(.5f, animation.getColor().g, 0.01f);
+      assertEquals(.5f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
+      animation.update(.2f);
+      assertTrue(underTest.isDone());
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(.5f, animation.getColor().g, 0.01f);
+      assertEquals(.5f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
+      // reset and start over
+      underTest.reset();
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(.8f, animation.getColor().g, 0.01f);
+      assertEquals(.8f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(0f, animation.getColor().g, 0.01f);
+      assertEquals(0f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      animation.update(.2f);
+      assertFalse(underTest.isDone());
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(.5f, animation.getColor().g, 0.01f);
+      assertEquals(.5f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
+      animation.update(.2f);
+      assertTrue(underTest.isDone());
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(.5f, animation.getColor().g, 0.01f);
+      assertEquals(.5f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
    }
 
    @Test
@@ -161,25 +305,26 @@ public class ColorCycleEffectsTest {
       // 1 = .3
       // 2 = .1999
       // 3 = -.3999
+      animation.addEffects(underTest);
 
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      assertEquals(1f, underTest.getColor().r, 0.1f);
-      assertEquals(.8f, underTest.getColor().g, 0.1f);
-      assertEquals(.5f, underTest.getColor().b, 0.1f);
-      assertEquals(.6f, underTest.getColor().a, 0.1f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      underTest.update(.2f);
-      assertEquals(.8f, underTest.getColor().r, 0.1f);
-      assertEquals(.5f, underTest.getColor().g, 0.1f);
-      assertEquals(.3f, underTest.getColor().b, 0.1f);
-      assertEquals(1f, underTest.getColor().a, 0.1f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      assertEquals(1f, animation.getColor().r, 0.01f);
+      assertEquals(.8f, animation.getColor().g, 0.01f);
+      assertEquals(.5f, animation.getColor().b, 0.01f);
+      assertEquals(.6f, animation.getColor().a, 0.01f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      animation.update(.2f);
+      assertEquals(.8f, animation.getColor().r, 0.01f);
+      assertEquals(.5f, animation.getColor().g, 0.01f);
+      assertEquals(.3f, animation.getColor().b, 0.01f);
+      assertEquals(1f, animation.getColor().a, 0.01f);
    }
 
 }
