@@ -65,6 +65,9 @@ Change log for Gdx2dFramework.
 ## [0.4]
 - Add Animation interface, a BaseAnimation and StaticAnimation classes.
 
+## [0.3]
+- move resize() method into BaseScreen.
+
 ## [0.2]
 - Add getTexture() to BaseScreen to store images in a cache and disposing of them on exit.
 
