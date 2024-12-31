@@ -90,7 +90,7 @@ public class FourKeyMovementTest {
 
    @Test
    public void testHandleCollisionRight() {
-      BoundingBox bb = new BoundingBox(31, (int) yLoc, 20, 20);
+      BoundingBox bb = new BoundingBox(30, (int) yLoc, 20, 20);
       underTest = new FourKeyMovement(Input.Keys.UP, Input.Keys.DOWN, Input.Keys.RIGHT, Input.Keys.LEFT, .8f);
       underTest.xUpdate = 1f;
       mockSpriteUpdate.setX(xLoc + 1f);
@@ -107,7 +107,7 @@ public class FourKeyMovementTest {
 
    @Test
    public void testHandleCollisionLeft() {
-      BoundingBox bb = new BoundingBox(-11, (int) yLoc, 20, 20);
+      BoundingBox bb = new BoundingBox(-10, (int) yLoc, 20, 20);
       underTest = new FourKeyMovement(Input.Keys.UP, Input.Keys.DOWN, Input.Keys.RIGHT, Input.Keys.LEFT, .8f);
       underTest.xUpdate = -1f;
       mockSpriteUpdate.setX(xLoc - 1f);
@@ -200,7 +200,7 @@ public class FourKeyMovementTest {
 
    @Test
    public void testHandleCollisionRightWithUpRight() {
-      BoundingBox bb = new BoundingBox(31, (int) yLoc, 20, 20);
+      BoundingBox bb = new BoundingBox(30, (int) yLoc, 20, 20);
       underTest = new FourKeyMovement(Input.Keys.UP, Input.Keys.DOWN, Input.Keys.RIGHT, Input.Keys.LEFT, .8f, true);
       underTest.xUpdate = 1f;
       underTest.yUpdate = 1f;
@@ -219,7 +219,7 @@ public class FourKeyMovementTest {
 
    @Test
    public void testHandleCollisionRightWithDownRight() {
-      BoundingBox bb = new BoundingBox(31, (int) yLoc, 20, 20);
+      BoundingBox bb = new BoundingBox(30, (int) yLoc, 20, 20);
       underTest = new FourKeyMovement(Input.Keys.UP, Input.Keys.DOWN, Input.Keys.RIGHT, Input.Keys.LEFT, .8f, true);
       underTest.xUpdate = 1f;
       underTest.yUpdate = -1f;
@@ -238,7 +238,7 @@ public class FourKeyMovementTest {
 
    @Test
    public void testHandleCollisionLeftWithUpLeft() {
-      BoundingBox bb = new BoundingBox(-11, (int) yLoc, 20, 20);
+      BoundingBox bb = new BoundingBox(-10, (int) yLoc, 20, 20);
       underTest = new FourKeyMovement(Input.Keys.UP, Input.Keys.DOWN, Input.Keys.RIGHT, Input.Keys.LEFT, .8f, true);
       underTest.xUpdate = -1f;
       underTest.yUpdate = 1f;
@@ -257,7 +257,7 @@ public class FourKeyMovementTest {
 
    @Test
    public void testHandleCollisionLeftWithDownLeft() {
-      BoundingBox bb = new BoundingBox(-11, (int) yLoc, 20, 20);
+      BoundingBox bb = new BoundingBox(-10, (int) yLoc, 20, 20);
       underTest = new FourKeyMovement(Input.Keys.UP, Input.Keys.DOWN, Input.Keys.RIGHT, Input.Keys.LEFT, .8f, true);
       underTest.xUpdate = -1f;
       underTest.yUpdate = -1f;

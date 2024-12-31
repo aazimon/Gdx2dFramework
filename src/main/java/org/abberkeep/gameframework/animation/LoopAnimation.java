@@ -47,9 +47,9 @@ public class LoopAnimation extends BaseAnimation {
       animationDuration = frameDuration * frames.length;
       width = region[0].getRegionWidth();
       height = region[0].getRegionHeight();
-      originX = width / 2;
-      originY = height / 2;
-      loopUpdate = (deltaTime) -> {
+      originX = width / 2.0f;
+      originY = height / 2.0f;
+      loopUpdate = deltaTime -> {
          stateTime += deltaTime;
          currentIndex = (int) (stateTime / frameDuration);
          currentIndex = currentIndex % frames.length;
@@ -74,9 +74,9 @@ public class LoopAnimation extends BaseAnimation {
       animationDuration = frameDuration * frames.length;
       width = region[0].getRegionWidth();
       height = region[0].getRegionHeight();
-      originX = width / 2;
-      originY = height / 2;
-      loopUpdate = (deltaTime) -> {
+      originX = width / 2.0f;
+      originY = height / 2.0f;
+      loopUpdate = deltaTime -> {
          stateTime += deltaTime;
          currentIndex = (int) (stateTime / frameDuration);
          int loopNumber = (int) (stateTime / animationDuration);

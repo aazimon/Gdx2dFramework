@@ -35,10 +35,10 @@ import org.abberkeep.gameframework.movement.Direction;
  * @version 0.6
  */
 public class FourWayMotion extends BaseMotion {
-   private final static int NORTH = 0;
-   private final static int EAST = 1;
-   private final static int SOUTH = 2;
-   private final static int WEST = 3;
+   private static final int NORTH = 0;
+   private static final int EAST = 1;
+   private static final int SOUTH = 2;
+   private static final int WEST = 3;
 
    /**
     * Creates a TwoWayMotion to control the animation. The animation changes as the direction changes.

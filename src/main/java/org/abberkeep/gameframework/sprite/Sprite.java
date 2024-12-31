@@ -38,7 +38,7 @@ public abstract class Sprite implements Updatable, SpriteUpdate {
    protected BoundingBox bounds;
    protected boolean remove;
 
-   public Sprite(int width, int height) {
+   protected Sprite(int width, int height) {
       this.width = width;
       this.height = height;
       bounds = new BoundingBox(0, 0, width, height);
@@ -75,6 +75,17 @@ public abstract class Sprite implements Updatable, SpriteUpdate {
    @Override
    public boolean contains(BoundingBox other) {
       return bounds.contains(other);
+   }
+
+   /**
+    * Returns true if the point is within the bounds of this BoundingBox, otherwise it returns false.
+    * @param x
+    * @param y
+    * @return
+    */
+   @Override
+   public boolean contains(int x, int y) {
+      return bounds.contains(x, y);
    }
 
    /**

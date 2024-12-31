@@ -52,9 +52,9 @@ public class RandomAnimation extends BaseAnimation {
       animationDuration = frameDuration * frames.length;
       width = region[0].getRegionWidth();
       height = region[0].getRegionHeight();
-      originX = width / 2;
-      originY = height / 2;
-      randomUpdate = (deltaTime) -> {
+      originX = width / 2.0f;
+      originY = height / 2.0f;
+      randomUpdate = deltaTime -> {
          stateTime += deltaTime;
          currentIndex = (int) (stateTime / frameDuration);
          int lastFrame = (int) ((lastStateTime) / frameDuration);
@@ -80,9 +80,9 @@ public class RandomAnimation extends BaseAnimation {
       animationDuration = frameDuration * frames.length;
       width = region[0].getRegionWidth();
       height = region[0].getRegionHeight();
-      originX = width / 2;
-      originY = height / 2;
-      randomUpdate = (deltaTime) -> {
+      originX = width / 2.0f;
+      originY = height / 2.0f;
+      randomUpdate = deltaTime -> {
          stateTime += deltaTime;
          currentIndex = (int) (stateTime / frameDuration);
          int cycleNumber = (int) (stateTime / animationDuration);

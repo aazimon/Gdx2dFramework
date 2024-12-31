@@ -48,9 +48,9 @@ public class BounceAnimation extends BaseAnimation {
       animationDuration = frameDuration * frames.length;
       width = region[0].getRegionWidth();
       height = region[0].getRegionHeight();
-      originX = width / 2;
-      originY = height / 2;
-      bounceUpdate = (deltaTime) -> {
+      originX = width / 2.0f;
+      originY = height / 2.0f;
+      bounceUpdate = deltaTime -> {
          stateTime += deltaTime;
          currentIndex = (int) (stateTime / frameDuration);
          currentIndex = currentIndex % ((frames.length * 2) - 2);
@@ -78,9 +78,9 @@ public class BounceAnimation extends BaseAnimation {
       animationDuration = frameDuration * frames.length;
       width = region[0].getRegionWidth();
       height = region[0].getRegionHeight();
-      originX = width / 2;
-      originY = height / 2;
-      bounceUpdate = (deltaTime) -> {
+      originX = width / 2.0f;
+      originY = height / 2.0f;
+      bounceUpdate = deltaTime -> {
          stateTime += deltaTime;
          int bounceNumber = (int) ((stateTime - frameDuration) / (animationDuration - frameDuration));
          if (bounceNumber < numberOfBounces) {

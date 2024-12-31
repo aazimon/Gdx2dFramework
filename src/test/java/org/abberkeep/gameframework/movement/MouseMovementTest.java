@@ -90,7 +90,7 @@ public class MouseMovementTest {
 
    @Test
    public void testHandleCollisionRight() {
-      BoundingBox bb = new BoundingBox(31, (int) yLoc, 20, 20);
+      BoundingBox bb = new BoundingBox(30, (int) yLoc, 20, 20);
       underTest.xUpdate = 1f;
       mockSpriteUpdate.setX(xLoc + 1f);
 
@@ -106,7 +106,7 @@ public class MouseMovementTest {
 
    @Test
    public void testHandleCollisionLeft() {
-      BoundingBox bb = new BoundingBox(-11, (int) yLoc, 20, 20);
+      BoundingBox bb = new BoundingBox(-10, (int) yLoc, 20, 20);
       underTest.xUpdate = -1f;
       mockSpriteUpdate.setX(xLoc - 1f);
 
@@ -194,7 +194,7 @@ public class MouseMovementTest {
 
    @Test
    public void testHandleCollisionRightWithUpRight() {
-      BoundingBox bb = new BoundingBox(31, (int) yLoc, 20, 20);
+      BoundingBox bb = new BoundingBox(30, (int) yLoc, 20, 20);
       underTest.xUpdate = 1f;
       underTest.yUpdate = 1f;
       mockSpriteUpdate.setX(xLoc + 1f);
@@ -212,7 +212,7 @@ public class MouseMovementTest {
 
    @Test
    public void testHandleCollisionRightWithDownRight() {
-      BoundingBox bb = new BoundingBox(31, (int) yLoc, 20, 20);
+      BoundingBox bb = new BoundingBox(30, (int) yLoc, 20, 20);
       underTest.xUpdate = 1f;
       underTest.yUpdate = -1f;
       mockSpriteUpdate.setX(xLoc + 1f);
@@ -230,7 +230,7 @@ public class MouseMovementTest {
 
    @Test
    public void testHandleCollisionLeftWithUpLeft() {
-      BoundingBox bb = new BoundingBox(-11, (int) yLoc, 20, 20);
+      BoundingBox bb = new BoundingBox(-10, (int) yLoc, 20, 20);
       underTest.xUpdate = -1f;
       underTest.yUpdate = 1f;
       mockSpriteUpdate.setX(xLoc - 1f);
@@ -248,7 +248,7 @@ public class MouseMovementTest {
 
    @Test
    public void testHandleCollisionLeftWithDownLeft() {
-      BoundingBox bb = new BoundingBox(-11, (int) yLoc, 20, 20);
+      BoundingBox bb = new BoundingBox(-10, (int) yLoc, 20, 20);
       underTest.xUpdate = -1f;
       underTest.yUpdate = -1f;
       mockSpriteUpdate.setX(xLoc - 1f);

@@ -42,6 +42,11 @@ public class MockSpriteUpdate implements SpriteUpdate {
    }
 
    @Override
+   public boolean contains(int x, int y) {
+      return bounds.contains(x, y);
+   }
+
+   @Override
    public float getX() {
       return x;
    }

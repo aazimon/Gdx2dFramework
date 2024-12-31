@@ -36,14 +36,14 @@ import org.abberkeep.gameframework.movement.Direction;
  * @version 0.6
  */
 public class EightWayMotion extends BaseMotion {
-   private final static int NORTH = 0;
-   private final static int NORTH_EAST = 1;
-   private final static int EAST = 2;
-   private final static int SOUTH_EAST = 3;
-   private final static int SOUTH = 4;
-   private final static int SOUTH_WEST = 5;
-   private final static int WEST = 6;
-   private final static int NORTH_WEST = 7;
+   private static final int NORTH = 0;
+   private static final int NORTH_EAST = 1;
+   private static final int EAST = 2;
+   private static final int SOUTH_EAST = 3;
+   private static final int SOUTH = 4;
+   private static final int SOUTH_WEST = 5;
+   private static final int WEST = 6;
+   private static final int NORTH_WEST = 7;
 
    /**
     * Creates a FourWayMotion to control the animation. The animation changes as the direction changes.
