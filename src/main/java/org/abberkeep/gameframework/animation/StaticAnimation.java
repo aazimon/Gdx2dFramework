@@ -49,8 +49,8 @@ public class StaticAnimation extends BaseAnimation {
       ySrcHeight = texture.getHeight();
       width = texture.getWidth();
       height = texture.getHeight();
-      this.originX = width / 2;
-      this.originY = height / 2;
+      this.originX = width / 2.0f;
+      this.originY = height / 2.0f;
    }
 
    /**
@@ -65,8 +65,8 @@ public class StaticAnimation extends BaseAnimation {
       ySrcHeight = texture.getHeight();
       this.width = width;
       this.height = height;
-      this.originX = width / 2;
-      this.originY = height / 2;
+      this.originX = width / 2.0f;
+      this.originY = height / 2.0f;
    }
 
    /**
@@ -86,8 +86,8 @@ public class StaticAnimation extends BaseAnimation {
       width = xSrcWidth;
       height = ySrcHeight;
       if (rotation != 0) {
-         this.originX = width / 2;
-         this.originY = height / 2;
+         this.originX = width / 2.0f;
+         this.originY = height / 2.0f;
       }
    }
 

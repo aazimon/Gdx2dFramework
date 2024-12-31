@@ -40,8 +40,8 @@ public class StaticRegionAnimation extends BaseAnimation {
       this.region = region;
       this.width = region.getRegionWidth();
       this.height = region.getRegionHeight();
-      this.originX = width / 2;
-      this.originY = height / 2;
+      this.originX = width / 2.0f;
+      this.originY = height / 2.0f;
    }
 
    /**

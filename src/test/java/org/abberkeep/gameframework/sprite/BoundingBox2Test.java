@@ -35,8 +35,8 @@ public class BoundingBox2Test {
       underTest.setYInset(3);
       underTest.setHeight(14);
       underTest.setWidth(14);
-      //43,57   57,57
-      //43,43   57,43
+      //43,56   56,56
+      //43,43   56,43
    }
 
    @Test

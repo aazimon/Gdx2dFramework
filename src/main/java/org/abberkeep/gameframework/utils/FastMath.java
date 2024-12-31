@@ -52,8 +52,8 @@ public final class FastMath {
    private static final double BIG_ENOUGH_FLOOR = BIG_ENOUGH_INT + 0.0000;
    private static final double BIG_ENOUGH_ROUND = BIG_ENOUGH_INT + 0.5000;
    private static final double BIG_ENOUGH_CEIL = BIG_ENOUGH_INT + 0.9999;
-   private final static int ROUND_TO = 5;
-   private final static double ROUNDING = Math.pow(10, ROUND_TO);
+   private static final int ROUND_TO = 5;
+   private static final double ROUNDING = Math.pow(10, ROUND_TO);
 
    /**
     * @author Riven
@@ -234,7 +234,7 @@ public final class FastMath {
     */
    public static double roundOff(double value) {
       long temp = (long) ((value * ROUNDING));
-      return (((double) temp) / ROUNDING);
+      return (temp / ROUNDING);
    }
 
    /**

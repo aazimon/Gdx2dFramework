@@ -112,8 +112,8 @@ public abstract class BaseAnimation implements Animation {
    public void setSize(int width, int height) {
       this.width = width;
       this.height = height;
-      this.originX = width / 2;
-      this.originY = height / 2;
+      this.originX = width / 2.0f;
+      this.originY = height / 2.0f;
    }
 
    @Override

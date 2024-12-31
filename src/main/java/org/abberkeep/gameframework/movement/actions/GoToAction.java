@@ -81,7 +81,7 @@ public class GoToAction extends ScriptAction {
 
    @Override
    public void updateChild(float deltaTime, SpriteUpdate spriteUpdate) {
-
+      // Unused, needed for parent
    }
 
 }

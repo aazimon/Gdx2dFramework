@@ -45,7 +45,7 @@ public abstract class ActorFactory<T extends ForgedActor> {
     * when the setupQueue() method is called and not before. At that time, the queue will default to five entries.
     * @param baseScreen
     */
-   public ActorFactory(BaseScreen baseScreen) {
+   protected ActorFactory(BaseScreen baseScreen) {
       this.baseScreen = baseScreen;
    }
 
@@ -56,7 +56,7 @@ public abstract class ActorFactory<T extends ForgedActor> {
     * @param baseScreen
     * @param queueSize
     */
-   public ActorFactory(BaseScreen baseScreen, int queueSize) {
+   protected ActorFactory(BaseScreen baseScreen, int queueSize) {
       this.baseScreen = baseScreen;
       this.queueSize = queueSize;
    }

@@ -34,7 +34,7 @@ import org.abberkeep.gameframework.movement.Movement;
 public abstract class ForgedActor extends Actor {
    protected ActorFactory factory;
 
-   public ForgedActor(Movement movement, Motion[] moveMotion, Motion[] stillMotion) {
+   protected ForgedActor(Movement movement, Motion[] moveMotion, Motion[] stillMotion) {
       super(movement, moveMotion, stillMotion);
    }
 

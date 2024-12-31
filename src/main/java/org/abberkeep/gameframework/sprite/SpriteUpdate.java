@@ -37,6 +37,14 @@ public interface SpriteUpdate {
    boolean contains(BoundingBox other);
 
    /**
+    * Determines if this SpriteUpdate contains the point location passed in.
+    * @param x
+    * @param y
+    * @return
+    */
+   boolean contains(int x, int y);
+
+   /**
     * Returns the Sprite's X location.
     * @return
     */

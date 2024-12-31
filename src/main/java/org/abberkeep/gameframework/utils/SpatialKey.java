@@ -59,7 +59,7 @@ public class SpatialKey implements Comparable<SpatialKey> {
    }
 
    public int getX() {
-      return (int) x;
+      return x;
    }
 
    public float getXf() {

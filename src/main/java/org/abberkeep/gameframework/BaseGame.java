@@ -54,7 +54,7 @@ public class BaseGame extends Game {
     * @return
     */
    public static Texture getGlobalTexture(String fileName) {
-      return textures.computeIfAbsent(fileName, fn -> new Texture(fn));
+      return textures.computeIfAbsent(fileName, Texture::new);
    }
 
    /**

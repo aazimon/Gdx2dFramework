@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.abberkeep.gameframework.Updatable;
+import org.abberkeep.gameframework.background.Background;
 import org.abberkeep.gameframework.sprite.Actor;
 import org.abberkeep.gameframework.sprite.Decor;
 
@@ -45,6 +46,7 @@ import org.abberkeep.gameframework.sprite.Decor;
  * @since 0.1
  */
 public abstract class BaseScreen implements Screen {
+   protected Background background;
    protected SpriteBatch batch;
    protected int largestSpriteWidth = 0;
    protected int largestSpriteHeight = 0;
@@ -129,7 +131,7 @@ public abstract class BaseScreen implements Screen {
     * @return
     */
    public Texture getTexture(String fileName) {
-      return textures.computeIfAbsent(fileName, fn -> new Texture(fn));
+      return textures.computeIfAbsent(fileName, Texture::new);
    }
 
    @Override
@@ -143,8 +145,9 @@ public abstract class BaseScreen implements Screen {
    }
 
    /**
-    * Renders the images to the screen and setting up basic setup for all Screens. This calls the renderChild method
-    * that child Screens will implement and render for the specific Screen.
+    * Renders the images to the screen and setting up basic setup for all Screens. This updates any Updatables, then
+    * updates and renders the Background if it is set, and then it calls the renderChild method that child Screens will
+    * implement and render for the specific Screen.
     * @param deltaTime
     */
    @Override
@@ -154,8 +157,13 @@ public abstract class BaseScreen implements Screen {
       viewport.getCamera().update();
       batch.setProjectionMatrix(viewport.getCamera().combined);
       batch.begin();
-      renderChild(deltaTime);
       updatables.forEach(up -> up.update(deltaTime));
+      if (background != null) {
+         background.setScreenOrigin(viewport.getScreenX(), viewport.getScreenY());
+         background.update(deltaTime);
+         background.draw(batch);
+      }
+      renderChild(deltaTime);
       batch.end();
    }
 
@@ -165,10 +173,19 @@ public abstract class BaseScreen implements Screen {
     */
    protected abstract void renderChild(float deltaTime);
 
+   /**
+    * This sets the Screen's width and height and updates the Background if that is set.
+    * @param width
+    * @param height
+    */
    @Override
    public void resize(int width, int height) {
       this.width = width;
       this.height = height;
+      if (background != null) {
+         background.setScreenSize(width, height);
+         background.setScreenOrigin(viewport.getScreenX(), viewport.getScreenY());
+      }
    }
 
    @Override
@@ -187,34 +204,18 @@ public abstract class BaseScreen implements Screen {
       this.viewport = viewport;
       height = Gdx.graphics.getHeight();
       width = Gdx.graphics.getWidth();
+      if (background != null) {
+         background.setScreenSize(width, height);
+         background.setScreenOrigin(viewport.getScreenX(), viewport.getScreenY());
+      }
    }
 
    /**
-    * Set the background color for the Screen. The default is 0, 0, 0, or black.
-    * @param color
+    * Set the Background object for this Screen.
+    * @param background
     */
-   public void setBackgroundColor(Color color) {
-      bgColor = color;
-   }
-
-   /**
-    * Set the background color for the Screen. The default is 0, 0, 0, or black.
-    * @param red
-    * @param green
-    * @param blue
-    */
-   public void setBackgroundColor(float red, float green, float blue) {
-      bgColor = new Color(red, green, blue, 0f);
-   }
-
-   /**
-    * Set the background color for the Screen from RGB 0-255 range. The range is converted to decimal 0.0 to 1.0..
-    * @param red
-    * @param green
-    * @param blue
-    */
-   public void setBackgroundColor(int red, int green, int blue) {
-      bgColor = new Color(red / 255.0f, green / 255.0f, blue / 255.0f, 0f);
+   public void setBackground(Background background) {
+      this.background = background;
    }
 
 }

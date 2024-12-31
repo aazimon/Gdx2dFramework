@@ -46,6 +46,17 @@ public class BoundingBox implements Bounds {
       return (checkX(other) && checkY(other));
    }
 
+   /**
+    * Check if the X and Y are all withing this BoundingBox. This checks if the BoundingBox contains the X and Y
+    * locations.
+    * @param x
+    * @param y
+    * @return
+    */
+   public boolean contains(int x, int y) {
+      return checkX(x) && checkY(y);
+   }
+
    @Override
    public void setHeight(int height) {
       this.height = height;
@@ -92,18 +103,28 @@ public class BoundingBox implements Bounds {
       return y + yInset;
    }
 
+   private boolean checkX(int x) {
+      // x <= oX < x+w
+      return getXEdge() <= x && x < getXEdge() + width;
+   }
+
    private boolean checkX(BoundingBox other) {
-      // x <= oX <= x+w
-      // ox <= x <= ox+ow
-      return (getXEdge() <= other.getXEdge() && other.getXEdge() <= getXEdge() + width)
-         || (other.getXEdge() <= getXEdge() && getXEdge() <= other.getXEdge() + other.width);
+      // x <= oX < x+w
+      // ox <= x < ox+ow
+      return (getXEdge() <= other.getXEdge() && other.getXEdge() < getXEdge() + width)
+         || (other.getXEdge() <= getXEdge() && getXEdge() < other.getXEdge() + other.width);
+   }
+
+   private boolean checkY(int y) {
+      // y <= oy < y+h
+      return getYEdge() <= y && y < getYEdge() + height;
    }
 
    private boolean checkY(BoundingBox other) {
-      // y <= oy <= y+h
-      // oy <= y <= oy+oh
-      return (getYEdge() <= other.getYEdge() && other.getYEdge() <= getYEdge() + height)
-         || (other.getYEdge() <= getYEdge() && getYEdge() <= other.getYEdge() + other.height);
+      // y <= oy < y+h
+      // oy <= y < oy+oh
+      return (getYEdge() <= other.getYEdge() && other.getYEdge() < getYEdge() + height)
+         || (other.getYEdge() <= getYEdge() && getYEdge() < other.getYEdge() + other.height);
    }
 
 }

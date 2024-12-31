@@ -32,24 +32,24 @@ import org.abberkeep.gameframework.utils.FastMath;
  */
 public class Direction {
    // Directions
-   public final static float NO_DIRECTION = -1f;
-   public final static float EAST = 0.0f;
-   public final static float EAST_NORTH_EAST = 22.5f;
-   public final static float NORTH_EAST = 45.0f;
-   public final static float NORTH_NORTH_EAST = 67.5f;
-   public final static float NORTH = 90.0f;
-   public final static float NORTH_NORTH_WEST = 112.5f;
-   public final static float NORTH_WEST = 135.0f;
-   public final static float WEST_NORTH_WEST = 157.5f;
-   public final static float WEST = 180.0f;
-   public final static float WEST_SOUTH_WEST = 202.5f;
-   public final static float SOUTH_WEST = 225.0f;
-   public final static float SOUTH_SOUTH_WEST = 247.5f;
-   public final static float SOUTH = 270.0f;
-   public final static float SOUTH_SOUTH_EAST = 292.5f;
-   public final static float SOUTH_EAST = 315.0f;
-   public final static float EAST_SOUTH_EAST = 337.5f;
-   private final static float FRACTION = 11.25f;
+   public static final float NO_DIRECTION = -1f;
+   public static final float EAST = 0.0f;
+   public static final float EAST_NORTH_EAST = 22.5f;
+   public static final float NORTH_EAST = 45.0f;
+   public static final float NORTH_NORTH_EAST = 67.5f;
+   public static final float NORTH = 90.0f;
+   public static final float NORTH_NORTH_WEST = 112.5f;
+   public static final float NORTH_WEST = 135.0f;
+   public static final float WEST_NORTH_WEST = 157.5f;
+   public static final float WEST = 180.0f;
+   public static final float WEST_SOUTH_WEST = 202.5f;
+   public static final float SOUTH_WEST = 225.0f;
+   public static final float SOUTH_SOUTH_WEST = 247.5f;
+   public static final float SOUTH = 270.0f;
+   public static final float SOUTH_SOUTH_EAST = 292.5f;
+   public static final float SOUTH_EAST = 315.0f;
+   public static final float EAST_SOUTH_EAST = 337.5f;
+   private static final float FRACTION = 11.25f;
 
    /**
     * Takes two points and finds the direction from the original to the destination.

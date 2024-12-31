@@ -1,0 +1,1 @@
+mvn clean install verify sonar:sonar -Dsonar.projectKey=GDX2D-Framework -Dsonar.projectName='GDX2D-Framework' -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_ed60fe152bd49a96aa5fdc06115b82dca9b4b4c0
