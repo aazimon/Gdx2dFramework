@@ -57,7 +57,7 @@ public class TwoKeyMovementTest {
 
    @Test
    public void testHandleCollisionRight() {
-      BoundingBox bb = new BoundingBox(10, 10, 20, 20);
+      BoundingBox bb = new BoundingBox(10, 10, 0, 20, 20);
       underTest.xUpdate = 1f;
       mockSpriteUpdate.setX(xLoc + 1f);
 
@@ -71,7 +71,7 @@ public class TwoKeyMovementTest {
 
    @Test
    public void testHandleCollisionLeft() {
-      BoundingBox bb = new BoundingBox(10, 10, 20, 20);
+      BoundingBox bb = new BoundingBox(10, 10, 0, 20, 20);
       underTest.xUpdate = -1f;
       mockSpriteUpdate.setX(xLoc - 1f);
 
@@ -85,7 +85,7 @@ public class TwoKeyMovementTest {
 
    @Test
    public void testHandleCollisionUp() {
-      BoundingBox bb = new BoundingBox(10, 10, 20, 20);
+      BoundingBox bb = new BoundingBox(10, 10, 0, 20, 20);
       underTest.yUpdate = 1f;
       mockSpriteUpdate.setY(yLoc + 1f);
 
@@ -99,7 +99,7 @@ public class TwoKeyMovementTest {
 
    @Test
    public void testHandleCollisionDown() {
-      BoundingBox bb = new BoundingBox(10, 10, 20, 20);
+      BoundingBox bb = new BoundingBox(10, 10, 0, 20, 20);
       underTest.yUpdate = -1f;
       mockSpriteUpdate.setY(yLoc - 1f);
 

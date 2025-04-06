@@ -36,6 +36,12 @@ public interface Bounds {
    void setHeight(int height);
 
    /**
+    * Set the Layer of a Sprite's BoundingBox. A sprite can only be within one Layer.
+    * @param layer
+    */
+   void setLayer(int layer);
+
+   /**
     * Set the width of a Sprite's BoundingBox. This BoundingBox's bounds are effected by the X Inset, Adding an X Inset
     * and not changing the width will cause the Sprite to collide incorrectly.
     * @param width

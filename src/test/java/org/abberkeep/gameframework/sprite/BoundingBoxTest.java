@@ -32,7 +32,7 @@ public class BoundingBoxTest {
 
    @Before
    public void setUp() {
-      underTest = new BoundingBox(x, y, 20, 20);
+      underTest = new BoundingBox(x, y, 0, 20, 20);
       // x 10 width 20. Width is 10 to 29
       // y 10 height 20. height is 10 to 29
       //10,29   29,29
@@ -41,28 +41,28 @@ public class BoundingBoxTest {
 
    @Test
    public void testContains1() {
-      BoundingBox other = new BoundingBox(x - 5, y + 15, 10, 10);
+      BoundingBox other = new BoundingBox(x - 5, y + 15, 0, 10, 10);
 
       assertTrue(underTest.contains(other));
    }
 
    @Test
    public void testContains2() {
-      BoundingBox other = new BoundingBox(x + 5, y + 15, 10, 10);
+      BoundingBox other = new BoundingBox(x + 5, y + 15, 0, 10, 10);
 
       assertTrue(underTest.contains(other));
    }
 
    @Test
    public void testContains3() {
-      BoundingBox other = new BoundingBox(x + 15, y + 15, 10, 10);
+      BoundingBox other = new BoundingBox(x + 15, y + 15, 0, 10, 10);
 
       assertTrue(underTest.contains(other));
    }
 
    @Test
    public void testContains4() {
-      BoundingBox other = new BoundingBox(x - 5, y + 5, 10, 10);
+      BoundingBox other = new BoundingBox(x - 5, y + 5, 0, 10, 10);
 
       assertTrue(underTest.contains(other));
    }
@@ -73,42 +73,42 @@ public class BoundingBoxTest {
    //10,10   29,10
    @Test
    public void testContains5() {
-      BoundingBox other = new BoundingBox(x + 5, y + 5, 10, 10);
+      BoundingBox other = new BoundingBox(x + 5, y + 5, 0, 10, 10);
 
       assertTrue(underTest.contains(other));
    }
 
    @Test
    public void testContains6() {
-      BoundingBox other = new BoundingBox(x + 15, y + 5, 10, 10);
+      BoundingBox other = new BoundingBox(x + 15, y + 5, 0, 10, 10);
 
       assertTrue(underTest.contains(other));
    }
 
    @Test
    public void testContains7() {
-      BoundingBox other = new BoundingBox(x - 5, y - 5, 10, 10);
+      BoundingBox other = new BoundingBox(x - 5, y - 5, 0, 10, 10);
 
       assertTrue(underTest.contains(other));
    }
 
    @Test
    public void testContains8() {
-      BoundingBox other = new BoundingBox(x + 5, y - 5, 10, 10);
+      BoundingBox other = new BoundingBox(x + 5, y - 5, 0, 10, 10);
 
       assertTrue(underTest.contains(other));
    }
 
    @Test
    public void testContains9() {
-      BoundingBox other = new BoundingBox(x + 15, y - 5, 10, 10);
+      BoundingBox other = new BoundingBox(x + 15, y - 5, 0, 10, 10);
 
       assertTrue(underTest.contains(other));
    }
 
    @Test
    public void testContainsNo() {
-      BoundingBox other = new BoundingBox(35, 35, 10, 10);
+      BoundingBox other = new BoundingBox(35, 35, 0, 10, 10);
 
       assertFalse(underTest.contains(other));
    }
@@ -119,29 +119,37 @@ public class BoundingBoxTest {
    //10,10   29,10
    @Test
    public void testNotContainsUp() {
-      BoundingBox other = new BoundingBox(x, y + 20, 10, 10);
+      BoundingBox other = new BoundingBox(x, y + 20, 0, 10, 10);
 
       assertFalse(underTest.contains(other));
    }
 
    @Test
    public void testNotContainsDown() {
-      BoundingBox other = new BoundingBox(x, y - 10, 10, 10);
+      BoundingBox other = new BoundingBox(x, y - 10, 0, 10, 10);
 
       assertFalse(underTest.contains(other));
    }
 
    @Test
    public void testNotContainsLeft() {
-      BoundingBox other = new BoundingBox(x - 10, y, 10, 10);
+      BoundingBox other = new BoundingBox(x - 10, y, 0, 10, 10);
 
       assertFalse(underTest.contains(other));
    }
 
    @Test
    public void testNotContainsRight() {
-      BoundingBox other = new BoundingBox(x + 20, y, 10, 10);
+      BoundingBox other = new BoundingBox(x + 20, y, 0, 10, 10);
 
       assertFalse(underTest.contains(other));
    }
+
+   @Test
+   public void testNotContainsLayer() {
+      BoundingBox other = new BoundingBox(x + 15, y - 5, 1, 10, 10);
+
+      assertFalse(underTest.contains(other));
+   }
+
 }

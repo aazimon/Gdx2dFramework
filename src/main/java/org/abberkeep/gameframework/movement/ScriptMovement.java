@@ -21,6 +21,7 @@ import java.util.List;
 import org.abberkeep.gameframework.movement.actions.ScriptAction;
 import org.abberkeep.gameframework.movement.actions.WaitAction;
 import org.abberkeep.gameframework.sprite.BoundingBox;
+import org.abberkeep.gameframework.sprite.Sprite;
 import org.abberkeep.gameframework.sprite.SpriteUpdate;
 
 /**
@@ -42,6 +43,7 @@ public class ScriptMovement implements Movement {
    private ScriptAction currentAction;
    private boolean done = false;
    private WaitAction waitAction = new WaitAction(0f);
+   protected Sprite parent;
 
    /**
     * Create a new ScriptMovement with the given ScriptAction. Sets up the ScriptMovement with an initial ScriptAction
@@ -81,6 +83,11 @@ public class ScriptMovement implements Movement {
       return currentAction.getDirection();
    }
 
+   @Override
+   public Sprite getParent() {
+      return parent;
+   }
+
    /**
     * Sets the newIndex as the currentIndex and sets up that action. If the index is greater then the size of the array
     * an IllegalArgumentException will be thrown. If the newIndex is set to zero or outside the number of ScriptActions,
@@ -107,6 +114,11 @@ public class ScriptMovement implements Movement {
          spriteUpdate.getY() - currentAction.getYUpdate());
    }
 
+   @Override
+   public boolean isChangingLayer() {
+      return false;
+   }
+
    /**
     * Return true if all ScriptActions are Done.
     * @return boolean
@@ -127,6 +139,11 @@ public class ScriptMovement implements Movement {
       currentAction = waitAction;
       done = false;
       currentIndex = -1;
+   }
+
+   @Override
+   public void setParent(Sprite parent) {
+      this.parent = parent;
    }
 
    /**

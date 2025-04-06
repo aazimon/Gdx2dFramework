@@ -136,4 +136,18 @@ public class Direction {
       }
       return degree;
    }
+
+   public enum LAYER {
+      UP(1), DOWN(-1);
+      private int direction;
+
+      private LAYER(int direction) {
+         this.direction = direction;
+      }
+
+      public int getDirection() {
+         return direction;
+      }
+   }
+
 }

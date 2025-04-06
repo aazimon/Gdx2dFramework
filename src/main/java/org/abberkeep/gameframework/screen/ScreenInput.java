@@ -18,6 +18,7 @@ package org.abberkeep.gameframework.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
+import org.abberkeep.gameframework.sprite.Sprite;
 
 /**
  * Title: ScreenInput
@@ -31,6 +32,7 @@ import com.badlogic.gdx.graphics.Camera;
  * @version 0.7
  */
 public class ScreenInput {
+   public static InputLocks inputLocks = new InputLocks();
    private static int width;
    private static int height;
    private static Camera camera;
@@ -57,6 +59,40 @@ public class ScreenInput {
     */
    public static final int getY() {
       return (int) camera.position.y - (height / 2) + ScreenInput.height - Gdx.input.getY();
+   }
+
+   /**
+    * Check is a (mouse) button is just pressed. If there is a lock on the Button ID, then it will check if it is locked
+    * for this Sprite, if so we will get a just press response, otherwise it will return false.
+    * @param buttonID
+    * @param sprite
+    * @return
+    */
+   public static final boolean isButtonJustPressed(int buttonID, Sprite sprite) {
+      if (!inputLocks.isLocked(buttonID)) {
+         return Gdx.input.isButtonJustPressed(buttonID);
+      }
+      if (inputLocks.isLockedOn(buttonID, sprite)) {
+         return Gdx.input.isButtonJustPressed(buttonID);
+      }
+      return false;
+   }
+
+   /**
+    * Check is a (mouse) button is being pressed. If there is a lock on the Button ID, then it will check if it is
+    * locked for this Sprite, if so we will get a being pressed response, otherwise it will return false.
+    * @param buttonID
+    * @param sprite
+    * @return
+    */
+   public static final boolean isButtonPressed(int buttonID, Sprite sprite) {
+      if (!inputLocks.isLocked(buttonID)) {
+         return Gdx.input.isButtonPressed(buttonID);
+      }
+      if (inputLocks.isLockedOn(buttonID, sprite)) {
+         return Gdx.input.isButtonPressed(buttonID);
+      }
+      return false;
    }
 
    public static final void setScreenSize(int screenWidth, int screenHeight, Camera camera) {

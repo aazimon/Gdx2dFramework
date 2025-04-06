@@ -16,6 +16,7 @@
  */
 package org.abberkeep.gameframework.movement;
 
+import org.abberkeep.gameframework.sprite.Sprite;
 import org.abberkeep.gameframework.utils.FastMath;
 
 /**
@@ -33,6 +34,7 @@ public abstract class BaseMovement implements Movement {
    protected float yUpdate;
    protected float direction;
    protected float speed;
+   protected Sprite parent;
 
    @Override
    public float getDirection() {
@@ -48,8 +50,23 @@ public abstract class BaseMovement implements Movement {
    }
 
    @Override
+   public Sprite getParent() {
+      return parent;
+   }
+
+   @Override
+   public boolean isChangingLayer() {
+      return false;
+   }
+
+   @Override
    public void reset() {
       // do nothing by default.
+   }
+
+   @Override
+   public void setParent(Sprite sprite) {
+      this.parent = sprite;
    }
 
    @Override

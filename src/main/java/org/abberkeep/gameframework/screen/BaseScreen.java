@@ -31,8 +31,7 @@ import java.util.List;
 import java.util.Map;
 import org.abberkeep.gameframework.Updatable;
 import org.abberkeep.gameframework.background.Background;
-import org.abberkeep.gameframework.sprite.Actor;
-import org.abberkeep.gameframework.sprite.Decor;
+import org.abberkeep.gameframework.screen.map.GameMap;
 
 /**
  * Title: BaseScreen
@@ -58,6 +57,7 @@ public abstract class BaseScreen implements Screen {
    private Map<String, Sound> sounds = new HashMap<>();
    private Map<String, Music> musics = new HashMap<>();
    private List<Updatable> updatables = new ArrayList<>();
+   private GameMap gameMap;
 
    /**
     * Constructor for the BaseScreen. It sets the background color to a default Black.
@@ -65,22 +65,6 @@ public abstract class BaseScreen implements Screen {
    protected BaseScreen() {
       bgColor = new Color();
    }
-
-   /**
-    * Adds an Actor to this Screen at the location.
-    * @param actor
-    * @param x
-    * @param y
-    */
-   public abstract void addActor(Actor actor);
-
-   /**
-    * Adds a Decor to this Screen at the location.
-    * @param decor
-    * @param x
-    * @param y
-    */
-   public abstract void addDecor(Decor decor);
 
    /**
     * Adds an Updatable object to this Screen. Updatable objects are not drawn on the screen but are only updated each
@@ -163,15 +147,10 @@ public abstract class BaseScreen implements Screen {
          background.update(deltaTime);
          background.draw(batch);
       }
-      renderChild(deltaTime);
+      gameMap.renderCycle(deltaTime, batch);
       batch.end();
+      ScreenInput.inputLocks.clear();
    }
-
-   /**
-    * ChildScreens must implement this for the Screen's specific implementation.
-    * @param deltaTime
-    */
-   protected abstract void renderChild(float deltaTime);
 
    /**
     * This sets the Screen's width and height and updates the Background if that is set.
@@ -216,6 +195,10 @@ public abstract class BaseScreen implements Screen {
     */
    public void setBackground(Background background) {
       this.background = background;
+   }
+
+   public void setGameMap(GameMap gameMap) {
+      this.gameMap = gameMap;
    }
 
 }

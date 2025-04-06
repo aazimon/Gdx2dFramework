@@ -16,7 +16,6 @@
  */
 package org.abberkeep.gameframework.movement;
 
-import com.badlogic.gdx.Gdx;
 import org.abberkeep.gameframework.screen.ScreenInput;
 import org.abberkeep.gameframework.sprite.BoundingBox;
 import org.abberkeep.gameframework.sprite.SpriteUpdate;
@@ -25,20 +24,14 @@ import org.abberkeep.gameframework.sprite.SpriteUpdate;
  * Title: MouseDragMovement
  *
  * <p>
- * Description: </p>
+ * Description: This Movement will "drag" a Sprite with the mouse cursor. It has in option to drag the sprite with
+ * pressing the mouse button, or by clicking to trigger the dragging and then clicking to turn off the trigger.</p>
  *
  * Copyright (c) Sep 22, 2024
  * @author Gary Deken
- * @version
+ * @version 0.16
  */
-public class MouseDragMovement extends BaseMovement {
-   private boolean active = false;
-   private boolean buttonActivated = false;
-   private int buttonID;
-   private int xClickOffSet = 0;
-   private int yClickOffSet = 0;
-   private int xUpdateLoc;
-   private int yUpdateLoc;
+public class MouseDragMovement extends BaseMouseMovement {
 
    /**
     * Creates a MouseDragMovement that will move the Sprite with the Mouse cursor when the Mouse button is clicked on it
@@ -46,8 +39,7 @@ public class MouseDragMovement extends BaseMovement {
     * @param buttonID
     */
    public MouseDragMovement(int buttonID) {
-      this.buttonID = buttonID;
-      speed = 1;
+      super(buttonID);
    }
 
    /**
@@ -57,9 +49,8 @@ public class MouseDragMovement extends BaseMovement {
     * @param buttonActivated
     */
    public MouseDragMovement(int buttonID, boolean buttonActivated) {
-      this.buttonID = buttonID;
+      super(buttonID);
       this.buttonActivated = buttonActivated;
-      speed = 1;
    }
 
    @Override
@@ -74,10 +65,6 @@ public class MouseDragMovement extends BaseMovement {
       }
    }
 
-   public void setButtonActivated(boolean buttonActivate) {
-      this.buttonActivated = buttonActivate;
-   }
-
    @Override
    public void update(float deltaTime, SpriteUpdate spriteUpdate) {
       xUpdateLoc = ScreenInput.getX();
@@ -85,20 +72,29 @@ public class MouseDragMovement extends BaseMovement {
       // Need to check if in a state that the Actor should be moved.
       // first check if mouse is over the Actor.
       if (isOverActor(ScreenInput.getX(), ScreenInput.getY(), spriteUpdate)) {
-         if (Gdx.input.isButtonJustPressed(buttonID)) {
+         // if just clicked to set state.
+         if (ScreenInput.isButtonJustPressed(buttonID, parent)) {
             xClickOffSet = (int) spriteUpdate.getX() - ScreenInput.getX();
             yClickOffSet = (int) spriteUpdate.getY() - ScreenInput.getY();
-            // If the button activation set, the Mouse click will activate or deactivate for moving.
+            // check for button activated.
             if (buttonActivated) {
-               // Activate or deactivate
+               // the Mouse click will either activate or deactivate for moving.
                active = !active;
+               if (active) {
+                  ScreenInput.inputLocks.add(buttonID, parent);
+               } else {
+                  ScreenInput.inputLocks.remove(buttonID);
+                  // set update location for reverting back movement
+                  xUpdate = spriteUpdate.getX();
+                  yUpdate = spriteUpdate.getY();
+               }
             } else {
                active = true;
             }
          }
          // If Movement is not button activated, the mouse just needs to be pressed to move.
          if (!buttonActivated && active) {
-            active = Gdx.input.isButtonPressed(buttonID);
+            active = ScreenInput.isButtonPressed(buttonID, parent);
          }
       }
       if (active) {
@@ -107,13 +103,10 @@ public class MouseDragMovement extends BaseMovement {
          yUpdate = spriteUpdate.getY();
          // Drag the Actor
          spriteUpdate.setLocation(xUpdateLoc + xClickOffSet, yUpdateLoc + yClickOffSet);
-      } else {
+      } else if (!buttonActivated) {
          xUpdate = 0;
          yUpdate = 0;
       }
    }
 
-   private boolean isOverActor(int x, int y, SpriteUpdate spriteUpdate) {
-      return spriteUpdate.contains(x, y);
-   }
 }

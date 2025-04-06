@@ -30,7 +30,7 @@ public class BoundingBox2Test {
 
    @Before
    public void setUp() {
-      underTest = new BoundingBox(40, 40, 20, 20);
+      underTest = new BoundingBox(40, 40, 0, 20, 20);
       underTest.setXInset(3);
       underTest.setYInset(3);
       underTest.setHeight(14);
@@ -41,56 +41,56 @@ public class BoundingBox2Test {
 
    @Test
    public void testContainsNot1() {
-      BoundingBox other = new BoundingBox(32, 40, 10, 10);
+      BoundingBox other = new BoundingBox(32, 40, 0, 10, 10);
 
       assertFalse(other.contains(underTest));
    }
 
    @Test
    public void testContainsNot2() {
-      BoundingBox other = new BoundingBox(58, 40, 10, 10);
+      BoundingBox other = new BoundingBox(58, 40, 0, 10, 10);
 
       assertFalse(other.contains(underTest));
    }
 
    @Test
    public void testContainsNot3() {
-      BoundingBox other = new BoundingBox(40, 32, 10, 10);
+      BoundingBox other = new BoundingBox(40, 32, 0, 10, 10);
 
       assertFalse(other.contains(underTest));
    }
 
    @Test
    public void testContainsNot4() {
-      BoundingBox other = new BoundingBox(40, 58, 10, 10);
+      BoundingBox other = new BoundingBox(40, 58, 0, 10, 10);
 
       assertFalse(other.contains(underTest));
    }
 
    @Test
    public void testContains1() {
-      BoundingBox other = new BoundingBox(34, 40, 10, 10);
+      BoundingBox other = new BoundingBox(34, 40, 0, 10, 10);
 
       assertTrue(other.contains(underTest));
    }
 
    @Test
    public void testContains2() {
-      BoundingBox other = new BoundingBox(56, 40, 10, 10);
+      BoundingBox other = new BoundingBox(56, 40, 0, 10, 10);
 
       assertTrue(other.contains(underTest));
    }
 
    @Test
    public void testContains3() {
-      BoundingBox other = new BoundingBox(40, 34, 10, 10);
+      BoundingBox other = new BoundingBox(40, 34, 0, 10, 10);
 
       assertTrue(other.contains(underTest));
    }
 
    @Test
    public void testContains4() {
-      BoundingBox other = new BoundingBox(40, 56, 10, 10);
+      BoundingBox other = new BoundingBox(40, 56, 0, 10, 10);
 
       assertTrue(other.contains(underTest));
    }

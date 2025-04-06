@@ -20,7 +20,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import org.abberkeep.gameframework.motion.Motion;
 import org.abberkeep.gameframework.movement.Movement;
-import org.abberkeep.gameframework.screen.BaseScreen;
+import org.abberkeep.gameframework.screen.map.GameMap;
 
 /**
  * Title: ActorFactory
@@ -36,28 +36,28 @@ import org.abberkeep.gameframework.screen.BaseScreen;
  * @version 0.13
  */
 public abstract class ActorFactory<T extends ForgedActor> {
-   protected BaseScreen baseScreen;
+   protected GameMap gameMap;
    protected Queue<T> queue = new LinkedList<>();
    protected int queueSize = 5;
 
    /**
-    * Creates a SpriteFactory taking in the BaseScreen where the Actors will be added. The queue will only be populated
+    * Creates a SpriteFactory taking in the GameMap where the Actors will be added. The queue will only be populated
     * when the setupQueue() method is called and not before. At that time, the queue will default to five entries.
-    * @param baseScreen
+    * @param gameMap
     */
-   protected ActorFactory(BaseScreen baseScreen) {
-      this.baseScreen = baseScreen;
+   protected ActorFactory(GameMap gameMap) {
+      this.gameMap = gameMap;
    }
 
    /**
-    * Creates a SpriteFactory taking in the BaseScreen where the Actors will be added. The queue will only be populated
+    * Creates a SpriteFactory taking in the GameMap where the Actors will be added. The queue will only be populated
     * when the setupQueue() method is called and not before. At that time, the queue will be populated with the
     * queueSize number of entries.
-    * @param baseScreen
+    * @param gameMap
     * @param queueSize
     */
-   protected ActorFactory(BaseScreen baseScreen, int queueSize) {
-      this.baseScreen = baseScreen;
+   protected ActorFactory(GameMap gameMap, int queueSize) {
+      this.gameMap = gameMap;
       this.queueSize = queueSize;
    }
 
@@ -79,7 +79,7 @@ public abstract class ActorFactory<T extends ForgedActor> {
       }
       t.setLocation(x, y);
 
-      baseScreen.addActor(t);
+      gameMap.addActor(t);
    }
 
    /**
