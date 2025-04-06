@@ -37,6 +37,7 @@ public class Actor extends Sprite {
    protected int currentMoveMotion = 0;
    protected Motion[] stillMotion;
    protected int currentStillMotion = 0;
+   protected boolean changingLayer = false;
 
    /**
     * Creates an Actor with the Movement, move Motion and still Motion passed in. The width and height are based on the
@@ -48,7 +49,7 @@ public class Actor extends Sprite {
     */
    public Actor(Movement movement, Motion moveMotion, Motion stillMotion) {
       super(stillMotion.getWidth(), stillMotion.getHeight());
-      this.movement = movement;
+      setMovement(movement);
       this.moveMotion = new Motion[]{moveMotion};
       this.stillMotion = new Motion[]{stillMotion};
    }
@@ -63,7 +64,7 @@ public class Actor extends Sprite {
     */
    public Actor(Movement movement, Motion[] moveMotion, Motion[] stillMotion) {
       super(stillMotion[0].getWidth(), stillMotion[0].getHeight());
-      this.movement = movement;
+      setMovement(movement);
       this.moveMotion = moveMotion;
       this.stillMotion = stillMotion;
    }
@@ -100,6 +101,12 @@ public class Actor extends Sprite {
       if (contains(other)) {
          movement.handleCollision(this, other.bounds);
       }
+      changingLayer = movement.isChangingLayer();
+   }
+
+   @Override
+   public boolean isChangingLayer() {
+      return changingLayer;
    }
 
    /**
@@ -119,7 +126,9 @@ public class Actor extends Sprite {
 
    @Override
    public void update(float deltaTime) {
+      int startLayer = getLayer();
       movement.update(deltaTime, this);
+      changingLayer = startLayer != getLayer();
       if (getSpeed() == 0.0f) {
          stillMotion[currentStillMotion].update(deltaTime, movement.getDirection());
       } else {
@@ -128,4 +137,8 @@ public class Actor extends Sprite {
       }
    }
 
+   private void setMovement(Movement movement) {
+      this.movement = movement;
+      movement.setParent(this);
+   }
 }

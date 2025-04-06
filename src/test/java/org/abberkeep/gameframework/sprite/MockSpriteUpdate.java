@@ -29,11 +29,12 @@ package org.abberkeep.gameframework.sprite;
 public class MockSpriteUpdate implements SpriteUpdate {
    private float x;
    private float y;
+   private int layer;
    private BoundingBox bounds;
    private boolean remove;
 
    public MockSpriteUpdate(int width, int height) {
-      bounds = new BoundingBox(0, 0, width, height);
+      bounds = new BoundingBox(0, 0, 0, width, height);
    }
 
    @Override
@@ -42,8 +43,13 @@ public class MockSpriteUpdate implements SpriteUpdate {
    }
 
    @Override
-   public boolean contains(int x, int y) {
-      return bounds.contains(x, y);
+   public boolean contains(int x, int y, int layer) {
+      return bounds.contains(x, y, layer);
+   }
+
+   @Override
+   public int getLayer() {
+      return layer;
    }
 
    @Override
@@ -57,11 +63,16 @@ public class MockSpriteUpdate implements SpriteUpdate {
    }
 
    @Override
+   public void setLayer(int layer) {
+      this.layer = layer;
+      bounds.setLayer(layer);
+   }
+
+   @Override
    public void setLocation(float x, float y) {
       this.x = x;
       this.y = y;
       bounds.setLocation((int) x, (int) y);
-      System.out.println("SpriteUpdate X: " + x + " Y: " + y);
    }
 
    @Override
@@ -73,14 +84,12 @@ public class MockSpriteUpdate implements SpriteUpdate {
    public void setX(float x) {
       this.x = x;
       bounds.setLocation((int) x, (int) y);
-      System.out.println("SpriteUpdate X: " + x);
    }
 
    @Override
    public void setY(float y) {
       this.y = y;
       bounds.setLocation((int) x, (int) y);
-      System.out.println("SpriteUpdate Y: " + y);
    }
 
 }

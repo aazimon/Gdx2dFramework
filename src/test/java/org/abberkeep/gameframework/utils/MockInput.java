@@ -37,6 +37,8 @@ public class MockInput extends AbstractInput {
    private int buttonPressed1;
    private int x;
    private int y;
+   private boolean justPressed = true;
+   private boolean pressing = true;
 
    public MockInput() {
       Camera camera = new MockCamera(500, 500);
@@ -181,12 +183,12 @@ public class MockInput extends AbstractInput {
 
    @Override
    public boolean isButtonPressed(int button) {
-      return button == buttonPressed1;
+      return button == buttonPressed1 && pressing;
    }
 
    @Override
    public boolean isButtonJustPressed(int button) {
-      return isButtonPressed(button);
+      return isButtonPressed(button) && justPressed;
    }
 
    @Override
@@ -196,7 +198,7 @@ public class MockInput extends AbstractInput {
 
    @Override
    public boolean isKeyPressed(int key) {
-      return key == keyPressed1 || key == keyPressed2;
+      return (key == keyPressed1 || key == keyPressed2) && pressing;
    }
 
    @Override
@@ -238,6 +240,13 @@ public class MockInput extends AbstractInput {
       throw new UnsupportedOperationException("Not supported yet.");
    }
 
+   public void setJustPressed(boolean justPressed) {
+      this.justPressed = justPressed;
+      if (justPressed) {
+         pressing = true;
+      }
+   }
+
    public void setKeyPressed1(int keyPressed1) {
       this.keyPressed1 = keyPressed1;
    }
@@ -254,6 +263,10 @@ public class MockInput extends AbstractInput {
    @Override
    public void setOnscreenKeyboardVisible(boolean bln, OnscreenKeyboardType okt) {
       throw new UnsupportedOperationException("Not supported yet.");
+   }
+
+   public void setPressing(boolean pressing) {
+      this.pressing = pressing;
    }
 
    public void setX(int x) {

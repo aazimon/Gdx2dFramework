@@ -33,15 +33,17 @@ import org.abberkeep.gameframework.Updatable;
 public abstract class Sprite implements Updatable, SpriteUpdate {
    protected float x;
    protected float y;
+   protected int layer;
    protected int height = 1;
    protected int width = 1;
+   protected int depth = 1;
    protected BoundingBox bounds;
    protected boolean remove;
 
    protected Sprite(int width, int height) {
       this.width = width;
       this.height = height;
-      bounds = new BoundingBox(0, 0, width, height);
+      bounds = new BoundingBox(0, 0, 0, width, height);
    }
 
    /**
@@ -81,11 +83,12 @@ public abstract class Sprite implements Updatable, SpriteUpdate {
     * Returns true if the point is within the bounds of this BoundingBox, otherwise it returns false.
     * @param x
     * @param y
+    * @param layer
     * @return
     */
    @Override
-   public boolean contains(int x, int y) {
-      return bounds.contains(x, y);
+   public boolean contains(int x, int y, int layer) {
+      return bounds.contains(x, y, layer);
    }
 
    /**
@@ -97,11 +100,29 @@ public abstract class Sprite implements Updatable, SpriteUpdate {
    }
 
    /**
+    * Returns the depth of this Sprite in Layers. This is the front to back value, as in the number of layers the Sprite
+    * is in.
+    * @return
+    */
+   public int getDepth() {
+      return depth;
+   }
+
+   /**
     * Returns the height of this Sprite in pixels.
     * @return float
     */
    public int getHeight() {
       return height;
+   }
+
+   /**
+    * Returns the layer location of this Sprite.
+    * @return int
+    */
+   @Override
+   public int getLayer() {
+      return layer;
    }
 
    /**
@@ -139,11 +160,28 @@ public abstract class Sprite implements Updatable, SpriteUpdate {
    }
 
    /**
+    * This returns true if the Sprite is moving from one layer to another. Decor, for example, will not move from one
+    * layer to another.
+    * @return
+    */
+   public boolean isChangingLayer() {
+      return false;
+   }
+
+   /**
     * This tells the Screen if this Sprite should be removed from the Screen.
     * @return boolean
     */
    public boolean isRemove() {
       return remove;
+   }
+
+   /**
+    * Sets the depth (Number of layers) for this Sprite.
+    * @param depth
+    */
+   public void setDepth(int depth) {
+      this.depth = depth;
    }
 
    /**
@@ -153,6 +191,16 @@ public abstract class Sprite implements Updatable, SpriteUpdate {
    public void setHeight(int height) {
       this.height = height;
       bounds.setSize(width, height);
+   }
+
+   /**
+    * Sets the layer location of this Sprite. This does not take into account the actual number of layers in the Screen.
+    * @param layer
+    */
+   @Override
+   public void setLayer(int layer) {
+      this.layer = layer;
+      bounds.setLayer(layer);
    }
 
    @Override

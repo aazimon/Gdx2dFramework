@@ -17,6 +17,7 @@
 package org.abberkeep.gameframework.movement;
 
 import org.abberkeep.gameframework.sprite.BoundingBox;
+import org.abberkeep.gameframework.sprite.Sprite;
 import org.abberkeep.gameframework.sprite.SpriteUpdate;
 
 /**
@@ -50,9 +51,23 @@ public class NoMovement implements Movement {
       return 0f;
    }
 
+   /**
+    * This returns null, as the parent isn't needed for locking.
+    * @return
+    */
+   @Override
+   public Sprite getParent() {
+      return null;
+   }
+
    @Override
    public void handleCollision(SpriteUpdate spriteUpdate, BoundingBox other) {
       // Do nothing.
+   }
+
+   @Override
+   public boolean isChangingLayer() {
+      return false;
    }
 
    @Override
@@ -63,6 +78,15 @@ public class NoMovement implements Movement {
    @Override
    public void reset() {
       // do nothing by default.
+   }
+
+   /**
+    * NoMovement does not need parent Sprite for locking.
+    * @param sprite
+    */
+   @Override
+   public void setParent(Sprite sprite) {
+      // Parent does not need to be set.
    }
 
    @Override

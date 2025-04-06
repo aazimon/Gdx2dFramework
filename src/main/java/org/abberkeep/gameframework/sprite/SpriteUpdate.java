@@ -40,9 +40,16 @@ public interface SpriteUpdate {
     * Determines if this SpriteUpdate contains the point location passed in.
     * @param x
     * @param y
+    * @param layer
     * @return
     */
-   boolean contains(int x, int y);
+   boolean contains(int x, int y, int layer);
+
+   /**
+    * Returns the Sprite's Layer location
+    * @return
+    */
+   int getLayer();
 
    /**
     * Returns the Sprite's X location.
@@ -55,6 +62,12 @@ public interface SpriteUpdate {
     * @return
     */
    float getY();
+
+   /**
+    * Sets the Sprite's Layer location
+    * @param layer
+    */
+   void setLayer(int layer);
 
    /**
     * Sets the Sprite's X and Y location.

@@ -32,34 +32,48 @@ public class BoundingBox implements Bounds {
    private int xInset = 0;
    private int y;
    private int yInset = 0;
+   private int layer = 0;
    private int width;
    private int height;
 
-   public BoundingBox(int x, int y, int width, int height) {
+   public BoundingBox(int x, int y, int layer, int width, int height) {
       this.x = x;
       this.y = y;
+      this.layer = layer;
       this.width = width;
       this.height = height;
    }
 
+   /**
+    * Check if this BoundingBox contains the other BoundingBox. This checks if the layers match first, then if the
+    * BoundingBox has points withing each other.
+    * @param other
+    * @return
+    */
    public boolean contains(BoundingBox other) {
-      return (checkX(other) && checkY(other));
+      return this.layer == other.layer && (checkX(other) && checkY(other));
    }
 
    /**
-    * Check if the X and Y are all withing this BoundingBox. This checks if the BoundingBox contains the X and Y
-    * locations.
+    * Check if the X and Y and Layer are all withing this BoundingBox. This checks if the layers match first, then if
+    * the BoundingBox contains the X and Y locations.
     * @param x
     * @param y
+    * @param layer
     * @return
     */
-   public boolean contains(int x, int y) {
-      return checkX(x) && checkY(y);
+   public boolean contains(int x, int y, int layer) {
+      return this.layer == layer && checkX(x) && checkY(y);
    }
 
    @Override
    public void setHeight(int height) {
       this.height = height;
+   }
+
+   @Override
+   public void setLayer(int layer) {
+      this.layer = layer;
    }
 
    public void setLocation(int x, int y) {
@@ -70,6 +84,10 @@ public class BoundingBox implements Bounds {
    public void setSize(int width, int height) {
       this.width = width;
       this.height = height;
+   }
+
+   public int getLayer() {
+      return layer;
    }
 
    @Override

@@ -17,6 +17,7 @@
 package org.abberkeep.gameframework.movement;
 
 import org.abberkeep.gameframework.sprite.BoundingBox;
+import org.abberkeep.gameframework.sprite.Sprite;
 import org.abberkeep.gameframework.sprite.SpriteUpdate;
 
 /**
@@ -48,12 +49,25 @@ public interface Movement {
    float getCurrentSpeed();
 
    /**
+    * Returns the Sprite parent associated to this Movement.
+    * @return
+    */
+   Sprite getParent();
+
+   /**
     * Handle the collision between the Sprite and a BoundingBox.
     *
     * @param spriteUpdate
     * @param other
     */
    void handleCollision(SpriteUpdate spriteUpdate, BoundingBox other);
+
+   /**
+    * Returns if the movement is changing from one layer to another. This is typically done after handling a collision.
+    * Depending on the Movement, a collision could cause an Actor to move back to a previous location.
+    * @return
+    */
+   boolean isChangingLayer();
 
    /**
     * This method takes the delta time since the last update and a SpriteUpdate. It determines the movement since the
@@ -69,6 +83,12 @@ public interface Movement {
     * Reset the Movement to its original state.
     */
    void reset();
+
+   /**
+    * This sets the parent of this Movement. Button control needs the parent for controlling access.
+    * @param sprite
+    */
+   void setParent(Sprite sprite);
 
    /**
     * Set the speed, as in pixels per second.

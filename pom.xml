@@ -4,7 +4,7 @@
    <modelVersion>4.0.0</modelVersion>
    <groupId>org.abberkeep.gameframework</groupId>
    <artifactId>Gdx2dFramework</artifactId>
-   <version>0.16</version>
+   <version>0.17</version>
    <packaging>jar</packaging>
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,7 +29,6 @@
          </releases>
       </repository>
    </repositories>
-
 
    <dependencies>
       <dependency>
@@ -86,4 +85,15 @@
          </plugin>
       </plugins>
    </build>
+   
+   <developers>
+      <developer>
+         <name>Gary Deken</name>
+         <organization>Abber Keep</organization>
+         <roles>
+            <role>Architect</role>
+            <role>Lead Developer</role>
+         </roles>
+      </developer>
+   </developers>
 </project>
