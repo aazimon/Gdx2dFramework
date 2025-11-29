@@ -76,6 +76,14 @@ public interface SpriteUpdate {
     */
    void setLocation(float x, float y);
 
+   /**
+    * Sets the Sprite's X, Y and layer location.
+    * @param x
+    * @param y
+    * @param layer
+    */
+   void setLocation(float x, float y, int layer);
+
    void setRemove(boolean remove);
 
    /**

@@ -45,11 +45,9 @@ public class BounceAnimationTest extends EasyMockSupport {
 
    @Before
    public void setUp() {
-      TextureRegion tr = mock(TextureRegion.class);
+      TextureRegion tr = new MockTextureRegion(32, 32);
       region = new TextureRegion[4];
       region[0] = tr;
-      expect(region[0].getRegionWidth()).andReturn(32);
-      expect(region[0].getRegionHeight()).andReturn(32);
       sound = mock(Sound.class);
    }
 

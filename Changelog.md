@@ -1,5 +1,32 @@
 Change log for Gdx2dFramework.
 
+## [0.18]
+- add ControlledMovement for Movements that are controlled by a separate object.
+- Add GamePadMovement and GameStickMovement, for GamePad controlling.
+- add list of updatables in the base GameMap, and updating them in the rendercycle.
+- Move BackGround and ViewPort into GameMap.
+- add method to get the GameMap from the BaseScreen.
+- add method to SpriteUpdate and Sprite setLocation() that takes X, Y and Layer.
+- update JavaDocs on FastMath
+- make LibGdx and Gdx-Controller provided.
+
+## [0.17]
+- Add Layers to framework. Update SpriteUpdate with Layer and implementing classes.
+   - Add MouseLayerDragMovement, BaseMouseMovement.
+   - Add a parent and changingLayer checks to Movement for layer movement.
+   - update BoundingBox with layer and contains() with layer check.
+   - update Direction with LAYER enum.
+- Add GameMap for handling the layout of the game. Update classes to use GameMap. Update BaseScreen, removing GameMap code and add GameMap.
+   - Add SimpleSpriteMap, replacing SimpleScreen.
+- Add InputLocks class and update ScreenInput for handling button press for activation and deactivation,
+- Add a simple CollisionDetection for checking all sprites.
+
+## [0.16]
+- Add MouseDragMovement, Background and FixedBackground, Add Background to the BaseScreen.
+- add contains(int x, int y) to SpriteUpdate and add it in implementing classes.
+- update BoundingBox to add checks for just X and Y separately.
+- Jacoco reporting to project.
+
 ## [0.15]
 - Change ColorEffect to Effect and have TranslucencyEffect along with ColorCycleEffect.
 - Create a BaseEffect for common attributes.

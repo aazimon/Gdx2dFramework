@@ -43,11 +43,9 @@ public class RandomAnimationTest extends EasyMockSupport {
 
    @Before
    public void setUp() {
-      TextureRegion texture = mock(TextureRegion.class);
+      TextureRegion texture = new MockTextureRegion(32, 32);
       region = new TextureRegion[4];
       region[0] = texture;
-      expect(region[0].getRegionWidth()).andReturn(32);
-      expect(region[0].getRegionHeight()).andReturn(32);
       sound = mock(Sound.class);
    }
 

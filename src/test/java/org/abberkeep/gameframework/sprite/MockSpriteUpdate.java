@@ -76,6 +76,15 @@ public class MockSpriteUpdate implements SpriteUpdate {
    }
 
    @Override
+   public void setLocation(float x, float y, int layer) {
+      this.x = x;
+      this.y = y;
+      this.layer = layer;
+      bounds.setLayer(layer);
+      bounds.setLocation((int) x, (int) y);
+   }
+
+   @Override
    public void setRemove(boolean remove) {
       throw new UnsupportedOperationException("Not supported yet.");
    }
