@@ -16,9 +16,13 @@
  */
 package org.abberkeep.gameframework.screen.map;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.ArrayList;
 import java.util.List;
+import org.abberkeep.gameframework.Updatable;
+import org.abberkeep.gameframework.background.Background;
 import org.abberkeep.gameframework.sprite.Actor;
 import org.abberkeep.gameframework.sprite.Decor;
 import org.abberkeep.gameframework.sprite.Sprite;
@@ -36,8 +40,11 @@ import org.abberkeep.gameframework.sprite.Sprite;
  * @version 0.17
  */
 public abstract class GameMap {
+   private Viewport viewport;
    protected boolean renderCycle = false;
+   protected Background background;
    protected List<Sprite> toBeAdded = new ArrayList<>();
+   protected List<Updatable> updatables = new ArrayList<>();
 
    /**
     * Adds an Actor to this GameMap.
@@ -57,6 +64,10 @@ public abstract class GameMap {
     */
    public abstract void addSprite(Sprite sprite);
 
+   public void addUpdatable(Updatable updatable) {
+      this.updatables.add(updatable);
+   }
+
    /**
     * This renders the GameMap, by setting the renderCycle, updating the Sprites and then drawing the Sprites. Then it
     * will add any Sprites added during the render cycle to the GameMap.
@@ -65,10 +76,54 @@ public abstract class GameMap {
     */
    public void renderCycle(float deltaTime, SpriteBatch batch) {
       renderCycle = true;
+      if (background != null) {
+         background.setScreenOrigin(viewport.getScreenX(), viewport.getScreenY());
+         background.update(deltaTime);
+         background.draw(batch);
+      }
+      updatables.forEach(update -> update.update(deltaTime));;
       updateSprites(deltaTime);
       drawSprites(batch);
       renderCycle = false;
       addOffCycle();
+   }
+
+   /**
+    * This sets the GameMap's width and height and updates the Background if that is set.
+    * @param width
+    * @param height
+    */
+   public void resize(int width, int height) {
+      if (background != null) {
+         background.setScreenSize(width, height);
+         background.setScreenOrigin(viewport.getScreenX(), viewport.getScreenY());
+      }
+   }
+
+   /**
+    * Set the Background object for this Screen.
+    * @param background
+    */
+   public void setBackground(Background background) {
+      this.background = background;
+      if (viewport != null) {
+         background.setScreenSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+         background.setScreenOrigin(viewport.getScreenX(), viewport.getScreenY());
+      }
+   }
+
+   /**
+    * Called when calling BaseScreen setGameMap, to set up Background object. There is no need to call this manually.
+    * @param viewport
+    * @param screenWidth
+    * @param screenHeight
+    */
+   public void setUp(Viewport viewport, int screenWidth, int screenHeight) {
+      this.viewport = viewport;
+      if (background != null) {
+         background.setScreenSize(screenWidth, screenHeight);
+         background.setScreenOrigin(viewport.getScreenX(), viewport.getScreenY());
+      }
    }
 
    protected abstract void addOffCycle();

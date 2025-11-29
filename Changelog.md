@@ -1,5 +1,15 @@
 Change log for Gdx2dFramework.
 
+## [0.18]
+- add ControlledMovement for Movements that are controlled by a separate object.
+- Add GamePadMovement and GameStickMovement, for GamePad controlling.
+- add list of updatables in the base GameMap, and updating them in the rendercycle.
+- Move BackGround and ViewPort into GameMap.
+- add method to get the GameMap from the BaseScreen.
+- add method to SpriteUpdate and Sprite setLocation() that takes X, Y and Layer.
+- update JavaDocs on FastMath
+- make LibGdx and Gdx-Controller provided.
+
 ## [0.17]
 - Add Layers to framework. Update SpriteUpdate with Layer and implementing classes.
    - Add MouseLayerDragMovement, BaseMouseMovement.

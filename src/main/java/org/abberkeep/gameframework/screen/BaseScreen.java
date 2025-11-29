@@ -20,6 +20,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
@@ -30,7 +31,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.abberkeep.gameframework.Updatable;
-import org.abberkeep.gameframework.background.Background;
 import org.abberkeep.gameframework.screen.map.GameMap;
 
 /**
@@ -45,14 +45,13 @@ import org.abberkeep.gameframework.screen.map.GameMap;
  * @since 0.1
  */
 public abstract class BaseScreen implements Screen {
-   protected Background background;
    protected SpriteBatch batch;
    protected int largestSpriteWidth = 0;
    protected int largestSpriteHeight = 0;
    protected Viewport viewport;
    protected int height;
    protected int width;
-   private Color bgColor;
+   protected Color bgColor;
    private Map<String, Texture> textures = new HashMap<>();
    private Map<String, Sound> sounds = new HashMap<>();
    private Map<String, Music> musics = new HashMap<>();
@@ -64,6 +63,11 @@ public abstract class BaseScreen implements Screen {
     */
    protected BaseScreen() {
       bgColor = new Color();
+      try {
+         Controllers.getControllers();
+      } catch (Exception e) {
+         Gdx.app.log("Base", "No Controllers");
+      }
    }
 
    /**
@@ -92,9 +96,17 @@ public abstract class BaseScreen implements Screen {
    }
 
    /**
+    * Method to get the GameMap for this Screen.
+    * @return GameMap
+    */
+   public GameMap getGameMap() {
+      return gameMap;
+   }
+
+   /**
     * Method to get Musics and storing them at the Screen level for disposal when the screen disposes.
     * @param fileName
-    * @return
+    * @return Music
     */
    public Music getMusic(String fileName) {
       return musics.computeIfAbsent(fileName, fn -> Gdx.audio.newMusic(Gdx.files.internal(fn)));
@@ -142,18 +154,13 @@ public abstract class BaseScreen implements Screen {
       batch.setProjectionMatrix(viewport.getCamera().combined);
       batch.begin();
       updatables.forEach(up -> up.update(deltaTime));
-      if (background != null) {
-         background.setScreenOrigin(viewport.getScreenX(), viewport.getScreenY());
-         background.update(deltaTime);
-         background.draw(batch);
-      }
       gameMap.renderCycle(deltaTime, batch);
       batch.end();
       ScreenInput.inputLocks.clear();
    }
 
    /**
-    * This sets the Screen's width and height and updates the Background if that is set.
+    * This sets the Screen's width and height and updates the GameMap.
     * @param width
     * @param height
     */
@@ -161,10 +168,7 @@ public abstract class BaseScreen implements Screen {
    public void resize(int width, int height) {
       this.width = width;
       this.height = height;
-      if (background != null) {
-         background.setScreenSize(width, height);
-         background.setScreenOrigin(viewport.getScreenX(), viewport.getScreenY());
-      }
+      gameMap.resize(width, height);
    }
 
    @Override
@@ -183,22 +187,11 @@ public abstract class BaseScreen implements Screen {
       this.viewport = viewport;
       height = Gdx.graphics.getHeight();
       width = Gdx.graphics.getWidth();
-      if (background != null) {
-         background.setScreenSize(width, height);
-         background.setScreenOrigin(viewport.getScreenX(), viewport.getScreenY());
-      }
-   }
-
-   /**
-    * Set the Background object for this Screen.
-    * @param background
-    */
-   public void setBackground(Background background) {
-      this.background = background;
    }
 
    public void setGameMap(GameMap gameMap) {
       this.gameMap = gameMap;
+      gameMap.setUp(viewport, width, height);
    }
 
 }

@@ -62,13 +62,14 @@ public abstract class ActorFactory<T extends ForgedActor> {
    }
 
    /**
-    * Retrieve a Sprite from the queue or Create a New Sprite of the defined type and add it to the BaseScreen at the X
-    * and Y location passed in. This method uses the build method to create the Movement and Motions in the Actor. If
-    * the Sprite is pulled from the queue, it's remove flag is set to false.
+    * Retrieve a Sprite from the queue or Create a New Sprite of the defined type and add it to the BaseScreen at the X,
+    * Y and Layer location passed in.This method uses the build method to create the Movement and Motions in the Actor.
+    * If the Sprite is pulled from the queue, it's remove flag is set to false.
     * @param x
     * @param y
+    * @param layer
     */
-   public void createNewActor(float x, float y) {
+   public void createNewActor(float x, float y, int layer) {
       T t;
       if (queue.isEmpty()) {
          t = construct(buildMovement(), buildMoveMotions(), buildStillMotions());
@@ -77,7 +78,7 @@ public abstract class ActorFactory<T extends ForgedActor> {
          t = queue.poll();
          t.reset();
       }
-      t.setLocation(x, y);
+      t.setLocation(x, y, layer);
 
       gameMap.addActor(t);
    }

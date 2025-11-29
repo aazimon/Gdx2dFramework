@@ -17,10 +17,10 @@
 package org.abberkeep.gameframework.utils;
 
 /**
- * Title: FastTrig
+ * Title: FastMath
  *
  * <p>
- * Description: Fast Trig functions for x86.</p>
+ * Description: Fast Trigonometry functions, including lookup tables for faster calculations.</p>
  *
  * @author Jeff's Game Gems
  * @author Markus Persson
@@ -45,7 +45,6 @@ public final class FastMath {
    private static final int ATAN2_COUNT = ATAN2_MASK + 1;
    private static final int ATAN2_DIM = (int) Math.sqrt(ATAN2_COUNT);
    private static final float ATAN2_DIM_MINUS_1 = (ATAN2_DIM - 1);
-//   private static final float INV_ATAN2_DIM_MINUS_1 = 1.0f / (ATAN2_DIM - 1);
    private static final float DEG = 180.0f / (float) Math.PI;
    public static final float[] ATAN2 = new float[ATAN2_COUNT];
    private static final int BIG_ENOUGH_INT = 16 * 1024;
@@ -56,6 +55,8 @@ public final class FastMath {
    private static final double ROUNDING = Math.pow(10, ROUND_TO);
 
    /**
+    * Populate a tangent lookup table.
+    *
     * @author Riven
     */
    static {
@@ -69,6 +70,8 @@ public final class FastMath {
    }
 
    /**
+    * Quickly get the absolute value of an int
+    *
     * @author Markus Persson
     * @param a
     * @return absolute int
@@ -78,6 +81,8 @@ public final class FastMath {
    }
 
    /**
+    * Get the direction in degrees via the tangent look up table.
+    *
     * @author Riven
     * @param y
     * @param x
@@ -88,6 +93,8 @@ public final class FastMath {
    }
 
    /**
+    * Get the direction in degrees.
+    *
     * @author Riven
     * @param y
     * @param x
@@ -98,6 +105,8 @@ public final class FastMath {
    }
 
    /**
+    * Get the direction in radians via lookup table.
+    *
     * @author Riven
     * @param y
     * @param x
@@ -133,9 +142,11 @@ public final class FastMath {
    }
 
    /**
-    * @author Bruno Augier (DzzD) Compute and return cosinus of its parameter using Taylor series
-    * @param x angle in radian to
-    * @return cosinus value for the given parameter
+    * Get the cosine value using Taylor series for the angle in radians.
+    *
+    * @author Bruno Augier (DzzD)
+    * @param x
+    * @return double
     */
    public static double cosLookup(double x) {
       if (x < 0.0) {
@@ -161,6 +172,8 @@ public final class FastMath {
    }
 
    /**
+    * Quickly calculate the ceiling for a number.
+    *
     * @author Riven
     * @param x
     * @return int
@@ -170,6 +183,8 @@ public final class FastMath {
    }
 
    /**
+    * Quickly calculate the cosine of a radian angle.
+    *
     * @author Jeff's Game Gems
     * @param radians
     * @return cosine double
@@ -179,6 +194,8 @@ public final class FastMath {
    }
 
    /**
+    * Quickly calculate the floor of a number.
+    *
     * @author Riven
     * @param x
     * @return int
@@ -188,6 +205,8 @@ public final class FastMath {
    }
 
    /**
+    * Quickly round a number up.
+    *
     * @author Riven
     * @param x
     * @return int
@@ -197,6 +216,8 @@ public final class FastMath {
    }
 
    /**
+    * Quickly calculate the sine of an angle in radians.
+    *
     * @author Jeff's Game Gems
     * @param radians
     * @return sine double
@@ -211,6 +232,7 @@ public final class FastMath {
    }
 
    /**
+    * Calculate the distance between two points.
     *
     * @param x1
     * @param y1
@@ -238,8 +260,9 @@ public final class FastMath {
    }
 
    /**
-    * @author David Brackeen Returns the sign of the number. Returns -1 for negative, 1 for positive, and 0 otherwise.
+    * Returns the sign of a number. Returns -1 for negative and 1 for positive. Other 0 is returned.
     *
+    * @author David Brackeen
     * @param v
     * @return int
     */
@@ -248,8 +271,9 @@ public final class FastMath {
    }
 
    /**
-    * @author David Brackeen Returns the sign of the number. Returns -1 for negative, 1 for positive, and 0 otherwise.
+    * Returns the sign of a number. Returns -1 for negative and 1 for positive. Other 0 is returned.
     *
+    * @author David Brackeen
     * @param v
     * @return int
     */
@@ -258,18 +282,24 @@ public final class FastMath {
    }
 
    /**
-    * @author Bruno Augier (DzzD) Compute and return sinus of its parameter using Taylor series
-    * @param x angle in radian to
-    * @return sinus value for the given parameter
+    * Quickly get the sine of a degree in radians via the Taylor series.
+    *
+    * @author Bruno Augier (DzzD)
+    * @param x
+    * @return double
     */
    public static double sinLookup(double x) {
       return cosLookup(x - PI05);
    }
 
    /**
-    * @author Jeff's Game Gems This forces the trig functions to stay within the safe area on the x86 processor (-45
-    * degrees to +45 degrees) The results may be very slightly off from what the Math and StrictMath trig functions give
-    * due to rounding in the angle reduction but it will be very very close.
+    * This forces the trig functions to stay within the safe area on the x86 processor (-45 degrees to +45 degrees). The
+    * results may be very slightly off from what the Math and StrictMath trig functions give due to rounding in the
+    * angle reduction but it will be very very close.
+    *
+    * @author Jeff's Game Gems
+    * @param radians
+    * @return
     */
    private static double reduceSinAngle(double radians) {
       radians %= Math.PI * 2.0; // put us in -2PI to +2PI space

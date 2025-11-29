@@ -211,6 +211,15 @@ public abstract class Sprite implements Updatable, SpriteUpdate {
    }
 
    @Override
+   public void setLocation(float x, float y, int layer) {
+      this.x = x;
+      this.y = y;
+      this.layer = layer;
+      bounds.setLocation((int) x, (int) y);
+      bounds.setLayer(layer);
+   }
+
+   @Override
    public void setRemove(boolean remove) {
       this.remove = remove;
    }
