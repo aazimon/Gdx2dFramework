@@ -1,5 +1,8 @@
 Change log for Gdx2dFramework.
 
+## [0.19]
+-
+
 ## [0.18]
 - add ControlledMovement for Movements that are controlled by a separate object.
 - Add GamePadMovement and GameStickMovement, for GamePad controlling.

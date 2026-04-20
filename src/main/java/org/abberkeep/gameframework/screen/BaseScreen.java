@@ -20,7 +20,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
@@ -32,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 import org.abberkeep.gameframework.Updatable;
 import org.abberkeep.gameframework.screen.map.GameMap;
+import org.abberkeep.gameframework.state.GameState;
 
 /**
  * Title: BaseScreen
@@ -45,6 +45,7 @@ import org.abberkeep.gameframework.screen.map.GameMap;
  * @since 0.1
  */
 public abstract class BaseScreen implements Screen {
+   private GameState currentState;
    protected SpriteBatch batch;
    protected int largestSpriteWidth = 0;
    protected int largestSpriteHeight = 0;
@@ -63,11 +64,6 @@ public abstract class BaseScreen implements Screen {
     */
    protected BaseScreen() {
       bgColor = new Color();
-      try {
-         Controllers.getControllers();
-      } catch (Exception e) {
-         Gdx.app.log("Base", "No Controllers");
-      }
    }
 
    /**
@@ -157,6 +153,7 @@ public abstract class BaseScreen implements Screen {
       gameMap.renderCycle(deltaTime, batch);
       batch.end();
       ScreenInput.inputLocks.clear();
+      currentState.update(deltaTime);
    }
 
    /**
@@ -177,14 +174,14 @@ public abstract class BaseScreen implements Screen {
    }
 
    /**
-    * Used within the BaseGame when calling setScreen. The setScreen will call this method to inject the SpriteBatch and
-    * Viewport objects.
-    * @param batch
-    * @param viewport
+    * Used within the BaseGame when calling setScreen. The setScreen will call this method to inject the SpriteBatch,
+    * Viewport and GameState objects.
+    * @param settings
     */
-   public void setupScreen(SpriteBatch batch, Viewport viewport) {
-      this.batch = batch;
-      this.viewport = viewport;
+   public void setupScreen(ScreenSettings settings) {
+      this.batch = settings.getSpriteBatch();
+      this.viewport = settings.getViewport();
+      this.currentState = settings.getGameState();
       height = Gdx.graphics.getHeight();
       width = Gdx.graphics.getWidth();
    }
