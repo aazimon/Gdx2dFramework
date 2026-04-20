@@ -37,10 +37,18 @@ public class LayeredAnimation extends BaseAnimation {
 
    public LayeredAnimation(Animation animation) {
       animations.add(animation);
+      width = animation.getWidth();
+      height = animation.getHeight();
    }
 
    public void addAnimation(Animation animation) {
       animations.add(animation);
+      if (animation.getWidth() > width) {
+         width = animation.getWidth();
+      }
+      if (animation.getHeight() > height) {
+         height = animation.getHeight();
+      }
    }
 
    public Animation getAnimation(int index) {
@@ -62,6 +70,12 @@ public class LayeredAnimation extends BaseAnimation {
    public void setColor(int red, int green, int blue) {
       super.setColor(red, green, blue);
       animations.forEach(animation -> animation.setColor(color));
+   }
+
+   @Override
+   public void setRotation(float rotation) {
+      super.setRotation(rotation);
+      animations.forEach(animation -> animation.setRotation(rotation));
    }
 
    @Override

@@ -36,7 +36,7 @@ public class BlockAnimation extends BaseAnimation {
    private static Texture texture;
 
    /**
-    * Creates a BlockAnimation with the given width and height.
+    * Creates a BlockAnimation with the given width and height and a color of White.
     * @param width
     * @param height
     */
@@ -45,6 +45,21 @@ public class BlockAnimation extends BaseAnimation {
          texture = BaseGame.getGlobalTexture("blank.png");
       }
       color = Color.WHITE;
+      this.width = width;
+      this.height = height;
+   }
+
+   /**
+    * Creates a BlockAnimation with the given width and height and a color of value passed in.
+    * @param width
+    * @param height
+    * @param color
+    */
+   public BlockAnimation(int width, int height, Color color) {
+      if (texture == null) {
+         texture = BaseGame.getGlobalTexture("blank.png");
+      }
+      this.color = color;
       this.width = width;
       this.height = height;
    }

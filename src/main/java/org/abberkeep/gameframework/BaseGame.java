@@ -29,6 +29,10 @@ import java.util.HashMap;
 import java.util.Map;
 import org.abberkeep.gameframework.screen.BaseScreen;
 import org.abberkeep.gameframework.screen.ScreenInput;
+import org.abberkeep.gameframework.screen.ScreenSettings;
+import org.abberkeep.gameframework.state.GameState;
+import org.abberkeep.gameframework.state.GameStateController;
+import org.abberkeep.gameframework.state.NullState;
 
 /**
  * Title: BaseGame
@@ -41,7 +45,8 @@ import org.abberkeep.gameframework.screen.ScreenInput;
  * @version 1
  * @since 0.1
  */
-public class BaseGame extends Game {
+public class BaseGame extends Game implements GameStateController, ScreenSettings {
+   protected GameState currentState = new NullState();
    protected SpriteBatch batch;
    protected float height = 600;
    protected float width = 800;
@@ -86,6 +91,21 @@ public class BaseGame extends Game {
       batch.dispose();
    }
 
+   @Override
+   public GameState getGameState() {
+      return currentState;
+   }
+
+   @Override
+   public SpriteBatch getSpriteBatch() {
+      return batch;
+   }
+
+   @Override
+   public Viewport getViewport() {
+      return viewport;
+   }
+
    /**
     * Clears the screen and sets the Projection Matrix to the camera's combined.
     */
@@ -111,13 +131,26 @@ public class BaseGame extends Game {
    }
 
    /**
+    * Sets the GameState, by adding this BaseGame to the GameState.
+    * @param state
+    */
+   @Override
+   public void setGameState(GameState state) {
+      if (state != null) {
+         currentState = state;
+         currentState.setGameStateController(this);
+         currentState.activateState();
+      }
+   }
+
+   /**
     * Sets the Screen for this Game and calls the BaseScreen's setupScreen, where it injects the SpriteBatch and
     * Viewport in to the BaseScreen passed in. The Screen passed in must inherit from BaseScreen.
     * @param screen
     */
    @Override
    public void setScreen(Screen screen) {
-      ((BaseScreen) screen).setupScreen(batch, viewport);
+      ((BaseScreen) screen).setupScreen(this);
       super.setScreen(screen);
 
    }

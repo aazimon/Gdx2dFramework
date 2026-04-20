@@ -103,6 +103,11 @@ public class MockAnimation implements Animation {
    }
 
    @Override
+   public void setRotation(float rotation) {
+      // TODO Implement method
+   }
+
+   @Override
    public void setSize(int width, int height) {
       this.height = height;
       this.width = width;
