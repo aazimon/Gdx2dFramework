@@ -1,7 +1,12 @@
 Change log for Gdx2dFramework.
 
 ## [0.19]
--
+- Add setRotation to the Movement interface.
+- Update BlockAnimation, add constructor that takes the size and a Color.
+- Update LayeredAnimation to get the width and height based on the largest Animation in the object.
+- Add GameState API. Allows easy switching between Game states.
+- Add ControlledMotion, for controlling the motion to be run on an Actor.
+- Add ChainEffect, that will run a series of Effects in order.
 
 ## [0.18]
 - add ControlledMovement for Movements that are controlled by a separate object.
