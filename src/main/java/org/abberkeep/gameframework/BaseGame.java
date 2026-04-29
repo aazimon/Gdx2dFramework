@@ -76,6 +76,7 @@ public class BaseGame extends Game implements GameStateController, ScreenSetting
       camera.update();
       viewport = new ScreenViewport(camera);
       ScreenInput.setScreenSize((int) width, (int) height, camera);
+      Gdx.input.setInputProcessor(new InputManager());
    }
 
    /**
