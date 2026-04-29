@@ -1,5 +1,8 @@
 Change log for Gdx2dFramework.
 
+## [0.21]
+- Add InputManager for monitoring Inputs and improve contorlling object reacting to the input
+
 ## [0.20]
 - Add a FontUtil class
 
