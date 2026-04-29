@@ -1,5 +1,8 @@
 Change log for Gdx2dFramework.
 
+## [0.20]
+- Add a FontUtil class
+
 ## [0.19]
 - Add setRotation to the Movement interface.
 - Update BlockAnimation, add constructor that takes the size and a Color.
