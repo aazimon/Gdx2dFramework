@@ -78,6 +78,10 @@ public class SimpleSpriteMap extends GameMap {
       }
    }
 
+   /**
+    * Sprites that are added to the GameMap are held in a separate list and get added to the GameMap after a render
+    * cycle.
+    */
    @Override
    protected void addOffCycle() {
       for (int i = 0; i < spriteLayers.length; i++) {

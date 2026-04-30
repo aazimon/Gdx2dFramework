@@ -126,10 +126,21 @@ public abstract class GameMap {
       }
    }
 
+   /**
+    * This is for adding Sprites to the GameMap and not conflict with currently updating or rendering list of Sprites.
+    */
    protected abstract void addOffCycle();
 
+   /**
+    * This is for rendering Sprites on the screen.
+    * @param batch
+    */
    protected abstract void drawSprites(SpriteBatch batch);
 
+   /**
+    * This is for updating Sprites on the Screen.
+    * @param deltaTime
+    */
    protected abstract void updateSprites(float deltaTime);
 
 }
